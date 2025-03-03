@@ -21,7 +21,7 @@ export function Navigation({ items = [] }: NavigationProps) {
         { label: 'Home', path: '/' },
         { label: 'カフェの今', path: 'https://www.prototype-cafe.space/%E3%82%AB%E3%83%95%E3%82%A7%E3%81%AE%E4%BB%8A/' }, //'/カフェの今' },
         { label: 'オープンスペース', path: 'https://www.prototype-cafe.space/%E5%88%A9%E7%94%A8%E3%81%AE%E3%81%94%E6%A1%88%E5%86%85/' }, //'/オープンスペース' },
-        { label: '地域イベント', path: 'https://www.prototype-cafe.space/event/' }, // '/event' },
+        { label: '新潟の技術系イベント', path: 'https://www.prototype-cafe.space/event/' }, // '/event' },
         { label: 'About Us', path: 'https://www.prototype-cafe.space/prototype-cafe-llc/' }, // '/prototype-cafe-llc' },
     ];
 

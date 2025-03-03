@@ -4,8 +4,8 @@ import Image from 'next/image';
 interface Feature {
     title: string;
     description: string;
-    icon: string;
     img?: string;
+    content?: React.ReactNode
 }
 
 interface FeatureListProps {
@@ -19,7 +19,6 @@ export function FeatureList({ features }: FeatureListProps) {
             <div className={styles.features}>
                 {features.map((feature, index) => (
                     <div key={index} className={styles.featureCard}>
-                        <div className={styles.featureIcon}>{feature.icon}</div>
                         <h3 className={styles.featureTitle}>{feature.title}</h3>
                         <p className={styles.featureDescription}>{feature.description}</p>
                         {feature.img && (
@@ -31,12 +30,13 @@ export function FeatureList({ features }: FeatureListProps) {
                                     fill
                                     sizes="(max-width: 768px) 100px, 120px"
                                     className={styles.featureImage}
-                                    // style={{
-                                    //     objectFit: 'contain',
-                                    //     position: 'static'
-                                    // }}
                                     priority
                                 />
+                            </div>
+                        )}
+                        {feature.content && (
+                            <div className={`featureContent ${styles.featureContent}`}>
+                                {feature.content}
                             </div>
                         )}
                     </div>
