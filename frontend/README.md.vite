@@ -1,0 +1,63 @@
+# PCafe 2025 フロントエンド
+
+Next.js、React、TypeScript、CSS Modulesを使用したモダンなウェブアプリケーション。
+
+## 開発環境のセットアップ
+
+### 前提条件
+- Node.js 22.x
+- Yarn 1.22.x以上
+
+### インストール
+
+```bash
+# 依存関係のインストール
+yarn install
+```
+
+### 開発サーバーの起動
+
+```bash
+# 開発サーバーの起動
+yarn dev
+```
+
+開発サーバーは http://localhost:3000 で実行されます。
+
+### ビルド
+
+```bash
+# 本番用ビルドの作成
+yarn build
+
+# ビルドしたアプリケーションの起動
+yarn start
+```
+
+### リンターの実行
+
+```bash
+# リンターの実行
+yarn lint
+```
+
+## プロジェクト構造
+
+- `app/` - App Routerのページとレイアウト
+  - `page.tsx` - ホームページ
+  - `layout.tsx` - ルートレイアウト
+  - `globals.css` - グローバルスタイル
+  - `about/` - Aboutページ
+- `components/` - 再利用可能なコンポーネント
+  - `Hero/` - ヒーローセクションコンポーネント
+  - `FeatureList/` - 機能リストコンポーネント
+  - `Navigation/` - ナビゲーションコンポーネント
+  - `Footer/` - フッターコンポーネント
+- `public/` - 静的ファイル（画像など）
+
+## 技術スタック
+
+- **Next.js** - Reactフレームワーク（App Router）
+- **React** - UIライブラリ
+- **TypeScript** - 型安全な開発
+- **CSS Modules** - スコープ付きCSS

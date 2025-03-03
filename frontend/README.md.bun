@@ -1,0 +1,82 @@
+# PCafe 2025 フロントエンド (Bun版)
+
+Next.js、React、TypeScriptを使用したモダンなウェブアプリケーション。Bunランタイムで実行します。
+
+## Bunのインストール
+
+まだBunをインストールしていない場合は、以下のコマンドでインストールできます：
+
+```bash
+# macOS / Linux
+curl -fsSL https://bun.sh/install | bash
+
+# Windows (via WSL)
+curl -fsSL https://bun.sh/install | bash
+```
+
+## 開発環境のセットアップ
+
+### 前提条件
+- Bun 1.0.0以上
+
+### インストール
+
+```bash
+# 依存関係のインストール
+bun install
+```
+
+### 開発サーバーの起動
+
+```bash
+# 開発サーバーの起動
+bun dev
+```
+
+開発サーバーは http://localhost:3000 で実行されます。
+
+### ビルド
+
+```bash
+# 本番用ビルドの作成
+bun run build
+
+# ビルドしたアプリケーションの起動
+bun start
+```
+
+### リンターの実行
+
+```bash
+# リンターの実行
+bun lint
+```
+
+## Bunの利点
+
+- 高速な起動時間
+- 効率的なパッケージマネージャー
+- Node.jsとの互換性
+- 組み込みのテストランナー
+
+## プロジェクト構造
+
+- `app/` - App Routerのページとレイアウト
+  - `page.tsx` - ホームページ
+  - `layout.tsx` - ルートレイアウト
+  - `globals.css` - グローバルスタイル
+  - `about/` - Aboutページ
+- `components/` - 再利用可能なコンポーネント
+  - `Hero/` - ヒーローセクションコンポーネント
+  - `FeatureList/` - 機能リストコンポーネント
+  - `Navigation/` - ナビゲーションコンポーネント
+  - `Footer/` - フッターコンポーネント
+- `public/` - 静的ファイル（画像など）
+
+## 技術スタック
+
+- **Next.js** - Reactフレームワーク（App Router）
+- **React** - UIライブラリ
+- **TypeScript** - 型安全な開発
+- **CSS Modules** - スコープ付きCSS
+- **Bun** - JavaScriptランタイムとパッケージマネージャー 

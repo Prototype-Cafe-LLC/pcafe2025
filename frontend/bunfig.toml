@@ -1,0 +1,23 @@
+[install]
+# デフォルトでは、Bunはnpmレジストリを使用します
+registry = "https://registry.npmjs.org/"
+
+# 依存関係をインストールする際に、devDependenciesも含めるかどうか
+dev = true
+
+# 依存関係をインストールする際に、peerDependenciesも含めるかどうか
+peer = true
+
+# 依存関係をインストールする際に、optionalDependenciesも含めるかどうか
+optional = true
+
+# 依存関係をインストールする際に、使用するNode.jsのバージョン
+node_version = "22"
+
+[run]
+# 環境変数の設定
+env = { NODE_ENV = "development" }
+
+[test]
+# テストの設定
+coverage = true 
