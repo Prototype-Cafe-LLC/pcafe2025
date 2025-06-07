@@ -132,11 +132,11 @@ migrate-django: ## Migrate data from Django database (usage: make migrate-django
 		echo "Usage: make migrate-django DJANGO_DSN='postgresql://user:pass@host:port/dbname'"; \
 		exit 1; \
 	fi
-	$(GOCMD) run cmd/migrate_django.go "$(DJANGO_DSN)"
+	$(GOCMD) run ./cmd/migrate-django "$(DJANGO_DSN)"
 
 .PHONY: migrate-events
 migrate-events: ## Migrate events from PCafe website
-	$(GOCMD) run cmd/migrate_events.go
+	$(GOCMD) run ./cmd/migrate-events
 
 # Database connection test
 .PHONY: db-test
