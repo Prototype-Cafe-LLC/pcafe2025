@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(git add:*)"
+    ],
+    "deny": []
+  }
+}

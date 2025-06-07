@@ -1,0 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+blobs: *.md, *.mdc
+
+- fix markdown error/warnings with ide:getDiagnostics (MCP) or whatever you need 
