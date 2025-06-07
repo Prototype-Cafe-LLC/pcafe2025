@@ -13,13 +13,13 @@ import (
 
 // ContactHandler handles contact form submissions
 type ContactHandler struct {
-	emailService *services.EmailService
+	emailService     *services.EmailService
 	turnstileService *services.TurnstileService
 }
 
 func NewContactHandler(emailService *services.EmailService, turnstileService *services.TurnstileService) *ContactHandler {
 	return &ContactHandler{
-		emailService: emailService,
+		emailService:     emailService,
 		turnstileService: turnstileService,
 	}
 }
@@ -91,22 +91,21 @@ func (h *ContactHandler) SubmitContactForm(c *gin.Context) {
 
 // GetContactSubmissions handles GET /api/contact (admin only)
 func (h *ContactHandler) GetContactSubmissions(c *gin.Context) {
-	// TODO: Add authentication middleware to verify admin access
-	
+
 	var submissions []models.ContactSubmission
 	db := db.GetDB()
-	
+
 	// Apply filters
 	query := db.Order("created_at DESC")
-	
+
 	if status := c.Query("status"); status != "" {
 		query = query.Where("status = ?", status)
 	}
-	
+
 	if isSpam := c.Query("is_spam"); isSpam != "" {
 		query = query.Where("is_spam = ?", isSpam == "true")
 	}
-	
+
 	// Pagination
 	limit := 50
 	if l := c.Query("limit"); l != "" {
@@ -114,64 +113,63 @@ func (h *ContactHandler) GetContactSubmissions(c *gin.Context) {
 			limit = parsed
 		}
 	}
-	
+
 	offset := 0
 	if o := c.Query("offset"); o != "" {
 		if parsed, err := strconv.Atoi(o); err == nil && parsed >= 0 {
 			offset = parsed
 		}
 	}
-	
+
 	query = query.Limit(limit).Offset(offset)
-	
+
 	if err := query.Find(&submissions).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	
+
 	c.JSON(http.StatusOK, submissions)
 }
 
 // UpdateContactSubmission handles PUT /api/contact/{id} (admin only)
 func (h *ContactHandler) UpdateContactSubmission(c *gin.Context) {
-	// TODO: Add authentication middleware to verify admin access
-	
+
 	id := c.Param("id")
-	
+
 	var input models.ContactSubmissionUpdate
 	if err := c.ShouldBindJSON(&input); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	
+
 	var submission models.ContactSubmission
 	db := db.GetDB()
-	
+
 	if err := db.First(&submission, id).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Contact submission not found"})
 		return
 	}
-	
+
 	// Update fields
 	submission.Status = input.Status
 	submission.IsSpam = input.IsSpam
 	submission.AdminNotes = input.AdminNotes
 	submission.ResponseSent = input.ResponseSent
-	
+
 	if input.Status != "new" && submission.ProcessedAt == nil {
 		now := time.Now()
 		submission.ProcessedAt = &now
 	}
-	
+
 	if input.ResponseSent && submission.ResponseSentAt == nil {
 		now := time.Now()
 		submission.ResponseSentAt = &now
 	}
-	
+
 	if err := db.Save(&submission).Error; err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
-	
+
 	c.JSON(http.StatusOK, submission)
 }

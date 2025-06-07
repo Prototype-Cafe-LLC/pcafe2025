@@ -9,6 +9,7 @@ import (
 	"github.com/pcafe/pcafe2025/db"
 	"github.com/pcafe/pcafe2025/db/seeds"
 	"github.com/pcafe/pcafe2025/handlers"
+	"github.com/pcafe/pcafe2025/middleware"
 	"github.com/pcafe/pcafe2025/services"
 )
 
@@ -62,6 +63,10 @@ func startServer(cfg *config.Config) {
 
 	// Initialize handlers
 	contactHandler := handlers.NewContactHandler(emailService, turnstileService)
+	authHandler := handlers.NewAuthHandler()
+	blogHandler := handlers.NewBlogHandler()
+	eventHandler := handlers.NewEventHandler()
+	iotHandler := handlers.NewIoTHandler()
 
 	// Setup router
 	if cfg.Env == "production" {
@@ -87,6 +92,46 @@ func startServer(cfg *config.Config) {
 	// API routes
 	api := router.Group("/api")
 	{
+		// Authentication endpoints
+		auth := api.Group("/auth")
+		{
+			auth.POST("/login", authHandler.Login)
+			auth.POST("/logout", authHandler.Logout)
+			auth.GET("/me", middleware.RequireAuth(), authHandler.GetCurrentUser)
+			auth.POST("/refresh", middleware.RequireAuth(), authHandler.RefreshSession)
+		}
+
+		// Blog endpoints
+		blog := api.Group("/blog")
+		{
+			blog.GET("", middleware.OptionalAuth(), blogHandler.GetBlogPosts)
+			blog.GET("/:id", middleware.OptionalAuth(), blogHandler.GetBlogPost)
+			blog.POST("", middleware.RequireAdminAuth(), blogHandler.CreateBlogPost)
+			blog.PUT("/:id", middleware.RequireAdminAuth(), blogHandler.UpdateBlogPost)
+			blog.DELETE("/:id", middleware.RequireAdminAuth(), blogHandler.DeleteBlogPost)
+		}
+
+		// Event endpoints
+		events := api.Group("/events")
+		{
+			events.GET("", middleware.OptionalAuth(), eventHandler.GetEvents)
+			events.GET("/calendar", eventHandler.GetEventCalendar)
+			events.GET("/:id", middleware.OptionalAuth(), eventHandler.GetEvent)
+			events.POST("", middleware.RequireAdminAuth(), eventHandler.CreateEvent)
+			events.PUT("/:id", middleware.RequireAdminAuth(), eventHandler.UpdateEvent)
+			events.DELETE("/:id", middleware.RequireAdminAuth(), eventHandler.DeleteEvent)
+		}
+
+		// IoT data endpoints
+		iot := api.Group("/iot")
+		{
+			iot.GET("/data", iotHandler.GetIoTData)
+			iot.GET("/stats", iotHandler.GetIoTStats)
+			iot.GET("/latest", iotHandler.GetLatestIoTData)
+			iot.GET("/devices", iotHandler.GetDevices)
+			iot.POST("/data", middleware.RequireAdminAuth(), iotHandler.CreateIoTData)
+		}
+
 		// Office data endpoints (Django compatibility)
 		api.GET("/officedata", handlers.GetOfficeDataList)
 		api.POST("/officedata", handlers.CreateOfficeData)
@@ -95,8 +140,8 @@ func startServer(cfg *config.Config) {
 
 		// Contact form endpoints
 		api.POST("/contact", contactHandler.SubmitContactForm)
-		api.GET("/contact", contactHandler.GetContactSubmissions)    // Admin only
-		api.PUT("/contact/:id", contactHandler.UpdateContactSubmission) // Admin only
+		api.GET("/contact", middleware.RequireAdminAuth(), contactHandler.GetContactSubmissions)
+		api.PUT("/contact/:id", middleware.RequireAdminAuth(), contactHandler.UpdateContactSubmission)
 	}
 
 	// Django compatibility endpoints
@@ -112,7 +157,7 @@ func startServer(cfg *config.Config) {
 	addr := cfg.ServerHost + ":" + cfg.ServerPort
 	log.Printf("Starting PCafe 2025 server on %s", addr)
 	log.Printf("Environment: %s", cfg.Env)
-	
+
 	if err := router.Run(addr); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 	}
