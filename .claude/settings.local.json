@@ -3,7 +3,11 @@
     "allow": [
       "Bash(ls:*)",
       "mcp__ide__getDiagnostics",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(gh issue create:*)",
+      "Bash(gh label create:*)",
+      "Bash(gh api:*)"
     ],
     "deny": []
   }
