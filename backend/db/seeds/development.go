@@ -253,6 +253,14 @@ func seedContactSubmissions(db *gorm.DB) error {
 func seedIoTData(db *gorm.DB) error {
 	log.Println("Seeding IoT data (this may take a moment)...")
 
+	// Check if IoT data already exists
+	var count int64
+	db.Model(&models.IoTData{}).Count(&count)
+	if count > 0 {
+		log.Printf("IoT data already exists (%d records), skipping...", count)
+		return nil
+	}
+
 	// Seed data for the last 7 days
 	startTime := time.Now().Add(-7 * 24 * time.Hour)
 	endTime := time.Now()

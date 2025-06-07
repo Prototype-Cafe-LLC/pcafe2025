@@ -1,0 +1,858 @@
+2025/06/07 23:46:03 Database connection established successfully
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:85
+[0m[33m[7.043ms] [34;1m[rows:0][0m CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;
+2025/06/07 23:46:03 TimescaleDB extension enabled
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[8.326ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND table_type = 'BASE TABLE'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.770ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[14.031ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'users'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.092ms] [34;1m[rows:-][0m SELECT * FROM "users" LIMIT 1
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[9.851ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'users' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[7.691ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'users'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.344ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'users'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[3.203ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.431ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m
+[0m[33m[4.817ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'users'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.620ms] [34;1m[rows:-][0m SELECT * FROM "users" LIMIT 1
+
+2025/06/07 23:46:03 [32m
+[0m[33m[6.953ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'users' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[6.821ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'users'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.602ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'users'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[2.248ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'created_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.290ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m
+[0m[33m[4.310ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'users'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.514ms] [34;1m[rows:-][0m SELECT * FROM "users" LIMIT 1
+
+2025/06/07 23:46:03 [32m
+[0m[33m[6.323ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'users' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[5.762ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'users'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.891ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'users'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[2.482ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'updated_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[2.536ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'deleted_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[2.268ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'username') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[2.004ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'email') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.433ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'password') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.416ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'is_admin') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[2.122ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'users' AND indexname = 'idx_users_deleted_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.096ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'users' AND indexname = 'idx_users_username' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.907ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'users' AND indexname = 'idx_users_email' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.754ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND table_type = 'BASE TABLE'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.292ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[4.851ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'sessions'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.825ms] [34;1m[rows:-][0m SELECT * FROM "sessions" LIMIT 1
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[6.413ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'sessions' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[6.595ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'sessions'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.077ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'sessions'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.561ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.268ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m
+[0m[33m[4.917ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'sessions'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.650ms] [34;1m[rows:-][0m SELECT * FROM "sessions" LIMIT 1
+
+2025/06/07 23:46:03 [32m
+[0m[33m[6.322ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'sessions' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[6.455ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'sessions'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.571ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'sessions'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.426ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'created_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.235ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m
+[0m[33m[4.718ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'sessions'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.643ms] [34;1m[rows:-][0m SELECT * FROM "sessions" LIMIT 1
+
+2025/06/07 23:46:03 [32m
+[0m[33m[6.598ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'sessions' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[5.855ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'sessions'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.545ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'sessions'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.441ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'updated_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.415ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'deleted_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.412ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'session_id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.376ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'user_id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.385ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'expires_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.413ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'ip_address') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.383ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'user_agent') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.513ms] [34;1m[rows:1][0m SELECT count(*) FROM INFORMATION_SCHEMA.table_constraints WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND constraint_name = 'fk_users_sessions'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.825ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'sessions' AND indexname = 'idx_sessions_deleted_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.761ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'sessions' AND indexname = 'idx_sessions_session_id' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.103ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'sessions' AND indexname = 'idx_sessions_user_id' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.400ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'sessions' AND indexname = 'idx_sessions_expires_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.045ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND table_type = 'BASE TABLE'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.314ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.760ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'events'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.912ms] [34;1m[rows:-][0m SELECT * FROM "events" LIMIT 1
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.436ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'events' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.317ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'events'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.402ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'events'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.630ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.267ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.781ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'events'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.430ms] [34;1m[rows:-][0m SELECT * FROM "events" LIMIT 1
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.484ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'events' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.337ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'events'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.298ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'events'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.404ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'created_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.241ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.557ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'events'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.442ms] [34;1m[rows:-][0m SELECT * FROM "events" LIMIT 1
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.292ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'events' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.223ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'events'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.328ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'events'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.460ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'updated_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.435ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'deleted_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.489ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'title') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.374ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'description') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.387ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'event_url') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.428ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'image_url') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.388ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'start_date') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.436ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'end_date') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.414ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'is_all_day') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.424ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'organizer_name') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.388ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'organizer_url') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.406ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'source_url') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.386ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'source_type') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.371ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'extracted_data') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.420ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'is_published') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.407ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'is_featured') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.599ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'created_by_id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.480ms] [34;1m[rows:1][0m SELECT count(*) FROM INFORMATION_SCHEMA.table_constraints WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND constraint_name = 'fk_users_events'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.367ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'events' AND indexname = 'idx_events_end_date' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.340ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'events' AND indexname = 'idx_events_is_published' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.281ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'events' AND indexname = 'idx_events_is_featured' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.270ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'events' AND indexname = 'idx_events_created_by_id' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.603ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'events' AND indexname = 'idx_events_deleted_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.299ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'events' AND indexname = 'idx_events_start_date' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.773ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND table_type = 'BASE TABLE'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.225ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[2.004ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.126ms] [34;1m[rows:-][0m SELECT * FROM "blog_posts" LIMIT 1
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.720ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'blog_posts' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.478ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'blog_posts'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.392ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'blog_posts'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.448ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.239ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.589ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.410ms] [34;1m[rows:-][0m SELECT * FROM "blog_posts" LIMIT 1
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.369ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'blog_posts' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.351ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'blog_posts'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.311ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'blog_posts'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.417ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'created_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.245ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.593ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.398ms] [34;1m[rows:-][0m SELECT * FROM "blog_posts" LIMIT 1
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.439ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'blog_posts' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.443ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'blog_posts'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.422ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'blog_posts'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.572ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'updated_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.639ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'deleted_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.507ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'title') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.443ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'slug') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.519ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'content') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.425ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'content_type') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.402ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'excerpt') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.409ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'meta_title') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.426ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'meta_desc') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.457ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'is_published') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.484ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'published_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.454ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'is_featured') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.409ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'tags') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.381ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'view_count') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.415ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'author_id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.487ms] [34;1m[rows:1][0m SELECT count(*) FROM INFORMATION_SCHEMA.table_constraints WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND constraint_name = 'fk_users_blog_posts'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.522ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'blog_posts' AND indexname = 'idx_blog_posts_deleted_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.385ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'blog_posts' AND indexname = 'idx_blog_posts_title' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.299ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'blog_posts' AND indexname = 'idx_blog_posts_slug' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.339ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'blog_posts' AND indexname = 'idx_blog_posts_is_published' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.348ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'blog_posts' AND indexname = 'idx_blog_posts_published_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.319ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'blog_posts' AND indexname = 'idx_blog_posts_is_featured' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.305ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'blog_posts' AND indexname = 'idx_blog_posts_author_id' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.840ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND table_type = 'BASE TABLE'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.286ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.916ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.830ms] [34;1m[rows:-][0m SELECT * FROM "contact_submissions" LIMIT 1
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.426ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'contact_submissions' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.395ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'contact_submissions'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.290ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'contact_submissions'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.430ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.257ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.624ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.353ms] [34;1m[rows:-][0m SELECT * FROM "contact_submissions" LIMIT 1
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.304ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'contact_submissions' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.287ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'contact_submissions'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.263ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'contact_submissions'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.423ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'created_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.252ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.601ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.501ms] [34;1m[rows:-][0m SELECT * FROM "contact_submissions" LIMIT 1
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.325ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'contact_submissions' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[1.289ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'contact_submissions'
+
+2025/06/07 23:46:03 [32m
+[0m[33m[0.291ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'contact_submissions'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.474ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'updated_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.584ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'deleted_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.562ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'name') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.403ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'email') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.452ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'phone') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.370ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'company') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.385ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'subject') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.370ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'message') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.423ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'form_type') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.378ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'source') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.384ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'ip_address') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.495ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'user_agent') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.365ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'turnstile_token') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.411ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'turnstile_verified') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.420ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'status') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.351ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'is_spam') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.391ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'processed_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.460ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'admin_notes') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.402ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'response_sent') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.514ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'response_sent_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.306ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'contact_submissions' AND indexname = 'idx_contact_submissions_is_spam' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.287ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'contact_submissions' AND indexname = 'idx_contact_submissions_processed_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.299ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'contact_submissions' AND indexname = 'idx_contact_submissions_deleted_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.288ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'contact_submissions' AND indexname = 'idx_contact_submissions_email' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.310ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'contact_submissions' AND indexname = 'idx_contact_submissions_turnstile_verified' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.332ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'contact_submissions' AND indexname = 'idx_contact_submissions_status' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.964ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND table_type = 'BASE TABLE'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.322ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.408ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'office_data'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.264ms] [34;1m[rows:-][0m SELECT * FROM "office_data" LIMIT 1
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.940ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'office_data' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.085ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'office_data'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.315ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'office_data'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.739ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'time') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.560ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'temperature') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.467ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'co2') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.401ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'ambient') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.450ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'event_title') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.387ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'light') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.404ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'office_open') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.454ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'parking_slot1') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.486ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'parking_slot2') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.359ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'office_data' AND indexname = 'idx_office_time' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.347ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND table_type = 'BASE TABLE'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.251ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.549ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[6.648ms] [34;1m[rows:-][0m SELECT * FROM "iot_data" LIMIT 1
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.578ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'iot_data' AND constraint_type = 'UNIQUE'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.080ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'iot_data'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.367ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'iot_data'
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.474ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'time') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.409ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'device_id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.503ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'sensor_type') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.490ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'device_name') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.486ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'device_type') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.413ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'location') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.412ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'value') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.494ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'unit') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.518ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'quality') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.522ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'accuracy') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.413ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'metadata') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.395ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'raw_data') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.300ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'iot_data' AND indexname = 'idx_iot_time' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.282ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'iot_data' AND indexname = 'idx_iot_device' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.325ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'iot_data' AND indexname = 'idx_iot_data_sensor_type' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.297ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'iot_data' AND indexname = 'idx_iot_data_device_name' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.294ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'iot_data' AND indexname = 'idx_iot_data_device_type' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.264ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'iot_data' AND indexname = 'idx_iot_data_location' AND schemaname = CURRENT_SCHEMA()
+2025/06/07 23:46:03 Database migrations completed successfully
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:137
+[0m[33m[3.001ms] [34;1m[rows:1][0m 
+		SELECT EXISTS (
+			SELECT 1 FROM timescaledb_information.hypertables 
+			WHERE hypertable_name = 'office_data'
+		)
+	
+2025/06/07 23:46:03 Office data hypertable already exists
+
+2025/06/07 23:46:03 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:177
+[0m[33m[1.318ms] [34;1m[rows:1][0m 
+		SELECT EXISTS (
+			SELECT 1 FROM timescaledb_information.hypertables 
+			WHERE hypertable_name = 'iot_data'
+		)
+	
+2025/06/07 23:46:03 IoT data hypertable already exists
+2025/06/07 23:46:03 Database initialization completed successfully
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /api/officedata           --> github.com/pcafe/pcafe2025/handlers.GetOfficeDataList (4 handlers)
+[GIN-debug] POST   /api/officedata           --> github.com/pcafe/pcafe2025/handlers.CreateOfficeData (4 handlers)
+[GIN-debug] GET    /api/officedata/:time     --> github.com/pcafe/pcafe2025/handlers.GetOfficeDataByID (4 handlers)
+[GIN-debug] GET    /api/latest               --> github.com/pcafe/pcafe2025/handlers.GetLatestOfficeData (4 handlers)
+[GIN-debug] POST   /api/contact              --> github.com/pcafe/pcafe2025/handlers.(*ContactHandler).SubmitContactForm-fm (4 handlers)
+[GIN-debug] GET    /api/contact              --> github.com/pcafe/pcafe2025/handlers.(*ContactHandler).GetContactSubmissions-fm (4 handlers)
+[GIN-debug] PUT    /api/contact/:id          --> github.com/pcafe/pcafe2025/handlers.(*ContactHandler).UpdateContactSubmission-fm (4 handlers)
+[GIN-debug] GET    /jlist                    --> github.com/pcafe/pcafe2025/handlers.GetOfficeDataJSON (4 handlers)
+[GIN-debug] GET    /jlast                    --> github.com/pcafe/pcafe2025/handlers.GetLastOfficeData (4 handlers)
+[GIN-debug] GET    /health                   --> main.main.func3 (4 handlers)
+2025/06/07 23:46:03 Starting PCafe 2025 server on 0.0.0.0:8080
+2025/06/07 23:46:03 Environment: development
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
+[GIN] 2025/06/07 - 23:46:12 | 200 |      95.417µs |       127.0.0.1 | GET      "/health"
+
+2025/06/07 23:46:17 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/office_data.go:54
+[0m[33m[4.878ms] [34;1m[rows:0][0m SELECT * FROM "office_data" ORDER BY time ASC
+[GIN] 2025/06/07 - 23:46:17 | 200 |    5.140709ms |       127.0.0.1 | GET      "/api/officedata"
+
+2025/06/07 23:46:22 [31;1m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/office_data.go:180 [35;1mrecord not found
+[0m[33m[2.304ms] [34;1m[rows:0][0m SELECT * FROM "office_data" ORDER BY time DESC,"office_data"."time" LIMIT 1
+[GIN] 2025/06/07 - 23:46:22 | 404 |    2.387042ms |       127.0.0.1 | GET      "/jlast"
+
+2025/06/07 23:46:33 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/office_data.go:85
+[0m[33m[22.564ms] [34;1m[rows:1][0m INSERT INTO "office_data" ("time","temperature","co2","ambient","event_title","light","office_open","parking_slot1","parking_slot2") VALUES ('2025-06-07 14:46:33.286',22.5,400,300,'',true,true,false,false)
+[GIN] 2025/06/07 - 23:46:33 | 201 |     22.7495ms |       127.0.0.1 | POST     "/api/officedata"
+
+2025/06/07 23:46:38 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/office_data.go:117
+[0m[33m[5.037ms] [34;1m[rows:1][0m SELECT * FROM "office_data" ORDER BY time DESC,"office_data"."time" LIMIT 1
+[GIN] 2025/06/07 - 23:46:38 | 200 |    5.126625ms |       127.0.0.1 | GET      "/api/latest"
+
+2025/06/07 23:46:43 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/office_data.go:180
+[0m[33m[3.437ms] [34;1m[rows:1][0m SELECT * FROM "office_data" ORDER BY time DESC,"office_data"."time" LIMIT 1
+[GIN] 2025/06/07 - 23:46:43 | 200 |    3.543583ms |       127.0.0.1 | GET      "/jlast"

@@ -28,9 +28,9 @@ type Event struct {
 	OrganizerURL  string `gorm:"size:500" json:"organizer_url"`
 	
 	// Metadata extraction info
-	SourceURL     string `gorm:"size:500" json:"source_url"`
-	SourceType    string `gorm:"size:50" json:"source_type"` // "url", "image", "pdf"
-	ExtractedData string `gorm:"type:jsonb" json:"extracted_data,omitempty"`
+	SourceURL     string  `gorm:"size:500" json:"source_url"`
+	SourceType    string  `gorm:"size:50" json:"source_type"` // "url", "image", "pdf"
+	ExtractedData *string `gorm:"type:jsonb" json:"extracted_data,omitempty"`
 	
 	// Status and visibility
 	IsPublished bool `gorm:"default:true;index" json:"is_published"`

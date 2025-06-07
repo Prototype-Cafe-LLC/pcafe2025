@@ -1,6 +1,9 @@
 package models
 
 import (
+	"database/sql/driver"
+	"encoding/json"
+	"errors"
 	"time"
 
 	"gorm.io/gorm"
@@ -31,7 +34,7 @@ type BlogPost struct {
 	IsFeatured  bool       `gorm:"default:false;index" json:"is_featured"`
 	
 	// Tags (stored as JSON array)
-	Tags []string `gorm:"type:jsonb" json:"tags"`
+	Tags StringArray `gorm:"type:jsonb" json:"tags"`
 	
 	// Statistics
 	ViewCount int `gorm:"default:0" json:"view_count"`
@@ -41,6 +44,37 @@ type BlogPost struct {
 	
 	// Relationships
 	Author *User `gorm:"foreignKey:AuthorID;constraint:OnDelete:SET NULL" json:"author,omitempty"`
+}
+
+// StringArray handles JSON serialization for string arrays in PostgreSQL JSONB
+type StringArray []string
+
+// Value implements the driver.Valuer interface for database storage
+func (s StringArray) Value() (driver.Value, error) {
+	if s == nil {
+		return nil, nil
+	}
+	return json.Marshal(s)
+}
+
+// Scan implements the sql.Scanner interface for database retrieval
+func (s *StringArray) Scan(value interface{}) error {
+	if value == nil {
+		*s = nil
+		return nil
+	}
+	
+	var bytes []byte
+	switch v := value.(type) {
+	case []byte:
+		bytes = v
+	case string:
+		bytes = []byte(v)
+	default:
+		return errors.New("cannot scan non-string/[]byte value into StringArray")
+	}
+	
+	return json.Unmarshal(bytes, s)
 }
 
 // BlogPostInput represents the input structure for creating/updating blog posts
@@ -53,5 +87,5 @@ type BlogPostInput struct {
 	MetaDesc    string   `json:"meta_description"`
 	IsPublished bool     `json:"is_published"`
 	IsFeatured  bool     `json:"is_featured"`
-	Tags        []string `json:"tags"`
+	Tags        StringArray `json:"tags"`
 }

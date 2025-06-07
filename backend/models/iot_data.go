@@ -35,12 +35,12 @@ type IoTData struct {
 	
 	// Device identification
 	DeviceID   string `gorm:"primaryKey;not null;size:50;index:idx_iot_device" json:"device_id"`
+	SensorType string `gorm:"primaryKey;size:50;not null;index" json:"sensor_type"`
 	DeviceName string `gorm:"size:100;index" json:"device_name"`
 	DeviceType string `gorm:"size:50;index" json:"device_type"`
 	Location   string `gorm:"size:100;index" json:"location"`
 	
-	// Sensor data
-	SensorType string  `gorm:"size:50;not null;index" json:"sensor_type"`
+	// Sensor data (SensorType is part of primary key above)
 	Value      float64 `gorm:"not null" json:"value"`
 	Unit       string  `gorm:"size:20" json:"unit"`
 	
@@ -53,6 +53,11 @@ type IoTData struct {
 	
 	// Raw data for debugging
 	RawData string `gorm:"type:text" json:"raw_data,omitempty"`
+}
+
+// TableName sets the table name explicitly
+func (IoTData) TableName() string {
+	return "iot_data"
 }
 
 // OfficeDataInput represents the input structure for creating office data entries
