@@ -93,6 +93,10 @@ docker-clean: docker-down ## Clean Docker volumes and images
 fmt: ## Format Go code
 	$(GOFMT) ./...
 
+.PHONY: vet
+vet: ## Run Go static analysis
+	$(GOCMD) vet ./...
+
 .PHONY: lint
 lint: ## Lint Go code (requires golangci-lint)
 	@which golangci-lint > /dev/null || (echo "Installing golangci-lint..." && go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest)

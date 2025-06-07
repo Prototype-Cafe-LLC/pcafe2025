@@ -1,11 +1,9 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
-	"strings"
 	"time"
 
 	"github.com/pcafe/pcafe2025/config"
@@ -94,7 +92,6 @@ func main() {
 // createSampleEventsFromWebsite creates sample events based on the website information
 // In a real scenario, this would parse the actual website or access the Django database
 func createSampleEventsFromWebsite() []EventData {
-	now := time.Now()
 	jst := time.FixedZone("JST", 9*60*60)
 	
 	return []EventData{
