@@ -13,32 +13,32 @@ type Event struct {
 	DeletedAt gorm.DeletedAt `gorm:"index" json:"deleted_at,omitempty"`
 
 	// Event details
-	Title       string    `gorm:"not null;size:200" json:"title"`
-	Description string    `gorm:"type:text" json:"description"`
-	EventURL    string    `gorm:"size:500" json:"event_url"`
-	ImageURL    string    `gorm:"size:500" json:"image_url"`
-	
+	Title       string `gorm:"not null;size:200" json:"title"`
+	Description string `gorm:"type:text" json:"description"`
+	EventURL    string `gorm:"size:500" json:"event_url"`
+	ImageURL    string `gorm:"size:500" json:"image_url"`
+
 	// Date and time
-	StartDate   time.Time  `gorm:"not null;index" json:"start_date"`
-	EndDate     *time.Time `gorm:"index" json:"end_date,omitempty"`
-	IsAllDay    bool       `gorm:"default:false" json:"is_all_day"`
-	
+	StartDate time.Time  `gorm:"not null;index" json:"start_date"`
+	EndDate   *time.Time `gorm:"index" json:"end_date,omitempty"`
+	IsAllDay  bool       `gorm:"default:false" json:"is_all_day"`
+
 	// Organizer information
 	OrganizerName string `gorm:"size:100" json:"organizer_name"`
 	OrganizerURL  string `gorm:"size:500" json:"organizer_url"`
-	
+
 	// Metadata extraction info
 	SourceURL     string  `gorm:"size:500" json:"source_url"`
 	SourceType    string  `gorm:"size:50" json:"source_type"` // "url", "image", "pdf"
 	ExtractedData *string `gorm:"type:jsonb" json:"extracted_data,omitempty"`
-	
+
 	// Status and visibility
 	IsPublished bool `gorm:"default:true;index" json:"is_published"`
 	IsFeatured  bool `gorm:"default:false;index" json:"is_featured"`
-	
+
 	// Foreign keys
 	CreatedByID *uint `gorm:"index" json:"created_by_id,omitempty"`
-	
+
 	// Relationships
 	CreatedBy *User `gorm:"foreignKey:CreatedByID;constraint:OnDelete:SET NULL" json:"created_by,omitempty"`
 }

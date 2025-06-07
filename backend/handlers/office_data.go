@@ -156,7 +156,7 @@ func GetOfficeDataJSON(c *gin.Context) {
 	for i, data := range officeData {
 		// Convert UTC to JST (similar to Django as_dict method)
 		jstTime := data.Time.In(time.FixedZone("JST", 9*60*60))
-		
+
 		result[i] = gin.H{
 			"time":          jstTime.Format("2006-01-02 15:04:05"),
 			"temperature":   data.Temperature,
@@ -184,7 +184,7 @@ func GetLastOfficeData(c *gin.Context) {
 
 	// Convert to Django-compatible format with local time
 	jstTime := officeData.Time.In(time.FixedZone("JST", 9*60*60))
-	
+
 	result := []gin.H{{
 		"time":          jstTime.Format("2006-01-02 15:04:05"),
 		"temperature":   officeData.Temperature,

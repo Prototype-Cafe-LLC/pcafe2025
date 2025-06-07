@@ -17,29 +17,29 @@ type ContactSubmission struct {
 	Email   string `gorm:"not null;size:100;index" json:"email"`
 	Phone   string `gorm:"size:20" json:"phone"`
 	Company string `gorm:"size:100" json:"company"`
-	
+
 	// Message content
 	Subject string `gorm:"not null;size:200" json:"subject"`
 	Message string `gorm:"type:text;not null" json:"message"`
-	
+
 	// Form metadata
-	FormType    string `gorm:"size:50;default:'general'" json:"form_type"` // "general", "tour_request", "partnership"
-	Source      string `gorm:"size:100" json:"source"` // referring page/source
-	IPAddress   string `gorm:"size:45" json:"ip_address"`
-	UserAgent   string `gorm:"size:500" json:"user_agent"`
-	
+	FormType  string `gorm:"size:50;default:'general'" json:"form_type"` // "general", "tour_request", "partnership"
+	Source    string `gorm:"size:100" json:"source"`                     // referring page/source
+	IPAddress string `gorm:"size:45" json:"ip_address"`
+	UserAgent string `gorm:"size:500" json:"user_agent"`
+
 	// Turnstile verification
 	TurnstileToken    string `gorm:"size:1000" json:"-"` // Don't expose in JSON
 	TurnstileVerified bool   `gorm:"default:false;index" json:"turnstile_verified"`
-	
+
 	// Status tracking
 	Status      string     `gorm:"size:20;default:'new';index" json:"status"` // "new", "read", "responded", "closed"
 	IsSpam      bool       `gorm:"default:false;index" json:"is_spam"`
 	ProcessedAt *time.Time `gorm:"index" json:"processed_at,omitempty"`
-	
+
 	// Admin notes
 	AdminNotes string `gorm:"type:text" json:"admin_notes,omitempty"`
-	
+
 	// Response tracking
 	ResponseSent   bool       `gorm:"default:false" json:"response_sent"`
 	ResponseSentAt *time.Time `json:"response_sent_at,omitempty"`
