@@ -23,7 +23,23 @@
       "Bash(go run:*)",
       "Bash(curl:*)",
       "Bash(pgrep:*)",
-      "Bash(gh pr edit:*)"
+      "Bash(gh pr edit:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr view:*)",
+      "Bash(touch:*)",
+      "Bash(bun install:*)",
+      "Bash(bun run:*)",
+      "Bash(pkill:*)",
+      "Bash(true)",
+      "WebFetch(domain:github.com)",
+      "Bash(go build:*)",
+      "Bash(go vet:*)",
+      "Bash(/Users/yukilab/.nvm/versions/node/v22.14.0/bin/markdownlint --fix CLAUDE.md)",
+      "Bash(mv:*)",
+      "Bash(bun list:*)",
+      "Bash(npx eslint:*)",
+      "Bash(bun add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }

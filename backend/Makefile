@@ -36,11 +36,11 @@ build: ## Build the application
 
 .PHONY: run
 run: ## Run the application
-	$(GOCMD) run server.go
+	$(GOCMD) run main.go
 
 .PHONY: run-server
 run-server: ## Run the API server
-	$(GOCMD) run server.go
+	$(GOCMD) run main.go
 
 .PHONY: dev
 dev: ## Run development server with auto-reload (requires air)
@@ -93,6 +93,10 @@ docker-clean: docker-down ## Clean Docker volumes and images
 fmt: ## Format Go code
 	$(GOFMT) ./...
 
+.PHONY: vet
+vet: ## Run Go static analysis
+	$(GOCMD) vet ./...
+
 .PHONY: lint
 lint: ## Lint Go code (requires golangci-lint)
 	@which golangci-lint > /dev/null || (echo "Installing golangci-lint..." && go install github.com/golangci/golangci-lint/cmd/golangci-lint@latest)
@@ -128,11 +132,11 @@ migrate-django: ## Migrate data from Django database (usage: make migrate-django
 		echo "Usage: make migrate-django DJANGO_DSN='postgresql://user:pass@host:port/dbname'"; \
 		exit 1; \
 	fi
-	$(GOCMD) run cmd/migrate_django.go "$(DJANGO_DSN)"
+	$(GOCMD) run ./cmd/migrate-django "$(DJANGO_DSN)"
 
 .PHONY: migrate-events
 migrate-events: ## Migrate events from PCafe website
-	$(GOCMD) run cmd/migrate_events.go
+	$(GOCMD) run ./cmd/migrate-events
 
 # Database connection test
 .PHONY: db-test
