@@ -127,6 +127,7 @@ PCafe 2025 - A fresh project starting from scratch. The project name suggests it
 - **Production Platform**: Ubuntu 24.04 LTS
 - Go 1.22+ (latest stable)
 - Node.js 20+ (latest LTS)
+  - markdownlint
 - Bun 1.0+ (package manager)
 - PostgreSQL 15+ with TimescaleDB extension (for 50M+ IoT records)
 - Docker & Docker Compose (for local development)
@@ -205,6 +206,22 @@ bun run dev         # Development server
 bun run build       # Production build
 bun run lint        # Lint code
 bun run typecheck   # TypeScript checking
+```
+
+**Documentation (Markdown):**
+
+```bash
+# Install markdownlint globally (if not already installed)
+npm install -g markdownlint-cli
+
+# Validate all markdown files
+markdownlint **/*.md
+
+# Validate specific files
+markdownlint README.md MIGRATION_GUIDE.md
+
+# Fix common issues automatically (where possible)
+markdownlint --fix **/*.md
 ```
 
 ### Project Structure
@@ -320,6 +337,49 @@ volumes:
 ```
 
 Commands: `make docker-up` / `make docker-down` / `make docker-logs`
+
+---
+
+## Documentation Standards
+
+### Markdown Formatting
+
+All markdown files in this project follow strict formatting standards enforced by markdownlint. Key requirements:
+
+**Line Length**: Maximum 80 characters per line for readability
+**Headers**: Must have blank lines before and after
+**Lists**: Must have blank lines before and after
+**Code Blocks**: Must have blank lines before and after
+**No Trailing Spaces**: All trailing whitespace must be removed
+**Final Newline**: Files must end with exactly one newline character
+
+### Validation Commands
+
+```bash
+# Check all markdown files for issues
+markdownlint **/*.md
+
+# Check specific files
+markdownlint backend/README.md MIGRATION_GUIDE.md
+
+# Auto-fix common formatting issues
+markdownlint --fix **/*.md
+```
+
+### Common Issues and Fixes
+
+1. **Line too long (MD013)**: Break long lines at logical points
+2. **Missing blank lines (MD022/MD031/MD032)**: Add blank lines around headers, code blocks, and lists
+3. **Trailing spaces (MD009)**: Remove all trailing whitespace
+4. **Missing final newline (MD047)**: Ensure files end with single newline
+
+### Best Practices
+
+- Write clear, concise documentation
+- Use consistent formatting throughout
+- Include code examples with proper syntax highlighting
+- Organize content with logical heading hierarchy
+- Validate markdown before committing changes
 
 ---
 
