@@ -487,9 +487,47 @@ markdownlint --fix **/*.md
 
 ---
 
+## GitHub Issues and Pull Requests
+
+### Creating Pull Requests for Issues
+
+When creating pull requests that resolve GitHub issues, always include the closing keyword at the **top** of the PR description to ensure proper issue linking:
+
+```markdown
+close #28
+
+## Summary
+[Your PR description here...]
+```
+
+**Important**: Place `close #issue-number` at the very beginning of the PR description, not buried in the content. This ensures GitHub automatically closes the issue when the PR is merged.
+
+Other valid closing keywords:
+
+- `close`, `closes`, `closed`
+- `fix`, `fixes`, `fixed`
+- `resolve`, `resolves`, `resolved`
+
+### Issue #28 Implementation Notes
+
+**Completed**: Go backend REST API implementation
+
+- ✅ Authentication middleware (session-based with cookies)
+- ✅ Blog CRUD endpoints with slug support
+- ✅ Event CRUD endpoints with calendar view
+- ✅ IoT data endpoints with TimescaleDB optimization
+- ✅ Contact form protection with admin middleware
+- ✅ Comprehensive input validation and error handling
+
+**API Structure**: All endpoints follow `/api/{resource}` pattern with proper HTTP methods
+**Security**: Admin-only endpoints protected by session middleware
+**Performance**: TimescaleDB hypertables for IoT time-series data
+
+---
+
 ### 📎 今後の設計・開発タスク候補
 
 1. 画面設計（ワイヤーフレーム）
 2. DB設計（ER図）
-3. API仕様書（OpenAPI定義）
-4. 開発雛形コード（Go＋React/Vite＋React Admin）
+3. ~~API仕様書（OpenAPI定義）~~ **→ Issue #28で実装完了、Swagger UI追加は今後**
+4. ~~開発雛形コード（Go＋React/Vite＋React Admin）~~ **→ Issue #28でバックエンド完了**
