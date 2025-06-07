@@ -59,6 +59,10 @@ go-test: ## Run Go tests
 go-fmt: ## Format Go code
 	cd backend && make fmt
 
+.PHONY: go-vet
+go-vet: ## Run Go static analysis
+	cd backend && make vet
+
 .PHONY: go-lint
 go-lint: ## Lint Go code
 	cd backend && make lint
@@ -135,6 +139,9 @@ docs-fix: ## Fix markdown formatting issues
 # Quality checks
 .PHONY: lint
 lint: go-lint frontend-lint docs-lint ## Run all linting
+
+.PHONY: vet
+vet: go-vet ## Run static analysis
 
 .PHONY: test
 test: go-test frontend-test ## Run all tests

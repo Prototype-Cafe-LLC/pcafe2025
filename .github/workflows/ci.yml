@@ -39,7 +39,7 @@ jobs:
         path: |
           ~/.cache/go-build
           ~/go/pkg/mod
-        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+        key: ${{ runner.os }}-go-${{ hashFiles('backend/go.sum') }}
         restore-keys: |
           ${{ runner.os }}-go-
     
@@ -79,7 +79,7 @@ jobs:
         path: |
           ~/.bun/install/cache
           frontend/node_modules
-        key: ${{ runner.os }}-bun-${{ hashFiles('**/package.json') }}
+        key: ${{ runner.os }}-bun-${{ hashFiles('frontend/package.json') }}
         restore-keys: |
           ${{ runner.os }}-bun-
     

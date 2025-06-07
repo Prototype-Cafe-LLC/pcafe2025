@@ -197,6 +197,8 @@ go run main.go      # Development server
 go build -o bin/server
 go test ./...       # Run tests
 go fmt ./...        # Format code
+go vet ./...        # Static analysis (REQUIRED before git push)
+go mod tidy         # Clean up dependencies
 ```
 
 **Frontend (React with Bun):**
@@ -338,6 +340,107 @@ volumes:
 ```
 
 Commands: `make docker-up` / `make docker-down` / `make docker-logs`
+
+---
+
+## Quality Assurance & Pre-Commit Practices
+
+### Essential Pre-Commit Checks
+
+Before pushing code to the repository, ALWAYS run these commands to ensure CI will pass:
+
+#### Backend Validation (Go)
+
+```bash
+# Format code
+go fmt ./...
+
+# Static analysis (catches unused imports, variables, duplicate functions)
+go vet ./...
+
+# Type checking and compilation
+go build -o bin/test main.go && rm bin/test
+
+# Run tests
+go test ./...
+
+# Clean dependencies
+go mod tidy
+```
+
+#### Frontend Validation (React/TypeScript)
+
+```bash
+# Type checking
+bun run typecheck
+
+# Linting
+bun run lint
+
+# Build verification
+bun run build
+```
+
+#### Documentation Validation
+
+```bash
+# Markdown linting
+markdownlint **/*.md
+
+# Auto-fix common issues
+markdownlint --fix **/*.md
+```
+
+### Common CI Issues and Solutions
+
+#### Backend Issues
+
+- **Duplicate main functions**: Only one `main.go` should exist in the root package
+- **Unused imports/variables**: Use `go vet` to catch these before committing
+- **Missing dependencies**: Run `go mod tidy` to ensure clean go.mod/go.sum files
+- **Import cycles**: Keep package dependencies acyclic
+
+#### Frontend Issues
+
+- **TypeScript errors**: Always run `bun run typecheck` before committing
+- **Missing CSS module types**: Ensure `*.module.css` type declarations exist
+- **Build failures**: Test with `bun run build` to catch compilation issues
+- **Linting errors**: Fix with `bun run lint` and follow established patterns
+
+#### Docker & CI Configuration
+
+- **Cache key mismatches**: Use specific paths like `backend/go.sum` instead of `**/go.sum`
+- **Working directory errors**: Ensure CI workflows specify correct `working-directory`
+- **Service dependencies**: Verify database services are healthy before running tests
+
+### Recommended Git Workflow
+
+1. **Before starting work**: `git pull origin develop`
+2. **During development**: Use `make dev` for unified development environment
+3. **Before committing**: Run full quality checks:
+
+   ```bash
+   make lint      # All linting
+   make test      # All tests  
+   make build     # All builds
+   ```
+
+4. **Commit with descriptive messages**: Follow conventional commit format
+5. **Push and create PR**: Include `close #issue-number` in PR description
+
+### Makefile Quality Commands
+
+The root Makefile includes consolidated quality commands:
+
+```bash
+make lint       # Run all linting (Go + Frontend + Markdown)
+make test       # Run all tests (Go + Frontend)
+make typecheck  # Run TypeScript checking
+make fmt        # Format all code
+make build      # Build all components
+```
+
+Use these before every commit to ensure CI pipeline success.
 
 ---
 
