@@ -25,6 +25,50 @@ services:
       retries: 5
     restart: unless-stopped
 
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: pcafe2025_backend
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: pcafe2025
+      DB_USER: postgres
+      DB_PASSWORD: password
+      SERVER_PORT: 8080
+      ENV: development
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend:/app
+    networks:
+      - pcafe_network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+    profiles: ["backend"]
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: pcafe2025_frontend
+    environment:
+      VITE_API_BASE_URL: http://localhost:8080
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - pcafe_network
+    depends_on:
+      - backend
+    restart: unless-stopped
+    profiles: ["frontend"]
+
   # Optional: pgAdmin for database management
   pgadmin:
     image: dpage/pgadmin4:latest

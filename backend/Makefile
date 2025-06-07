@@ -36,11 +36,11 @@ build: ## Build the application
 
 .PHONY: run
 run: ## Run the application
-	$(GOCMD) run server.go
+	$(GOCMD) run main.go
 
 .PHONY: run-server
 run-server: ## Run the API server
-	$(GOCMD) run server.go
+	$(GOCMD) run main.go
 
 .PHONY: dev
 dev: ## Run development server with auto-reload (requires air)

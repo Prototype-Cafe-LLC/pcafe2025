@@ -86,6 +86,7 @@ PCafe 2025 - A fresh project starting from scratch. The project name suggests it
 - React + TypeScript + Vite
 - 状態管理：Redux Toolkit + Redux Saga
 - UI：Radix UI
+- CSS: CSS Modules
 - 管理画面：React Admin（カスタムフォームあり）
 
 #### バックエンド（API）

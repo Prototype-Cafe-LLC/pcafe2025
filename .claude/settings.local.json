@@ -23,7 +23,14 @@
       "Bash(go run:*)",
       "Bash(curl:*)",
       "Bash(pgrep:*)",
-      "Bash(gh pr edit:*)"
+      "Bash(gh pr edit:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr view:*)",
+      "Bash(touch:*)",
+      "Bash(bun install:*)",
+      "Bash(bun run:*)",
+      "Bash(pkill:*)",
+      "Bash(true)"
     ],
     "deny": []
   }
