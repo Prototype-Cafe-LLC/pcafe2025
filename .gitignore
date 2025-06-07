@@ -6,7 +6,6 @@ server.log
 frontend/node_modules/
 frontend/dist/
 frontend/*.tsbuildinfo
-frontend/vite.config.d.ts
 
 # Backend build artifacts
 backend/bin/

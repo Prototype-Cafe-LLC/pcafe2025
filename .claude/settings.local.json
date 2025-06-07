@@ -34,7 +34,12 @@
       "WebFetch(domain:github.com)",
       "Bash(go build:*)",
       "Bash(go vet:*)",
-      "Bash(/Users/yukilab/.nvm/versions/node/v22.14.0/bin/markdownlint --fix CLAUDE.md)"
+      "Bash(/Users/yukilab/.nvm/versions/node/v22.14.0/bin/markdownlint --fix CLAUDE.md)",
+      "Bash(mv:*)",
+      "Bash(bun list:*)",
+      "Bash(npx eslint:*)",
+      "Bash(bun add:*)",
+      "Bash(git commit:*)"
     ],
     "deny": []
   }
