@@ -19,10 +19,10 @@ type User struct {
 
 	// Sessions for this user
 	Sessions []Session `gorm:"foreignKey:UserID;constraint:OnDelete:CASCADE" json:"sessions,omitempty"`
-	
+
 	// Blog posts created by this user
 	BlogPosts []BlogPost `gorm:"foreignKey:AuthorID;constraint:OnDelete:SET NULL" json:"blog_posts,omitempty"`
-	
+
 	// Events created by this user
 	Events []Event `gorm:"foreignKey:CreatedByID;constraint:OnDelete:SET NULL" json:"events,omitempty"`
 }

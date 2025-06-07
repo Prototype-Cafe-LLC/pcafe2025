@@ -135,7 +135,7 @@ func setupOfficeDataHypertable() error {
 			WHERE hypertable_name = 'office_data'
 		)
 	`).Scan(&exists).Error
-	
+
 	if err != nil {
 		return fmt.Errorf("failed to check if office_data hypertable exists: %w", err)
 	}
@@ -175,7 +175,7 @@ func setupIoTDataHypertable() error {
 			WHERE hypertable_name = 'iot_data'
 		)
 	`).Scan(&exists).Error
-	
+
 	if err != nil {
 		return fmt.Errorf("failed to check if iot_data hypertable exists: %w", err)
 	}
@@ -211,12 +211,12 @@ func createOfficeDataIndexes() error {
 		// Time-based indexes for efficient querying
 		"CREATE INDEX IF NOT EXISTS idx_office_time ON office_data (time DESC);",
 		"CREATE INDEX IF NOT EXISTS idx_office_time_brin ON office_data USING BRIN (time);",
-		
+
 		// Composite indexes for common query patterns
 		"CREATE INDEX IF NOT EXISTS idx_office_event_time ON office_data (event_title, time DESC) WHERE event_title != '';",
 		"CREATE INDEX IF NOT EXISTS idx_office_open_time ON office_data (office_open, time DESC);",
 		"CREATE INDEX IF NOT EXISTS idx_office_light_time ON office_data (light, time DESC);",
-		
+
 		// Indexes for environmental data queries
 		"CREATE INDEX IF NOT EXISTS idx_office_temperature ON office_data (temperature) WHERE temperature > 0;",
 		"CREATE INDEX IF NOT EXISTS idx_office_co2 ON office_data (co2) WHERE co2 > 0;",
@@ -241,10 +241,10 @@ func createTimescaleIndexes() error {
 		"CREATE INDEX IF NOT EXISTS idx_iot_sensor_time ON iot_data (sensor_type, time DESC);",
 		"CREATE INDEX IF NOT EXISTS idx_iot_location_time ON iot_data (location, time DESC);",
 		"CREATE INDEX IF NOT EXISTS idx_iot_device_sensor_time ON iot_data (device_id, sensor_type, time DESC);",
-		
+
 		// Index for value range queries
 		"CREATE INDEX IF NOT EXISTS idx_iot_value ON iot_data (value) WHERE quality = 'good';",
-		
+
 		// BRIN index for time column (very efficient for time-series data)
 		"CREATE INDEX IF NOT EXISTS idx_iot_time_brin ON iot_data USING BRIN (time);",
 	}

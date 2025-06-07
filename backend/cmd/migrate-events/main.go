@@ -13,15 +13,15 @@ import (
 
 // EventData represents the structure for parsing event information
 type EventData struct {
-	Title         string    `json:"title"`
-	Description   string    `json:"description"`
-	URL           string    `json:"url"`
-	StartDate     time.Time `json:"start_date"`
+	Title         string     `json:"title"`
+	Description   string     `json:"description"`
+	URL           string     `json:"url"`
+	StartDate     time.Time  `json:"start_date"`
 	EndDate       *time.Time `json:"end_date,omitempty"`
-	OrganizerName string    `json:"organizer_name"`
-	OrganizerURL  string    `json:"organizer_url"`
-	IsRecurring   bool      `json:"is_recurring"`
-	Category      string    `json:"category"`
+	OrganizerName string     `json:"organizer_name"`
+	OrganizerURL  string     `json:"organizer_url"`
+	IsRecurring   bool       `json:"is_recurring"`
+	Category      string     `json:"category"`
 }
 
 func main() {
@@ -93,7 +93,7 @@ func main() {
 // In a real scenario, this would parse the actual website or access the Django database
 func createSampleEventsFromWebsite() []EventData {
 	jst := time.FixedZone("JST", 9*60*60)
-	
+
 	return []EventData{
 		{
 			Title:         "JAWS-UG 新潟 プチキャッチアップ",
@@ -216,13 +216,13 @@ func fetchEventDetails(url string) (*EventData, error) {
 	// 2. Parse OpenGraph meta tags
 	// 3. Extract structured data (JSON-LD)
 	// 4. Parse Connpass/Doorkeeper APIs if available
-	
+
 	resp, err := http.Get(url)
 	if err != nil {
 		return nil, fmt.Errorf("failed to fetch event page: %w", err)
 	}
 	defer resp.Body.Close()
-	
+
 	// Placeholder implementation
 	return &EventData{
 		Title:       "Parsed Event Title",

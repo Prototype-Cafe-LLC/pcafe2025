@@ -10,7 +10,7 @@ import (
 type OfficeData struct {
 	// Primary key and time (hypertable partition key)
 	Time time.Time `gorm:"primaryKey;not null;index:idx_office_time" json:"time"`
-	
+
 	// Sensor data (matching Django OfficeData fields exactly)
 	Temperature  float64 `gorm:"default:0" json:"temperature"`
 	CO2          int     `gorm:"default:0" json:"co2"`
@@ -32,25 +32,25 @@ func (OfficeData) TableName() string {
 type IoTData struct {
 	// Primary key and time (hypertable partition key)
 	Time time.Time `gorm:"primaryKey;not null;index:idx_iot_time" json:"time"`
-	
+
 	// Device identification
 	DeviceID   string `gorm:"primaryKey;not null;size:50;index:idx_iot_device" json:"device_id"`
 	SensorType string `gorm:"primaryKey;size:50;not null;index" json:"sensor_type"`
 	DeviceName string `gorm:"size:100;index" json:"device_name"`
 	DeviceType string `gorm:"size:50;index" json:"device_type"`
 	Location   string `gorm:"size:100;index" json:"location"`
-	
+
 	// Sensor data (SensorType is part of primary key above)
-	Value      float64 `gorm:"not null" json:"value"`
-	Unit       string  `gorm:"size:20" json:"unit"`
-	
+	Value float64 `gorm:"not null" json:"value"`
+	Unit  string  `gorm:"size:20" json:"unit"`
+
 	// Data quality
-	Quality    string  `gorm:"size:20;default:'good'" json:"quality"` // "good", "warning", "error"
-	Accuracy   float64 `gorm:"default:0" json:"accuracy"`
-	
+	Quality  string  `gorm:"size:20;default:'good'" json:"quality"` // "good", "warning", "error"
+	Accuracy float64 `gorm:"default:0" json:"accuracy"`
+
 	// Additional metadata (stored as JSONB for flexibility)
 	Metadata map[string]interface{} `gorm:"type:jsonb" json:"metadata,omitempty"`
-	
+
 	// Raw data for debugging
 	RawData string `gorm:"type:text" json:"raw_data,omitempty"`
 }
