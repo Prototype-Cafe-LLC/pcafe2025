@@ -1,69 +1,592 @@
+/* Corporate Colors */
+:root {
+  --primary-green: #16a085;     /* Corporate green from logo */
+  --primary-green-dark: #138d7a;
+  --primary-green-light: #1abc9c;
+  --base-teal: #f0f9fa;         /* Baby blue/light teal base */
+  --base-teal-light: #f4fdff;
+  --text-dark: #0f172a;
+  --text-medium: #475569;
+  --text-light: #64748b;
+  --white: #ffffff;
+  --gray-50: #f8fafc;
+  --gray-100: #f1f5f9;
+}
+
 .container {
   min-height: 100vh;
-  background: linear-gradient(to bottom, #f0fdfa, #ffffff);
+  background: var(--base-teal-light);
 }
 
-.header {
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--base-teal-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(22, 160, 133, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.heroContent {
   text-align: center;
-  padding: 5rem 0;
+  max-width: 800px;
+  padding: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
-.title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #115e59;
+.heroTitle {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  color: var(--primary-green);
   margin-bottom: 1rem;
+  letter-spacing: -0.02em;
 }
 
-.subtitle {
-  font-size: 1.25rem;
-  color: #0d9488;
+.heroSubtitle {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  color: var(--primary-green-dark);
+  margin-bottom: 1.5rem;
+  font-weight: 600;
 }
 
-.main {
+.heroDescription {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-medium);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heroActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.primaryButton {
+  background: var(--primary-green);
+  color: var(--white);
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px 0 rgba(22, 160, 133, 0.25);
+}
+
+.primaryButton:hover {
+  background: var(--primary-green-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px 0 rgba(22, 160, 133, 0.35);
+}
+
+.secondaryButton {
+  background: transparent;
+  color: var(--primary-green);
+  border: 2px solid var(--primary-green);
+  padding: 0.875rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.secondaryButton:hover {
+  background: var(--primary-green);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+/* Shared Section Styles */
+.sectionContainer {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
 }
 
-.section {
-  text-align: center;
-  padding: 3rem 0;
-}
-
 .sectionTitle {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #374151;
-  margin-bottom: 2rem;
+  font-size: clamp(1.875rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text-dark);
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
 }
 
-.grid {
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--primary-green);
+  border-radius: 2px;
+}
+
+.sectionFooter {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+.viewAllButton {
+  background: transparent;
+  color: var(--primary-green);
+  border: 2px solid var(--primary-green);
+  padding: 0.75rem 2rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.viewAllButton:hover {
+  background: var(--primary-green);
+  color: var(--white);
+}
+
+/* About Section */
+.about {
+  padding: 5rem 0;
+  background: var(--white);
+}
+
+.aboutContent {
+  display: grid;
+  gap: 3rem;
+  align-items: center;
+  grid-template-columns: 1fr;
+}
+
+.aboutText {
+  text-align: center;
+}
+
+.aboutImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.labPhoto {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.labPhoto:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+}
+
+.aboutDescription {
+  font-size: 1.125rem;
+  color: var(--text-medium);
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.feature {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.featureTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-green);
+  margin-bottom: 0.75rem;
+}
+
+.featureDescription {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+/* Events Section */
+.events {
+  padding: 5rem 0;
+  background: var(--gray-50);
+}
+
+.eventsGrid {
   display: grid;
   gap: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
-.card {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+.eventCard {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  border-top: 4px solid var(--primary-green);
 }
 
-.cardTitle {
-  font-size: 1.125rem;
+.eventCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.eventDate {
+  display: inline-block;
+  background: var(--primary-green);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  color: #0f766e;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
 }
 
-.cardDescription {
-  color: #6b7280;
+.eventTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  line-height: 1.3;
 }
 
-@media (min-width: 768px) {
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
+.eventDescription {
+  color: var(--text-medium);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.eventButton {
+  background: var(--base-teal);
+  color: var(--primary-green);
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.eventButton:hover {
+  background: var(--primary-green);
+  color: var(--white);
+}
+
+/* Blog Section */
+.blog {
+  padding: 5rem 0;
+  background: var(--white);
+}
+
+.blogGrid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.blogCard {
+  background: var(--gray-50);
+  padding: 2rem;
+  border-radius: 1rem;
+  transition: all 0.2s ease;
+  border-left: 4px solid var(--primary-green);
+}
+
+.blogCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.blogMeta {
+  color: var(--text-light);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.blogTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.blogExcerpt {
+  color: var(--text-medium);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.readMoreButton {
+  background: transparent;
+  color: var(--primary-green);
+  border: 1px solid var(--primary-green);
+  padding: 0.5rem 1.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.readMoreButton:hover {
+  background: var(--primary-green);
+  color: var(--white);
+}
+
+/* IoT Section */
+.iot {
+  padding: 5rem 0;
+  background: var(--base-teal-light);
+}
+
+.iotContent {
+  text-align: center;
+}
+
+.iotGrid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-bottom: 2rem;
+}
+
+.iotCard {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.iotCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.iotIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.iotValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  margin-bottom: 0.5rem;
+}
+
+.iotLabel {
+  color: var(--text-medium);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.iotUpdate {
+  color: var(--text-light);
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
+}
+
+/* Smooth Scrolling and Animations */
+.hero,
+.about,
+.events,
+.blog,
+.iot {
+  scroll-margin-top: 80px;
+}
+
+/* Fade-in animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Apply animations */
+.heroContent {
+  animation: fadeInUp 1s ease-out;
+}
+
+.aboutContent {
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.feature:nth-child(1) {
+  animation: fadeInLeft 0.8s ease-out 0.4s both;
+}
+
+.feature:nth-child(2) {
+  animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.feature:nth-child(3) {
+  animation: fadeInRight 0.8s ease-out 0.8s both;
+}
+
+.eventCard:nth-child(1) {
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.eventCard:nth-child(2) {
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+.blogCard:nth-child(1) {
+  animation: fadeInLeft 0.6s ease-out 0.2s both;
+}
+
+.blogCard:nth-child(2) {
+  animation: fadeInRight 0.6s ease-out 0.4s both;
+}
+
+.iotCard {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.iotCard:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.iotCard:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.iotCard:nth-child(3) {
+  animation-delay: 1s;
+}
+
+/* Scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Parallax effect for hero */
+.hero::before {
+  animation: pulse 4s ease-in-out infinite;
+}\n\n/* Responsive Design */
+@media (min-width: 1024px) {
+  .aboutContent {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+  
+  .aboutText {
+    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroActions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .primaryButton,
+  .secondaryButton {
+    width: 100%;
+    max-width: 280px;
+  }
+  
+  .features {
+    grid-template-columns: 1fr;
+  }
+  
+  .eventsGrid,
+  .blogGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .iotGrid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .heroContent {
+    padding: 1rem;
+  }
+  
+  .sectionContainer {
+    padding: 0 0.75rem;
+  }
+  
+  .eventCard,
+  .blogCard,
+  .iotCard {
+    padding: 1.5rem;
   }
 }
