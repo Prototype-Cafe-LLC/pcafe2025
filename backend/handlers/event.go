@@ -28,8 +28,8 @@ func (h *EventHandler) GetEvents(c *gin.Context) {
 	query := database.Preload("CreatedBy").Order("start_date ASC")
 
 	// Filter by published status for non-admin users
-	user, userExists := c.Get("user")
-	if !userExists || !user.(*models.User).IsAdmin {
+	user, userExists := getUserFromContext(c)
+	if !userExists || !user.IsAdmin {
 		query = query.Where("is_published = ?", true)
 		// Hide past events for public users (optional)
 		if c.Query("include_past") != "true" {
@@ -54,6 +54,30 @@ func (h *EventHandler) GetEvents(c *gin.Context) {
 		}
 	}
 
+	// Count total records for pagination
+	var total int64
+	countQuery := database.Model(&models.Event{})
+	if !userExists || !user.IsAdmin {
+		countQuery = countQuery.Where("is_published = ?", true)
+		if c.Query("include_past") != "true" {
+			countQuery = countQuery.Where("start_date >= ?", time.Now())
+		}
+	}
+	if featured := c.Query("featured"); featured == "true" {
+		countQuery = countQuery.Where("is_featured = ?", true)
+	}
+	if startDate := c.Query("start_date"); startDate != "" {
+		if date, err := time.Parse("2006-01-02", startDate); err == nil {
+			countQuery = countQuery.Where("start_date >= ?", date)
+		}
+	}
+	if endDate := c.Query("end_date"); endDate != "" {
+		if date, err := time.Parse("2006-01-02", endDate); err == nil {
+			countQuery = countQuery.Where("start_date <= ?", date)
+		}
+	}
+	countQuery.Count(&total)
+
 	// Pagination
 	limit := 20
 	if l := c.Query("limit"); l != "" {
@@ -76,6 +100,15 @@ func (h *EventHandler) GetEvents(c *gin.Context) {
 		return
 	}
 
+	// Set Content-Range header for React Admin pagination
+	start := offset
+	end := offset + len(events) - 1
+	if end < start {
+		end = start
+	}
+	contentRange := "events " + strconv.Itoa(start) + "-" + strconv.Itoa(end) + "/" + strconv.FormatInt(total, 10)
+	c.Header("Content-Range", contentRange)
+
 	c.JSON(http.StatusOK, events)
 }
 
@@ -92,8 +125,8 @@ func (h *EventHandler) GetEvent(c *gin.Context) {
 	}
 
 	// Check if published for non-admin users
-	user, userExists := c.Get("user")
-	if !userExists || !user.(*models.User).IsAdmin {
+	user, userExists := getUserFromContext(c)
+	if !userExists || !user.IsAdmin {
 		if !event.IsPublished {
 			c.JSON(http.StatusNotFound, gin.H{"error": "Event not found"})
 			return
@@ -111,7 +144,11 @@ func (h *EventHandler) CreateEvent(c *gin.Context) {
 		return
 	}
 
-	user := c.MustGet("user").(*models.User)
+	user, exists := getUserFromContext(c)
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "User not found in context"})
+		return
+	}
 
 	event := models.Event{
 		Title:         input.Title,
@@ -318,8 +355,8 @@ func (h *EventHandler) ExtractMetadata(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"success":     true,
-		"event_data":  eventInput,
+		"success":      true,
+		"event_data":   eventInput,
 		"raw_metadata": metadata,
 	})
 }
@@ -362,7 +399,7 @@ func (h *EventHandler) ProcessImageOCR(c *gin.Context) {
 
 	// Extract additional event information from the OCR text
 	eventInfo := ocrService.ExtractEventInfoFromText(result.Text)
-	
+
 	// Merge extracted data
 	for key, value := range eventInfo {
 		if result.ExtractedData == nil {
@@ -445,7 +482,7 @@ func (h *EventHandler) ProcessPDFExtraction(c *gin.Context) {
 
 	// Extract additional event information from the PDF text
 	eventInfo := pdfService.ExtractEventInfoFromPDFText(result.Text)
-	
+
 	// Merge extracted data
 	for key, value := range eventInfo {
 		if result.ExtractedData == nil {
@@ -486,10 +523,10 @@ func (h *EventHandler) ProcessPDFExtraction(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"success":      true,
-		"pdf_result":   result,
-		"event_data":   eventInput,
-		"suggestions":  result.ExtractedData,
-		"page_count":   result.PageCount,
+		"success":     true,
+		"pdf_result":  result,
+		"event_data":  eventInput,
+		"suggestions": result.ExtractedData,
+		"page_count":  result.PageCount,
 	})
 }

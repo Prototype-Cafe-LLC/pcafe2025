@@ -89,3 +89,11 @@ type BlogPostInput struct {
 	IsFeatured  bool        `json:"is_featured"`
 	Tags        StringArray `json:"tags"`
 }
+
+// BlogPostResponse represents the response structure with processed content
+type BlogPostResponse struct {
+	BlogPost
+	ProcessedContent string `json:"processed_content"`
+	PlainText        string `json:"plain_text,omitempty"`
+	ReadingTime      int    `json:"reading_time"` // Estimated reading time in minutes
+}

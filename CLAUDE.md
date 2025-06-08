@@ -84,10 +84,12 @@ PCafe 2025 - A fresh project starting from scratch. The project name suggests it
 #### フロントエンド
 
 - React + TypeScript + Vite
+- React Router v7
 - 状態管理：Redux Toolkit + Redux Saga
 - UI：Radix UI
 - CSS: CSS Modules
 - 管理画面：React Admin（カスタムフォームあり）
+- local開発 port 3000q
 
 #### バックエンド（API）
 

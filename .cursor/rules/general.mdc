@@ -1,9 +1,13 @@
 ---
 description: 
-globs: 
-alwaysApply: true
+globs: `*.md`, `*.mdc`
+globs: alwaysApply: true
 ---
-blobs: *.md, *.mdc
+# General Rules
 
 - fix markdown error/warnings with ide:getDiagnostics (MCP) or whatever you need
 - before commit, test/format/lint not to fail CI.
+- before playwright test, confirm user did `make dev`
+- format/lin mdc file except for header section surrounded by --- lines
+- thinkharder your change should always answer to requirements on the ticket. Do plan and implement then  │
+│   test and check. 

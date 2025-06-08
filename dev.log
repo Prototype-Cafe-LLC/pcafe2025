@@ -1,0 +1,1526 @@
+Starting development servers...
+Backend: http://localhost:8080
+Frontend: http://localhost:3000
+Press Ctrl+C to stop
+$ vite
+go run main.go
+
+  VITE v5.4.19  ready in 196 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: use --host to expose
+2025/06/08 14:43:26 Database connection established successfully
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:85
+[0m[33m[7.352ms] [34;1m[rows:0][0m CREATE EXTENSION IF NOT EXISTS timescaledb CASCADE;
+2025/06/08 14:43:26 TimescaleDB extension enabled
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[5.518ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND table_type = 'BASE TABLE'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.698ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[8.829ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'users'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.686ms] [34;1m[rows:-][0m SELECT * FROM "users" LIMIT 1
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[8.311ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'users' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[6.731ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'users'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.914ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'users'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[2.505ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.264ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m
+[0m[33m[4.012ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'users'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.361ms] [34;1m[rows:-][0m SELECT * FROM "users" LIMIT 1
+
+2025/06/08 14:43:26 [32m
+[0m[33m[5.857ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'users' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[6.891ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'users'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.689ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'users'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[2.326ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'created_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.273ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m
+[0m[33m[4.905ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'users'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.446ms] [34;1m[rows:-][0m SELECT * FROM "users" LIMIT 1
+
+2025/06/08 14:43:26 [32m
+[0m[33m[5.934ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'users' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[6.095ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'users'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.762ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'users'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[2.484ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'updated_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[2.261ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'deleted_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[2.082ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'username') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[2.049ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'email') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.454ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'password') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.402ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND column_name = 'is_admin') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'users' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.847ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'users' AND indexname = 'idx_users_username' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.836ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'users' AND indexname = 'idx_users_email' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.828ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'users' AND indexname = 'idx_users_deleted_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.751ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND table_type = 'BASE TABLE'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.258ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[4.419ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'sessions'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.779ms] [34;1m[rows:-][0m SELECT * FROM "sessions" LIMIT 1
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[6.102ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'sessions' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[6.775ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'sessions'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.598ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'sessions'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.427ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.246ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m
+[0m[33m[4.344ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'sessions'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.408ms] [34;1m[rows:-][0m SELECT * FROM "sessions" LIMIT 1
+
+2025/06/08 14:43:26 [32m
+[0m[33m[5.670ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'sessions' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[5.452ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'sessions'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.489ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'sessions'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.396ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'created_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.250ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m
+[0m[33m[3.952ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'sessions'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.403ms] [34;1m[rows:-][0m SELECT * FROM "sessions" LIMIT 1
+
+2025/06/08 14:43:26 [32m
+[0m[33m[5.793ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'sessions' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[5.624ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'sessions'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.561ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'sessions'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.410ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'updated_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.482ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'deleted_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.358ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'session_id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.365ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'user_id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.364ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'expires_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.386ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'ip_address') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.347ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND column_name = 'user_agent') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'sessions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.501ms] [34;1m[rows:1][0m SELECT count(*) FROM INFORMATION_SCHEMA.table_constraints WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'sessions' AND constraint_name = 'fk_users_sessions'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.788ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'sessions' AND indexname = 'idx_sessions_deleted_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.766ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'sessions' AND indexname = 'idx_sessions_session_id' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.770ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'sessions' AND indexname = 'idx_sessions_user_id' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.273ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'sessions' AND indexname = 'idx_sessions_expires_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.687ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND table_type = 'BASE TABLE'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.243ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.612ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'events'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.784ms] [34;1m[rows:-][0m SELECT * FROM "events" LIMIT 1
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.194ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'events' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.190ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'events'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.272ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'events'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.394ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.219ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.422ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'events'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.344ms] [34;1m[rows:-][0m SELECT * FROM "events" LIMIT 1
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.200ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'events' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.154ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'events'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.319ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'events'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.409ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'created_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.259ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.429ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'events'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.353ms] [34;1m[rows:-][0m SELECT * FROM "events" LIMIT 1
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.217ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'events' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.149ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'events'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.287ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'events'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.410ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'updated_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.360ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'deleted_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.464ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'title') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.382ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'description') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.391ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'event_url') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.379ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'image_url') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.360ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'start_date') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.347ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'end_date') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.353ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'is_all_day') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.406ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'organizer_name') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.358ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'organizer_url') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.352ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'source_url') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.355ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'source_type') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.374ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'extracted_data') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.409ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'is_published') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.398ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'is_featured') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.375ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND column_name = 'created_by_id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'events' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.139ms] [34;1m[rows:1][0m SELECT count(*) FROM INFORMATION_SCHEMA.table_constraints WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'events' AND constraint_name = 'fk_users_events'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.306ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'events' AND indexname = 'idx_events_end_date' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.268ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'events' AND indexname = 'idx_events_is_published' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.296ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'events' AND indexname = 'idx_events_is_featured' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.273ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'events' AND indexname = 'idx_events_created_by_id' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.264ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'events' AND indexname = 'idx_events_deleted_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.296ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'events' AND indexname = 'idx_events_start_date' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.691ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND table_type = 'BASE TABLE'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.201ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.549ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.733ms] [34;1m[rows:-][0m SELECT * FROM "blog_posts" LIMIT 1
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.295ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'blog_posts' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.330ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'blog_posts'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.315ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'blog_posts'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.376ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.230ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.442ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.322ms] [34;1m[rows:-][0m SELECT * FROM "blog_posts" LIMIT 1
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.269ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'blog_posts' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.273ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'blog_posts'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.297ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'blog_posts'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.411ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'created_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.208ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.389ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.349ms] [34;1m[rows:-][0m SELECT * FROM "blog_posts" LIMIT 1
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.287ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'blog_posts' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.288ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'blog_posts'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.313ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'blog_posts'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.363ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'updated_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.466ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'deleted_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.411ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'title') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.362ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'slug') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.343ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'content') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.345ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'content_type') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.402ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'excerpt') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.333ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'meta_title') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.364ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'meta_desc') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.365ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'is_published') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.359ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'published_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.362ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'is_featured') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.359ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'tags') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.367ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'view_count') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.377ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND column_name = 'author_id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'blog_posts' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.161ms] [34;1m[rows:1][0m SELECT count(*) FROM INFORMATION_SCHEMA.table_constraints WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'blog_posts' AND constraint_name = 'fk_users_blog_posts'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.290ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'blog_posts' AND indexname = 'idx_blog_posts_author_id' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.315ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'blog_posts' AND indexname = 'idx_blog_posts_deleted_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.295ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'blog_posts' AND indexname = 'idx_blog_posts_title' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.294ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'blog_posts' AND indexname = 'idx_blog_posts_slug' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.306ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'blog_posts' AND indexname = 'idx_blog_posts_is_published' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.253ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'blog_posts' AND indexname = 'idx_blog_posts_published_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.313ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'blog_posts' AND indexname = 'idx_blog_posts_is_featured' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.719ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND table_type = 'BASE TABLE'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.269ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.724ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.773ms] [34;1m[rows:-][0m SELECT * FROM "contact_submissions" LIMIT 1
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.287ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'contact_submissions' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.267ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'contact_submissions'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.443ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'contact_submissions'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.469ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.486ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m
+[0m[33m[2.258ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.403ms] [34;1m[rows:-][0m SELECT * FROM "contact_submissions" LIMIT 1
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.596ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'contact_submissions' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.538ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'contact_submissions'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.413ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'contact_submissions'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.565ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'created_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.416ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m
+[0m[33m[3.614ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.374ms] [34;1m[rows:-][0m SELECT * FROM "contact_submissions" LIMIT 1
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.696ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'contact_submissions' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[1.392ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'contact_submissions'
+
+2025/06/08 14:43:26 [32m
+[0m[33m[0.306ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'contact_submissions'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.426ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'updated_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.510ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'deleted_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.347ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'name') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.350ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'email') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.462ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'phone') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.400ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'company') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.384ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'subject') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.346ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'message') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.374ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'form_type') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.354ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'source') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.340ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'ip_address') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.340ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'user_agent') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.324ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'turnstile_token') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.312ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'turnstile_verified') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.343ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'status') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.326ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'is_spam') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.547ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'processed_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.344ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'admin_notes') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.355ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'response_sent') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.389ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'contact_submissions' AND column_name = 'response_sent_at') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'contact_submissions' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.281ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'contact_submissions' AND indexname = 'idx_contact_submissions_is_spam' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.222ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'contact_submissions' AND indexname = 'idx_contact_submissions_processed_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.251ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'contact_submissions' AND indexname = 'idx_contact_submissions_deleted_at' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.237ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'contact_submissions' AND indexname = 'idx_contact_submissions_email' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.247ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'contact_submissions' AND indexname = 'idx_contact_submissions_turnstile_verified' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.248ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'contact_submissions' AND indexname = 'idx_contact_submissions_status' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.791ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND table_type = 'BASE TABLE'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.239ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.322ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'office_data'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.741ms] [34;1m[rows:-][0m SELECT * FROM "office_data" LIMIT 1
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.981ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'office_data' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.185ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'office_data'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.315ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'office_data'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.401ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'time') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.365ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'temperature') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.358ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'co2') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.358ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'ambient') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.391ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'event_title') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.420ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'light') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.339ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'office_open') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.329ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'parking_slot1') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.367ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'office_data' AND column_name = 'parking_slot2') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'office_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.295ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'office_data' AND indexname = 'idx_office_time' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.259ms] [34;1m[rows:1][0m SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND table_type = 'BASE TABLE'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.170ms] [34;1m[rows:1][0m SELECT CURRENT_DATABASE()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.388ms] [34;1m[rows:-][0m SELECT c.column_name, c.is_nullable = 'YES', c.udt_name, c.character_maximum_length, c.numeric_precision, c.numeric_precision_radix, c.numeric_scale, c.datetime_precision, 8 * typlen, c.column_default, pd.description, c.identity_increment FROM information_schema.columns AS c JOIN pg_type AS pgt ON c.udt_name = pgt.typname LEFT JOIN pg_catalog.pg_description as pd ON pd.objsubid = c.ordinal_position AND pd.objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = c.table_name AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = c.table_schema)) where table_catalog = 'pcafe2025' AND table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[5.546ms] [34;1m[rows:-][0m SELECT * FROM "iot_data" LIMIT 1
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.049ms] [34;1m[rows:-][0m SELECT constraint_name FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'iot_data' AND constraint_type = 'UNIQUE'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[1.195ms] [34;1m[rows:-][0m SELECT c.column_name, constraint_name, constraint_type FROM information_schema.table_constraints tc JOIN information_schema.constraint_column_usage AS ccu USING (constraint_schema, constraint_catalog, table_name, constraint_name) JOIN information_schema.columns AS c ON c.table_schema = tc.constraint_schema AND tc.table_name = c.table_name AND ccu.column_name = c.column_name WHERE constraint_type IN ('PRIMARY KEY', 'UNIQUE') AND c.table_catalog = 'pcafe2025' AND c.table_schema = CURRENT_SCHEMA() AND c.table_name = 'iot_data'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.330ms] [34;1m[rows:-][0m SELECT a.attname as column_name, format_type(a.atttypid, a.atttypmod) AS data_type
+		FROM pg_attribute a JOIN pg_class b ON a.attrelid = b.oid AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA())
+		WHERE a.attnum > 0 -- hide internal columns
+		AND NOT a.attisdropped -- hide deleted columns
+		AND b.relname = 'iot_data'
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.443ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'time') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.371ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'device_id') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.386ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'sensor_type') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.412ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'device_name') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.441ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'device_type') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.391ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'location') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.399ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'value') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.447ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'unit') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.456ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'quality') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.368ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'accuracy') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.338ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'metadata') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.358ms] [34;1m[rows:0][0m SELECT description FROM pg_catalog.pg_description WHERE objsubid = (SELECT ordinal_position FROM information_schema.columns WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'iot_data' AND column_name = 'raw_data') AND objoid = (SELECT oid FROM pg_catalog.pg_class WHERE relname = 'iot_data' AND relnamespace = (SELECT oid FROM pg_catalog.pg_namespace WHERE nspname = CURRENT_SCHEMA()))
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.290ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'iot_data' AND indexname = 'idx_iot_time' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.279ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'iot_data' AND indexname = 'idx_iot_device' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.273ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'iot_data' AND indexname = 'idx_iot_data_sensor_type' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.278ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'iot_data' AND indexname = 'idx_iot_data_device_name' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.291ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'iot_data' AND indexname = 'idx_iot_data_device_type' AND schemaname = CURRENT_SCHEMA()
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:96
+[0m[33m[0.293ms] [34;1m[rows:1][0m SELECT count(*) FROM pg_indexes WHERE tablename = 'iot_data' AND indexname = 'idx_iot_data_location' AND schemaname = CURRENT_SCHEMA()
+2025/06/08 14:43:26 Database migrations completed successfully
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:137
+[0m[33m[3.009ms] [34;1m[rows:1][0m 
+		SELECT EXISTS (
+			SELECT 1 FROM timescaledb_information.hypertables 
+			WHERE hypertable_name = 'office_data'
+		)
+	
+2025/06/08 14:43:26 Office data hypertable already exists
+
+2025/06/08 14:43:26 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/db/connection.go:177
+[0m[33m[1.487ms] [34;1m[rows:1][0m 
+		SELECT EXISTS (
+			SELECT 1 FROM timescaledb_information.hypertables 
+			WHERE hypertable_name = 'iot_data'
+		)
+	
+2025/06/08 14:43:26 IoT data hypertable already exists
+2025/06/08 14:43:26 Database initialization completed successfully
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:	export GIN_MODE=release
+ - using code:	gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] POST   /api/auth/login           --> github.com/pcafe/pcafe2025/handlers.(*AuthHandler).Login-fm (4 handlers)
+[GIN-debug] POST   /api/auth/logout          --> github.com/pcafe/pcafe2025/handlers.(*AuthHandler).Logout-fm (4 handlers)
+[GIN-debug] GET    /api/auth/me              --> github.com/pcafe/pcafe2025/handlers.(*AuthHandler).GetCurrentUser-fm (5 handlers)
+[GIN-debug] POST   /api/auth/refresh         --> github.com/pcafe/pcafe2025/handlers.(*AuthHandler).RefreshSession-fm (5 handlers)
+[GIN-debug] GET    /api/blog                 --> github.com/pcafe/pcafe2025/handlers.(*BlogHandler).GetBlogPosts-fm (5 handlers)
+[GIN-debug] GET    /api/blog/tags            --> github.com/pcafe/pcafe2025/handlers.(*BlogHandler).GetBlogTags-fm (4 handlers)
+[GIN-debug] GET    /api/blog/:id             --> github.com/pcafe/pcafe2025/handlers.(*BlogHandler).GetBlogPost-fm (5 handlers)
+[GIN-debug] POST   /api/blog                 --> github.com/pcafe/pcafe2025/handlers.(*BlogHandler).CreateBlogPost-fm (5 handlers)
+[GIN-debug] PUT    /api/blog/:id             --> github.com/pcafe/pcafe2025/handlers.(*BlogHandler).UpdateBlogPost-fm (5 handlers)
+[GIN-debug] DELETE /api/blog/:id             --> github.com/pcafe/pcafe2025/handlers.(*BlogHandler).DeleteBlogPost-fm (5 handlers)
+[GIN-debug] GET    /api/events               --> github.com/pcafe/pcafe2025/handlers.(*EventHandler).GetEvents-fm (5 handlers)
+[GIN-debug] GET    /api/events/calendar      --> github.com/pcafe/pcafe2025/handlers.(*EventHandler).GetEventCalendar-fm (4 handlers)
+[GIN-debug] GET    /api/events/:id           --> github.com/pcafe/pcafe2025/handlers.(*EventHandler).GetEvent-fm (5 handlers)
+[GIN-debug] POST   /api/events               --> github.com/pcafe/pcafe2025/handlers.(*EventHandler).CreateEvent-fm (5 handlers)
+[GIN-debug] PUT    /api/events/:id           --> github.com/pcafe/pcafe2025/handlers.(*EventHandler).UpdateEvent-fm (5 handlers)
+[GIN-debug] DELETE /api/events/:id           --> github.com/pcafe/pcafe2025/handlers.(*EventHandler).DeleteEvent-fm (5 handlers)
+[GIN-debug] POST   /api/events/extract-metadata --> github.com/pcafe/pcafe2025/handlers.(*EventHandler).ExtractMetadata-fm (5 handlers)
+[GIN-debug] POST   /api/events/process-image --> github.com/pcafe/pcafe2025/handlers.(*EventHandler).ProcessImageOCR-fm (5 handlers)
+[GIN-debug] POST   /api/events/process-pdf   --> github.com/pcafe/pcafe2025/handlers.(*EventHandler).ProcessPDFExtraction-fm (5 handlers)
+[GIN-debug] GET    /api/iot/data             --> github.com/pcafe/pcafe2025/handlers.(*IoTHandler).GetIoTData-fm (4 handlers)
+[GIN-debug] GET    /api/iot/stats            --> github.com/pcafe/pcafe2025/handlers.(*IoTHandler).GetIoTStats-fm (4 handlers)
+[GIN-debug] GET    /api/iot/latest           --> github.com/pcafe/pcafe2025/handlers.(*IoTHandler).GetLatestIoTData-fm (4 handlers)
+[GIN-debug] GET    /api/iot/devices          --> github.com/pcafe/pcafe2025/handlers.(*IoTHandler).GetDevices-fm (4 handlers)
+[GIN-debug] POST   /api/iot/data             --> github.com/pcafe/pcafe2025/handlers.(*IoTHandler).CreateIoTData-fm (5 handlers)
+[GIN-debug] GET    /api/officedata           --> github.com/pcafe/pcafe2025/handlers.GetOfficeDataList (4 handlers)
+[GIN-debug] POST   /api/officedata           --> github.com/pcafe/pcafe2025/handlers.CreateOfficeData (4 handlers)
+[GIN-debug] GET    /api/officedata/:time     --> github.com/pcafe/pcafe2025/handlers.GetOfficeDataByID (4 handlers)
+[GIN-debug] GET    /api/latest               --> github.com/pcafe/pcafe2025/handlers.GetLatestOfficeData (4 handlers)
+[GIN-debug] POST   /api/contact              --> github.com/pcafe/pcafe2025/handlers.(*ContactHandler).SubmitContactForm-fm (4 handlers)
+[GIN-debug] GET    /api/contact              --> github.com/pcafe/pcafe2025/handlers.(*ContactHandler).GetContactSubmissions-fm (5 handlers)
+[GIN-debug] PUT    /api/contact/:id          --> github.com/pcafe/pcafe2025/handlers.(*ContactHandler).UpdateContactSubmission-fm (5 handlers)
+[GIN-debug] GET    /jlist                    --> github.com/pcafe/pcafe2025/handlers.GetOfficeDataJSON (4 handlers)
+[GIN-debug] GET    /jlast                    --> github.com/pcafe/pcafe2025/handlers.GetLastOfficeData (4 handlers)
+[GIN-debug] GET    /health                   --> main.startServer.func2 (4 handlers)
+2025/06/08 14:43:26 Starting PCafe 2025 server on 0.0.0.0:8080
+2025/06/08 14:43:26 Environment: development
+[GIN-debug] [WARNING] You trusted all proxies, this is NOT safe. We recommend you to set a value.
+Please check https://pkg.go.dev/github.com/gin-gonic/gin#readme-don-t-trust-all-proxies for details.
+[GIN-debug] Listening and serving HTTP on 0.0.0.0:8080
+
+2025/06/08 14:43:39 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.059ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:43:39 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[5.618ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:43:39 | 200 |     5.85775ms |       127.0.0.1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:44:06 | 204 |          14µs |             ::1 | OPTIONS  "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:44:06 | 204 |       3.291µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:44:06 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.051ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:44:06 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[4.739ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:44:06 | 200 |     4.81425ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:44:06 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.794ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:44:06 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.701ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:44:06 | 200 |    2.754958ms |             ::1 | GET      "/api/blog?published=true"
+2:44:35 PM [vite] page reload playwright-report/index.html
+2:46:22 PM [vite] hmr update /src/pages/BlogPage.tsx
+[GIN] 2025/06/08 - 14:46:23 | 204 |      32.917µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:46:23 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[1.571ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:46:23 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[10.642ms] [34;1m[rows:1][0m SELECT * FROM "sessions" WHERE (session_id = '5a436040fe0151b9226c8e910c79b7469257de6e40011d1992f0f7a0174013a5' AND expires_at > NOW()) AND "sessions"."deleted_at" IS NULL ORDER BY "sessions"."id" LIMIT 1
+
+2025/06/08 14:46:23 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.039ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:46:23 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[4.800ms] [34;1m[rows:3][0m SELECT * FROM "blog_posts" WHERE "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:46:23 | 200 |      15.934ms |             ::1 | GET      "/api/blog?published=true"
+2:46:29 PM [vite] hmr update /src/pages/BlogPage.tsx
+2:46:29 PM [vite] hmr update /src/pages/BlogPage.tsx
+2:46:52 PM [vite] hmr update /src/pages/BlogPage.tsx
+2:46:57 PM [vite] hmr update /src/pages/BlogPage.tsx
+[GIN] 2025/06/08 - 14:46:57 | 204 |      20.208µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:46:57 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[0.447ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:46:57 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[2.968ms] [34;1m[rows:1][0m SELECT * FROM "sessions" WHERE (session_id = '5a436040fe0151b9226c8e910c79b7469257de6e40011d1992f0f7a0174013a5' AND expires_at > NOW()) AND "sessions"."deleted_at" IS NULL ORDER BY "sessions"."id" LIMIT 1
+
+2025/06/08 14:46:57 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.343ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:46:57 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.846ms] [34;1m[rows:3][0m SELECT * FROM "blog_posts" WHERE "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:46:57 | 200 |    3.924834ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:46:57 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[0.473ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:46:57 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[1.459ms] [34;1m[rows:1][0m SELECT * FROM "sessions" WHERE (session_id = '5a436040fe0151b9226c8e910c79b7469257de6e40011d1992f0f7a0174013a5' AND expires_at > NOW()) AND "sessions"."deleted_at" IS NULL ORDER BY "sessions"."id" LIMIT 1
+
+2025/06/08 14:46:57 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.389ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:46:57 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.885ms] [34;1m[rows:3][0m SELECT * FROM "blog_posts" WHERE "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:46:57 | 200 |    2.427375ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:47:04 | 204 |      15.709µs |             ::1 | OPTIONS  "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:47:04 | 204 |       3.584µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:47:04 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.539ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:47:04 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[4.403ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:47:04 | 200 |    4.469292ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:47:04 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.512ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:47:04 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.372ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:47:04 | 200 |     1.42775ms |             ::1 | GET      "/api/blog?published=true"
+2:47:06 PM [vite] page reload playwright-report/index.html
+[GIN] 2025/06/08 - 14:47:36 | 204 |      18.833µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:47:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[0.454ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:47:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[6.406ms] [34;1m[rows:1][0m SELECT * FROM "sessions" WHERE (session_id = '5a436040fe0151b9226c8e910c79b7469257de6e40011d1992f0f7a0174013a5' AND expires_at > NOW()) AND "sessions"."deleted_at" IS NULL ORDER BY "sessions"."id" LIMIT 1
+
+2025/06/08 14:47:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.499ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:47:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.064ms] [34;1m[rows:3][0m SELECT * FROM "blog_posts" WHERE "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:47:36 | 200 |    7.592166ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:47:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[0.679ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:47:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[2.233ms] [34;1m[rows:1][0m SELECT * FROM "sessions" WHERE (session_id = '5a436040fe0151b9226c8e910c79b7469257de6e40011d1992f0f7a0174013a5' AND expires_at > NOW()) AND "sessions"."deleted_at" IS NULL ORDER BY "sessions"."id" LIMIT 1
+
+2025/06/08 14:47:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.380ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:47:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.116ms] [34;1m[rows:3][0m SELECT * FROM "blog_posts" WHERE "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:47:36 | 200 |    3.427125ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:47:42 | 204 |      15.125µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:47:42 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[0.431ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:47:42 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[2.722ms] [34;1m[rows:1][0m SELECT * FROM "sessions" WHERE (session_id = '5a436040fe0151b9226c8e910c79b7469257de6e40011d1992f0f7a0174013a5' AND expires_at > NOW()) AND "sessions"."deleted_at" IS NULL ORDER BY "sessions"."id" LIMIT 1
+
+2025/06/08 14:47:42 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.360ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:47:42 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.746ms] [34;1m[rows:3][0m SELECT * FROM "blog_posts" WHERE "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:47:42 | 200 |    3.572333ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:47:42 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[0.480ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:47:42 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[1.359ms] [34;1m[rows:1][0m SELECT * FROM "sessions" WHERE (session_id = '5a436040fe0151b9226c8e910c79b7469257de6e40011d1992f0f7a0174013a5' AND expires_at > NOW()) AND "sessions"."deleted_at" IS NULL ORDER BY "sessions"."id" LIMIT 1
+
+2025/06/08 14:47:42 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.406ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:47:42 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.898ms] [34;1m[rows:3][0m SELECT * FROM "blog_posts" WHERE "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:47:42 | 200 |    2.348708ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:49:58 | 204 |      20.083µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:49:58 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[0.679ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:49:58 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[10.415ms] [34;1m[rows:1][0m SELECT * FROM "sessions" WHERE (session_id = '5a436040fe0151b9226c8e910c79b7469257de6e40011d1992f0f7a0174013a5' AND expires_at > NOW()) AND "sessions"."deleted_at" IS NULL ORDER BY "sessions"."id" LIMIT 1
+
+2025/06/08 14:49:58 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.390ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:49:58 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.905ms] [34;1m[rows:3][0m SELECT * FROM "blog_posts" WHERE "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:49:58 | 200 |   11.437708ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:49:58 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[0.348ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:49:58 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/middleware/auth.go:63
+[0m[33m[0.891ms] [34;1m[rows:1][0m SELECT * FROM "sessions" WHERE (session_id = '5a436040fe0151b9226c8e910c79b7469257de6e40011d1992f0f7a0174013a5' AND expires_at > NOW()) AND "sessions"."deleted_at" IS NULL ORDER BY "sessions"."id" LIMIT 1
+
+2025/06/08 14:49:58 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.449ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:49:58 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.544ms] [34;1m[rows:3][0m SELECT * FROM "blog_posts" WHERE "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:49:58 | 200 |    2.502416ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:50:00 | 204 |      18.791µs |             ::1 | OPTIONS  "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:50:00 | 204 |       2.708µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:50:00 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.675ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:50:00 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[4.559ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:50:00 | 200 |    4.647083ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:50:00 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.491ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:50:00 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.226ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:50:00 | 200 |    1.268875ms |             ::1 | GET      "/api/blog?published=true"
+2:50:01 PM [vite] page reload playwright-report/index.html
+[GIN] 2025/06/08 - 14:52:15 | 204 |      16.875µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:52:15 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.347ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:52:15 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[3.566ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:52:15 | 200 |    3.635792ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:52:15 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.334ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:52:15 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.906ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:52:15 | 200 |       947.5µs |             ::1 | GET      "/api/blog?published=true"
+2:52:16 PM [vite] page reload playwright-report/index.html
+make: *** [dev] Terminated: 15
+[GIN] 2025/06/08 - 14:54:34 | 204 |      47.417µs |             ::1 | OPTIONS  "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:34 | 204 |     167.625µs |             ::1 | OPTIONS  "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:34 | 204 |       58.75µs |             ::1 | OPTIONS  "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:34 | 204 |      63.292µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.597ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[8.422ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:34 | 200 |    8.639291ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.416ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.067ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:34 | 200 |    1.148708ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.787ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[63.611ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:34 | 200 |   63.723917ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.316ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.100ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:34 | 200 |    1.157459ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:34 | 204 |      73.083µs |             ::1 | OPTIONS  "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:34 | 204 |        3.75µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.293ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[6.424ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:34 | 200 |    6.590292ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.999ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.531ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:34 | 200 |    2.625833ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:34 | 204 |      15.584µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.860ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.572ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:34 | 200 |    2.866125ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.962ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[4.535ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:34 | 200 |     4.63225ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:34 | 204 |      15.083µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.549ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.139ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:34 | 200 |    2.234084ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.733ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:34 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.936ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:34 | 200 |    1.993958ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:35 | 204 |        5.25µs |             ::1 | OPTIONS  "/api/blog?search=test+search&published=true"
+
+2025/06/08 14:54:35 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[4.380ms] [34;1m[rows:0][0m SELECT * FROM "blog_posts" WHERE is_published = true AND (LOWER(title) LIKE '%test search%' OR LOWER(content) LIKE '%test search%' OR LOWER(excerpt) LIKE '%test search%') AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:35 | 200 |     4.46925ms |             ::1 | GET      "/api/blog?search=test+search&published=true"
+[GIN] 2025/06/08 - 14:54:35 | 204 |       4.959µs |             ::1 | OPTIONS  "/api/blog?search=test&published=true"
+
+2025/06/08 14:54:35 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.012ms] [34;1m[rows:0][0m SELECT * FROM "blog_posts" WHERE is_published = true AND (LOWER(title) LIKE '%test%' OR LOWER(content) LIKE '%test%' OR LOWER(excerpt) LIKE '%test%') AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:35 | 200 |     2.10775ms |             ::1 | GET      "/api/blog?search=test&published=true"
+[GIN] 2025/06/08 - 14:54:35 | 204 |       4.792µs |             ::1 | OPTIONS  "/api/blog?search=test+search&featured=true&published=true"
+
+2025/06/08 14:54:35 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[5.454ms] [34;1m[rows:0][0m SELECT * FROM "blog_posts" WHERE is_published = true AND is_featured = true AND (LOWER(title) LIKE '%test search%' OR LOWER(content) LIKE '%test search%' OR LOWER(excerpt) LIKE '%test search%') AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:35 | 200 |    5.583792ms |             ::1 | GET      "/api/blog?search=test+search&featured=true&published=true"
+[GIN] 2025/06/08 - 14:54:35 | 204 |       6.625µs |             ::1 | OPTIONS  "/api/blog?search=test&featured=true&published=true"
+
+2025/06/08 14:54:35 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.717ms] [34;1m[rows:0][0m SELECT * FROM "blog_posts" WHERE is_published = true AND is_featured = true AND (LOWER(title) LIKE '%test%' OR LOWER(content) LIKE '%test%' OR LOWER(excerpt) LIKE '%test%') AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:35 | 200 |    3.559375ms |             ::1 | GET      "/api/blog?search=test&featured=true&published=true"
+
+2025/06/08 14:54:35 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.926ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:35 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.357ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:35 | 200 |     2.47525ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:35 | 204 |      18.542µs |             ::1 | OPTIONS  "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:35 | 204 |      17.125µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.731ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[8.654ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:36 | 200 |      8.7585ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.452ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.294ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:36 | 200 |    2.383166ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:36 | 204 |      17.208µs |             ::1 | OPTIONS  "/api/blog?search=test&featured=true&published=true"
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.184ms] [34;1m[rows:0][0m SELECT * FROM "blog_posts" WHERE is_published = true AND is_featured = true AND (LOWER(title) LIKE '%test%' OR LOWER(content) LIKE '%test%' OR LOWER(excerpt) LIKE '%test%') AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:36 | 200 |    2.262167ms |             ::1 | GET      "/api/blog?search=test&featured=true&published=true"
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.275ms] [34;1m[rows:0][0m SELECT * FROM "blog_posts" WHERE is_published = true AND is_featured = true AND (LOWER(title) LIKE '%test%' OR LOWER(content) LIKE '%test%' OR LOWER(excerpt) LIKE '%test%') AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:36 | 200 |    1.328791ms |             ::1 | GET      "/api/blog?search=test&featured=true&published=true"
+[GIN] 2025/06/08 - 14:54:36 | 204 |      28.833µs |             ::1 | OPTIONS  "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:36 | 204 |       3.208µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.409ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.777ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:36 | 200 |       1.844ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.483ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.186ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:36 | 200 |      1.2515ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:36 | 204 |      42.875µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.407ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[3.274ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:36 | 200 |    3.461917ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.393ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.418ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:36 | 200 |    1.482625ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.675ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[5.584ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:36 | 200 |    6.353417ms |             ::1 | GET      "/api/blog"
+
+2025/06/08 14:54:36 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:313
+[0m[33m[2.849ms] [34;1m[rows:-][0m 
+		SELECT DISTINCT jsonb_array_elements_text(tags) as tag 
+		FROM blog_posts 
+		WHERE is_published = true AND deleted_at IS NULL
+		ORDER BY tag
+	
+[GIN] 2025/06/08 - 14:54:36 | 200 |     3.22375ms |             ::1 | GET      "/api/blog/tags"
+[GIN] 2025/06/08 - 14:54:37 | 204 |      33.083µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:37 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.867ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:37 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.604ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:37 | 200 |    2.679583ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:37 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.586ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:37 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[3.502ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:37 | 200 |    3.555542ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:37 | 204 |      17.542µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:37 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.514ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:37 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.826ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:37 | 200 |    1.891917ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:37 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.541ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:37 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.209ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:37 | 200 |    1.273167ms |             ::1 | GET      "/api/blog?published=true"
+2:54:38 PM [vite] page reload playwright-report/index.html
+[GIN] 2025/06/08 - 14:54:42 | 204 |       25.75µs |             ::1 | OPTIONS  "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:48 | 204 |     149.292µs |             ::1 | OPTIONS  "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:48 | 204 |      18.875µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:48 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.223ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:48 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[4.747ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:48 | 200 |    4.826125ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:48 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.692ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:48 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.260ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:48 | 200 |    2.324792ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:48 | 204 |      19.083µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:48 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.552ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:48 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.899ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:48 | 200 |    1.978167ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:48 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.422ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:48 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.942ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:48 | 200 |    2.001792ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:48 | 204 |      50.042µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:48 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.408ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:48 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.703ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:48 | 200 |    1.771916ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:48 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.362ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:48 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.947ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:48 | 200 |         998µs |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:49 | 204 |      19.416µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:49 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.474ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:49 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.024ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:49 | 200 |    2.123041ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:49 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.475ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:49 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.205ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:49 | 200 |    1.241958ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:49 | 204 |       4.542µs |             ::1 | OPTIONS  "/api/blog?search=test+search&published=true"
+
+2025/06/08 14:54:49 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.127ms] [34;1m[rows:0][0m SELECT * FROM "blog_posts" WHERE is_published = true AND (LOWER(title) LIKE '%test search%' OR LOWER(content) LIKE '%test search%' OR LOWER(excerpt) LIKE '%test search%') AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:49 | 200 |    1.219542ms |             ::1 | GET      "/api/blog?search=test+search&published=true"
+[GIN] 2025/06/08 - 14:54:49 | 204 |       4.375µs |             ::1 | OPTIONS  "/api/blog?search=test+search&featured=true&published=true"
+
+2025/06/08 14:54:49 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.840ms] [34;1m[rows:0][0m SELECT * FROM "blog_posts" WHERE is_published = true AND is_featured = true AND (LOWER(title) LIKE '%test search%' OR LOWER(content) LIKE '%test search%' OR LOWER(excerpt) LIKE '%test search%') AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:49 | 200 |    1.936625ms |             ::1 | GET      "/api/blog?search=test+search&featured=true&published=true"
+[GIN] 2025/06/08 - 14:54:50 | 204 |      18.167µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:50 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.500ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:50 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.126ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:50 | 200 |       2.203ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:50 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.481ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:50 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[4.906ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:50 | 200 |    4.965167ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:50 | 204 |       16.75µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:50 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.518ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:50 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.483ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:50 | 200 |    2.561416ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:50 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.888ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:50 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[3.251ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:50 | 200 |    3.360125ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:51 | 204 |      17.959µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:51 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.446ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:51 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.843ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:51 | 200 |    1.945083ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:51 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.434ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:51 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.117ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:51 | 200 |    1.172458ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:51 | 204 |      10.084µs |             ::1 | OPTIONS  "/api/blog?search=test&published=true"
+
+2025/06/08 14:54:51 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.567ms] [34;1m[rows:0][0m SELECT * FROM "blog_posts" WHERE is_published = true AND (LOWER(title) LIKE '%test%' OR LOWER(content) LIKE '%test%' OR LOWER(excerpt) LIKE '%test%') AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:51 | 200 |    1.858084ms |             ::1 | GET      "/api/blog?search=test&published=true"
+[GIN] 2025/06/08 - 14:54:51 | 204 |       4.834µs |             ::1 | OPTIONS  "/api/blog?search=test&featured=true&published=true"
+
+2025/06/08 14:54:51 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[3.382ms] [34;1m[rows:0][0m SELECT * FROM "blog_posts" WHERE is_published = true AND is_featured = true AND (LOWER(title) LIKE '%test%' OR LOWER(content) LIKE '%test%' OR LOWER(excerpt) LIKE '%test%') AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:51 | 200 |     3.47875ms |             ::1 | GET      "/api/blog?search=test&featured=true&published=true"
+
+2025/06/08 14:54:51 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.015ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:51 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[3.365ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:51 | 200 |    3.423458ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:51 | 204 |      28.209µs |             ::1 | OPTIONS  "/api/blog?search=test&featured=true&published=true"
+[GIN] 2025/06/08 - 14:54:51 | 204 |      13.792µs |             ::1 | OPTIONS  "/api/blog?search=test&featured=true&published=true"
+
+2025/06/08 14:54:51 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.515ms] [34;1m[rows:0][0m SELECT * FROM "blog_posts" WHERE is_published = true AND is_featured = true AND (LOWER(title) LIKE '%test%' OR LOWER(content) LIKE '%test%' OR LOWER(excerpt) LIKE '%test%') AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:51 | 200 |    1.670708ms |             ::1 | GET      "/api/blog?search=test&featured=true&published=true"
+
+2025/06/08 14:54:51 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.915ms] [34;1m[rows:0][0m SELECT * FROM "blog_posts" WHERE is_published = true AND is_featured = true AND (LOWER(title) LIKE '%test%' OR LOWER(content) LIKE '%test%' OR LOWER(excerpt) LIKE '%test%') AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:51 | 200 |        2.02ms |             ::1 | GET      "/api/blog?search=test&featured=true&published=true"
+[GIN] 2025/06/08 - 14:54:51 | 204 |      15.459µs |             ::1 | OPTIONS  "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:51 | 204 |     872.292µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:51 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.647ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:51 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.631ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:51 | 200 |    2.700584ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:51 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.792ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:51 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.967ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:51 | 200 |      2.2495ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:52 | 204 |      20.084µs |             ::1 | OPTIONS  "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:52 | 204 |        36.5µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:52 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.819ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:52 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[6.091ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:52 | 200 |    6.203916ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:52 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[4.019ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:52 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[8.083ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:52 | 200 |    8.538333ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:52 | 204 |      17.291µs |             ::1 | OPTIONS  "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:52 | 204 |       6.125µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:52 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.608ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:52 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.444ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:52 | 200 |     2.51375ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:52 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[4.480ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:52 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[5.778ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:52 | 200 |    6.031209ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:52 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.769ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:52 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.097ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:52 | 200 |    2.172292ms |             ::1 | GET      "/api/blog"
+
+2025/06/08 14:54:52 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:313
+[0m[33m[0.953ms] [34;1m[rows:-][0m 
+		SELECT DISTINCT jsonb_array_elements_text(tags) as tag 
+		FROM blog_posts 
+		WHERE is_published = true AND deleted_at IS NULL
+		ORDER BY tag
+	
+[GIN] 2025/06/08 - 14:54:52 | 200 |    1.048084ms |             ::1 | GET      "/api/blog/tags"
+[GIN] 2025/06/08 - 14:54:52 | 204 |      20.792µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:52 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.741ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:52 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.990ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:52 | 200 |    2.061167ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:52 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.574ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:52 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.766ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:52 | 200 |    1.853084ms |             ::1 | GET      "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:53 | 204 |      18.334µs |             ::1 | OPTIONS  "/api/blog?published=true"
+[GIN] 2025/06/08 - 14:54:53 | 204 |       4.458µs |             ::1 | OPTIONS  "/api/blog?published=true"
+
+2025/06/08 14:54:53 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.648ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:53 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[2.053ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:53 | 200 |      2.1255ms |             ::1 | GET      "/api/blog?published=true"
+
+2025/06/08 14:54:53 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[0.485ms] [34;1m[rows:1][0m SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/06/08 14:54:53 [32m/Users/yukilab/temp/pcafe/pcafe2025/backend/handlers/blog.go:83
+[0m[33m[1.196ms] [34;1m[rows:2][0m SELECT * FROM "blog_posts" WHERE is_published = true AND "blog_posts"."deleted_at" IS NULL ORDER BY created_at DESC LIMIT 20
+[GIN] 2025/06/08 - 14:54:53 | 200 |     1.44475ms |             ::1 | GET      "/api/blog?published=true"
+2:54:55 PM [vite] page reload playwright-report/index.html
+signal: killed
+make[1]: *** [run] Error 1
+error: script "dev" was terminated by signal SIGKILL (Forced quit)
+/bin/sh: line 1: 13617 Killed: 9               bun run dev

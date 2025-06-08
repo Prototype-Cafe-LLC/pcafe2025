@@ -1,4 +1,3 @@
-import { Routes, Route } from 'react-router-dom'
 import { Admin, Resource } from 'react-admin'
 import simpleRestProvider from 'ra-data-simple-rest'
 
@@ -7,15 +6,34 @@ import { Dashboard } from './Dashboard'
 import { EventList, EventEdit, EventCreate, EventShow } from './resources/events'
 import { BlogList, BlogEdit, BlogCreate } from './resources/blog'
 
-// Custom data provider that handles errors gracefully
-const dataProvider = simpleRestProvider('/api')
+// Configure fetch to include credentials for session-based auth
+const httpClient = async (url: string, options: RequestInit = {}) => {
+  const response = await fetch(url, {
+    ...options,
+    credentials: 'include', // Include cookies for session authentication
+  })
+  
+  const text = await response.text()
+  
+  return {
+    status: response.status,
+    headers: response.headers,
+    body: text,
+    json: text ? JSON.parse(text) : {}
+  }
+}
 
-function ReactAdminApp() {
+// Create data provider with custom httpClient
+const dataProvider = simpleRestProvider('/api', httpClient)
+
+export function AdminApp() {
   return (
     <Admin 
       dataProvider={dataProvider}
       title="PCafe 2025 Admin"
       disableTelemetry
+      basename="/admin"
+      dashboard={Dashboard}
     >
       <Resource 
         name="events" 
@@ -31,15 +49,5 @@ function ReactAdminApp() {
         create={BlogCreate} 
       />
     </Admin>
-  )
-}
-
-export function AdminApp() {
-  return (
-    <Routes>
-      <Route path="/" element={<Dashboard />} />
-      <Route path="/events/*" element={<ReactAdminApp />} />
-      <Route path="/blog/*" element={<ReactAdminApp />} />
-    </Routes>
   )
 }

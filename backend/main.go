@@ -77,9 +77,21 @@ func startServer(cfg *config.Config) {
 
 	// CORS middleware
 	router.Use(func(c *gin.Context) {
-		c.Header("Access-Control-Allow-Origin", "*")
+		origin := c.Request.Header.Get("Origin")
+		// Allow requests from frontend development server and production
+		allowedOrigins := []string{"http://localhost:3000", "http://localhost:5173", "https://pcafe2025.com"}
+		
+		for _, allowedOrigin := range allowedOrigins {
+			if origin == allowedOrigin {
+				c.Header("Access-Control-Allow-Origin", origin)
+				break
+			}
+		}
+		
 		c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 		c.Header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		c.Header("Access-Control-Expose-Headers", "Content-Range")
+		c.Header("Access-Control-Allow-Credentials", "true")
 
 		if c.Request.Method == "OPTIONS" {
 			c.AbortWithStatus(204)
@@ -105,6 +117,7 @@ func startServer(cfg *config.Config) {
 		blog := api.Group("/blog")
 		{
 			blog.GET("", middleware.OptionalAuth(), blogHandler.GetBlogPosts)
+			blog.GET("/tags", blogHandler.GetBlogTags)
 			blog.GET("/:id", middleware.OptionalAuth(), blogHandler.GetBlogPost)
 			blog.POST("", middleware.RequireAdminAuth(), blogHandler.CreateBlogPost)
 			blog.PUT("/:id", middleware.RequireAdminAuth(), blogHandler.UpdateBlogPost)

@@ -16,9 +16,9 @@ type OCRService struct {
 
 // OCRResult represents the result of OCR processing
 type OCRResult struct {
-	Text        string            `json:"text"`
-	Confidence  float64           `json:"confidence"`
-	Language    string            `json:"language"`
+	Text          string            `json:"text"`
+	Confidence    float64           `json:"confidence"`
+	Language      string            `json:"language"`
 	ExtractedData map[string]string `json:"extracted_data,omitempty"`
 }
 
@@ -42,9 +42,9 @@ func (ocr *OCRService) ProcessImage(imageData []byte, mimeType string) (*OCRResu
 	// For demonstration purposes, this is a mock implementation
 	// In production, you would integrate with an actual OCR service
 	result := &OCRResult{
-		Text:       "",
-		Confidence: 0.0,
-		Language:   "unknown",
+		Text:          "",
+		Confidence:    0.0,
+		Language:      "unknown",
 		ExtractedData: make(map[string]string),
 	}
 
@@ -54,13 +54,13 @@ func (ocr *OCRService) ProcessImage(imageData []byte, mimeType string) (*OCRResu
 	// 2. AWS Textract
 	// 3. Azure Computer Vision
 	// 4. Tesseract with Japanese language pack (open source)
-	
+
 	// Mock implementation for development
 	if len(imageData) > 0 {
 		result.Text = "Mock OCR result - Event details would be extracted here"
 		result.Confidence = 0.85
 		result.Language = "ja"
-		
+
 		// Mock extracted event data
 		result.ExtractedData["title"] = "IoT勉強会"
 		result.ExtractedData["date"] = "2025年1月15日"
@@ -90,7 +90,7 @@ func (ocr *OCRService) ProcessImageFromBase64(base64Data string) (*OCRResult, er
 
 	// Detect MIME type from image data
 	mimeType := http.DetectContentType(imageData)
-	
+
 	return ocr.ProcessImage(imageData, mimeType)
 }
 
@@ -125,19 +125,19 @@ func (ocr *OCRService) ProcessImageFromURL(imageURL string) (*OCRResult, error) 
 // ExtractEventInfoFromText attempts to extract event information from OCR text
 func (ocr *OCRService) ExtractEventInfoFromText(text string) map[string]string {
 	result := make(map[string]string)
-	
+
 	// This would contain sophisticated text parsing logic
 	// For Japanese event information extraction
-	
+
 	// Mock implementation for development
 	if strings.Contains(text, "勉強会") || strings.Contains(text, "セミナー") || strings.Contains(text, "workshop") {
 		result["event_type"] = "workshop"
 	}
-	
+
 	if strings.Contains(text, "IoT") {
 		result["category"] = "IoT"
 	}
-	
+
 	// TODO: Implement actual text parsing for:
 	// - Date extraction (Japanese date formats)
 	// - Time extraction
@@ -145,7 +145,7 @@ func (ocr *OCRService) ExtractEventInfoFromText(text string) map[string]string {
 	// - Contact information
 	// - Event titles
 	// - Organizer information
-	
+
 	return result
 }
 
@@ -153,20 +153,20 @@ func (ocr *OCRService) ExtractEventInfoFromText(text string) map[string]string {
 func isValidImageType(mimeType string) bool {
 	supportedTypes := []string{
 		"image/jpeg",
-		"image/jpg", 
+		"image/jpg",
 		"image/png",
 		"image/gif",
 		"image/bmp",
 		"image/webp",
 		"image/tiff",
 	}
-	
+
 	for _, supportedType := range supportedTypes {
 		if strings.HasPrefix(mimeType, supportedType) {
 			return true
 		}
 	}
-	
+
 	return false
 }
 
@@ -187,18 +187,18 @@ func NewGoogleVisionOCR(apiKey string) *GoogleVisionOCR {
 func (g *GoogleVisionOCR) ProcessImage(imageData []byte) (*OCRResult, error) {
 	// Google Vision API integration would go here
 	// This is a placeholder for the actual implementation
-	
+
 	// In production, this would:
 	// 1. Create the API URL with the key
 	// 2. Prepare the request payload with image data
 	// 3. Send the request to Google Vision API
 	// 4. Parse the response and extract text
-	
+
 	// For now, return a mock result
 	return &OCRResult{
-		Text:       "Mock Google Vision result",
-		Confidence: 0.95,
-		Language:   "ja",
+		Text:          "Mock Google Vision result",
+		Confidence:    0.95,
+		Language:      "ja",
 		ExtractedData: make(map[string]string),
 	}, nil
 }
@@ -214,16 +214,16 @@ func NewTesseractOCR() *TesseractOCR {
 func (t *TesseractOCR) ProcessImage(imagePath string) (*OCRResult, error) {
 	// Tesseract command-line integration would go here
 	// Example: tesseract image.jpg output -l jpn+eng
-	
+
 	// This would require:
 	// 1. Tesseract installed on server
 	// 2. Japanese language pack installed
 	// 3. Proper command execution and output parsing
-	
+
 	return &OCRResult{
-		Text:       "Mock Tesseract result",
-		Confidence: 0.80,
-		Language:   "ja",
+		Text:          "Mock Tesseract result",
+		Confidence:    0.80,
+		Language:      "ja",
 		ExtractedData: make(map[string]string),
 	}, nil
 }

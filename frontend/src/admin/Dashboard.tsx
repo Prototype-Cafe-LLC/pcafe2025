@@ -1,6 +1,16 @@
-import { Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 export function Dashboard() {
+  const navigate = useNavigate()
+  
+  const handleEventsClick = () => {
+    navigate('/admin/events')
+  }
+  
+  const handleBlogClick = () => {
+    navigate('/admin/blog')
+  }
+  
   return (
     <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
       <h1>Admin Dashboard</h1>
@@ -15,8 +25,8 @@ export function Dashboard() {
         }}>
           <h3>Event Management</h3>
           <p>Manage events, workshops, and meetups</p>
-          <Link 
-            to="/admin/events" 
+          <button 
+            onClick={handleEventsClick}
             style={{ 
               display: 'inline-block',
               padding: '0.5rem 1rem',
@@ -24,11 +34,13 @@ export function Dashboard() {
               color: 'white',
               textDecoration: 'none',
               borderRadius: '4px',
-              marginTop: '1rem'
+              marginTop: '1rem',
+              border: 'none',
+              cursor: 'pointer'
             }}
           >
             Manage Events
-          </Link>
+          </button>
         </div>
         
         <div style={{ 
@@ -39,8 +51,8 @@ export function Dashboard() {
         }}>
           <h3>Blog Management</h3>
           <p>Create and edit blog posts and articles</p>
-          <Link 
-            to="/admin/blog" 
+          <button 
+            onClick={handleBlogClick}
             style={{ 
               display: 'inline-block',
               padding: '0.5rem 1rem',
@@ -48,11 +60,13 @@ export function Dashboard() {
               color: 'white',
               textDecoration: 'none',
               borderRadius: '4px',
-              marginTop: '1rem'
+              marginTop: '1rem',
+              border: 'none',
+              cursor: 'pointer'
             }}
           >
             Manage Blog
-          </Link>
+          </button>
         </div>
         
         <div style={{ 
