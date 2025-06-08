@@ -7,11 +7,20 @@ import { EventList, EventEdit, EventCreate, EventShow } from './resources/events
 import { BlogList, BlogEdit, BlogCreate } from './resources/blog'
 
 // Configure fetch to include credentials for session-based auth
-const httpClient = (url, options = {}) => {
-  return fetch(url, {
+const httpClient = async (url: string, options: RequestInit = {}) => {
+  const response = await fetch(url, {
     ...options,
     credentials: 'include', // Include cookies for session authentication
   })
+  
+  const text = await response.text()
+  
+  return {
+    status: response.status,
+    headers: response.headers,
+    body: text,
+    json: text ? JSON.parse(text) : {}
+  }
 }
 
 // Create data provider with custom httpClient

@@ -50,7 +50,8 @@
       "Bash(node:*)",
       "Bash(timeout:*)",
       "Bash(npx playwright test:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(gh pr create:*)"
     ],
     "deny": []
   }
