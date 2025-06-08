@@ -43,7 +43,9 @@
       "Bash(go fmt:*)",
       "Bash(go mod:*)",
       "Bash(kill:*)",
-      "Bash(bunx playwright test:*)"
+      "Bash(bunx playwright test:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh run view:*)"
     ],
     "deny": []
   }
