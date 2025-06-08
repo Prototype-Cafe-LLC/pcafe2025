@@ -21,9 +21,9 @@ interface ExtractedData {
   success: boolean
   event_data: Partial<EventFormData>
   suggestions?: Record<string, string>
-  raw_metadata?: any
-  ocr_result?: any
-  pdf_result?: any
+  raw_metadata?: Record<string, unknown>
+  ocr_result?: Record<string, unknown>
+  pdf_result?: Record<string, unknown>
 }
 
 interface EventInputFormProps {
@@ -51,7 +51,7 @@ export function EventInputForm({ initialData, onSubmit, onCancel, loading }: Eve
   const [urlInput, setUrlInput] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  const handleFormChange = (field: keyof EventFormData, value: any) => {
+  const handleFormChange = (field: keyof EventFormData, value: string | boolean) => {
     setFormData(prev => ({
       ...prev,
       [field]: value,

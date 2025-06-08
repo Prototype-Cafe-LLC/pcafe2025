@@ -1,7 +1,14 @@
 import { useState } from 'react'
 
+interface User {
+  id: number
+  username: string
+  email: string
+  is_admin: boolean
+}
+
 interface LoginFormProps {
-  onLoginSuccess: (user: any) => void
+  onLoginSuccess: (user: User) => void
   onCancel?: () => void
 }
 

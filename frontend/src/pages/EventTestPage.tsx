@@ -76,11 +76,18 @@ const mockEvents = [
   }
 ]
 
+interface User {
+  id: number
+  username: string
+  email: string
+  is_admin: boolean
+}
+
 export function EventTestPage() {
   const dispatch = useDispatch()
   const [showForm, setShowForm] = useState(false)
   const [testFeature, setTestFeature] = useState<'calendar' | 'form' | 'ocr'>('calendar')
-  const [user, setUser] = useState<any>(null)
+  const [user, setUser] = useState<User | null>(null)
   const [showLogin, setShowLogin] = useState(false)
 
   useEffect(() => {
@@ -94,7 +101,7 @@ export function EventTestPage() {
     setShowForm(false)
   }
 
-  const handleLoginSuccess = (loggedInUser: any) => {
+  const handleLoginSuccess = (loggedInUser: User) => {
     setUser(loggedInUser)
     setShowLogin(false)
     console.log('Logged in as:', loggedInUser)
