@@ -6,4 +6,4 @@ alwaysApply: true
 blobs: *.md, *.mdc
 
 - fix markdown error/warnings with ide:getDiagnostics (MCP) or whatever you need
-- before commit, test/format/lint as IC
+- before commit, test/format/lint not to fail CI.
