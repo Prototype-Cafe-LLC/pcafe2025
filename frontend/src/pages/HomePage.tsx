@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import styles from './HomePage.module.css'
 
 interface Event {
@@ -81,12 +82,12 @@ export function HomePage() {
             Connecting ideas, building the future of IoT technology through innovation and collaboration
           </p>
           <div className={styles.heroActions}>
-            <button className={styles.primaryButton}>
+            <Link to="/events" className={styles.primaryButton}>
               Explore Events
-            </button>
-            <button className={styles.secondaryButton}>
-              View Projects
-            </button>
+            </Link>
+            <Link to="/graphs" className={styles.secondaryButton}>
+              View IoT Data
+            </Link>
           </div>
         </div>
       </section>
@@ -148,7 +149,7 @@ export function HomePage() {
             ))}
           </div>
           <div className={styles.sectionFooter}>
-            <button className={styles.viewAllButton}>View All Events</button>
+            <Link to="/events" className={styles.viewAllButton}>View All Events</Link>
           </div>
         </div>
       </section>
@@ -208,6 +209,41 @@ export function HomePage() {
             </p>
             <div className={styles.sectionFooter}>
               <button className={styles.viewAllButton}>View Detailed Analytics</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Admin Access Section */}
+      <section className={styles.admin}>
+        <div className={styles.sectionContainer}>
+          <div className={styles.adminContent}>
+            <div className={styles.adminIcon}>🔧</div>
+            <h2 className={styles.adminTitle}>Administrator Access</h2>
+            <p className={styles.adminDescription}>
+              Manage events, blog posts, and system content through the admin panel
+            </p>
+            <div className={styles.adminFeatures}>
+              <div className={styles.adminFeature}>
+                <span className={styles.featureIcon}>📅</span>
+                <span>Event Management with OCR & URL extraction</span>
+              </div>
+              <div className={styles.adminFeature}>
+                <span className={styles.featureIcon}>📝</span>
+                <span>Content Management System</span>
+              </div>
+              <div className={styles.adminFeature}>
+                <span className={styles.featureIcon}>📊</span>
+                <span>Analytics & Data Overview</span>
+              </div>
+            </div>
+            <div className={styles.adminActions}>
+              <Link to="/admin" className={styles.adminButton}>
+                Access Admin Panel
+              </Link>
+              <div className={styles.adminCredentials}>
+                <small>Demo login: admin / admin123</small>
+              </div>
             </div>
           </div>
         </div>

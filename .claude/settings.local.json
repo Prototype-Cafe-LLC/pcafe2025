@@ -41,7 +41,9 @@
       "Bash(bun add:*)",
       "Bash(git commit:*)",
       "Bash(go fmt:*)",
-      "Bash(go mod:*)"
+      "Bash(go mod:*)",
+      "Bash(kill:*)",
+      "Bash(bunx playwright test:*)"
     ],
     "deny": []
   }

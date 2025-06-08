@@ -36,6 +36,16 @@ export function Header() {
                 Contact
               </Link>
             </li>
+            <li>
+              <Link to="/test-events" className={styles.navLink} style={{ color: '#ff6b6b', fontWeight: 'bold' }}>
+                🧪 Test
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin" className={`${styles.navLink} ${styles.adminLink}`}>
+                Admin
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
