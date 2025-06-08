@@ -50,6 +50,23 @@
   border-bottom-color: #0d9488;
 }
 
+.adminLink {
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
+  color: white !important;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border-bottom: 2px solid transparent !important;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.adminLink:hover {
+  background: linear-gradient(135deg, #388e3c, #1b5e20);
+  color: white !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+}
+
 /* Mobile navigation */
 @media (min-width: 768px) {
   .nav {

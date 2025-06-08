@@ -120,6 +120,9 @@ func startServer(cfg *config.Config) {
 			events.POST("", middleware.RequireAdminAuth(), eventHandler.CreateEvent)
 			events.PUT("/:id", middleware.RequireAdminAuth(), eventHandler.UpdateEvent)
 			events.DELETE("/:id", middleware.RequireAdminAuth(), eventHandler.DeleteEvent)
+			events.POST("/extract-metadata", middleware.RequireAdminAuth(), eventHandler.ExtractMetadata)
+			events.POST("/process-image", middleware.RequireAdminAuth(), eventHandler.ProcessImageOCR)
+			events.POST("/process-pdf", middleware.RequireAdminAuth(), eventHandler.ProcessPDFExtraction)
 		}
 
 		// IoT data endpoints

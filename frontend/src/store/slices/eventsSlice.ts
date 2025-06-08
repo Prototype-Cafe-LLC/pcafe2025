@@ -4,13 +4,20 @@ interface Event {
   id: number
   title: string
   description: string
-  startDate: string
-  endDate?: string
-  url?: string
-  organizer: string
-  organizerUrl?: string
-  createdAt: string
-  updatedAt: string
+  event_url?: string
+  image_url?: string
+  start_date: string
+  end_date?: string
+  is_all_day: boolean
+  organizer_name: string
+  organizer_url?: string
+  source_url?: string
+  source_type?: string
+  extracted_data?: string
+  is_published: boolean
+  is_featured: boolean
+  created_at: string
+  updated_at: string
 }
 
 interface EventsState {
