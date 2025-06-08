@@ -1,0 +1,158 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #115e59;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: #0d9488;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.content {
+  width: 100%;
+}
+
+.loading,
+.error {
+  text-align: center;
+  padding: 3rem;
+  font-size: 1.125rem;
+}
+
+.loading {
+  color: #0d9488;
+}
+
+.error {
+  color: #dc2626;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.5rem;
+}
+
+.empty {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.emptyTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 1rem;
+}
+
+.emptyText {
+  color: #6b7280;
+  font-size: 1.125rem;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.metricCard {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e6fffa;
+  text-align: center;
+}
+
+.metricTitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.metricValue {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #115e59;
+}
+
+.chartPlaceholder {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e6fffa;
+  text-align: center;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.chartTitle {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #115e59;
+  margin-bottom: 1rem;
+}
+
+.chartDescription {
+  color: #6b7280;
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.features {
+  text-align: left;
+}
+
+.featuresTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #0d9488;
+  margin-bottom: 1rem;
+}
+
+.featuresList {
+  color: #6b7280;
+  line-height: 1.8;
+}
+
+.featuresList li {
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .metrics {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .dashboard {
+    gap: 3rem;
+  }
+}
