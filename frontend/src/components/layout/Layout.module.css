@@ -1,0 +1,11 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom, #f0fdfa, #ffffff);
+}
+
+.main {
+  flex: 1;
+  width: 100%;
+}

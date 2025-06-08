@@ -1,12 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit'
 import createSagaMiddleware from 'redux-saga'
 import rootSaga from './sagas'
+import authReducer from './slices/authSlice'
+import eventsReducer from './slices/eventsSlice'
+import blogReducer from './slices/blogSlice'
+import iotReducer from './slices/iotSlice'
 
 const sagaMiddleware = createSagaMiddleware()
 
 export const store = configureStore({
   reducer: {
-    // Add reducers here
+    auth: authReducer,
+    events: eventsReducer,
+    blog: blogReducer,
+    iot: iotReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
