@@ -45,7 +45,11 @@
       "Bash(kill:*)",
       "Bash(bunx playwright test:*)",
       "Bash(gh pr checks:*)",
-      "Bash(gh run view:*)"
+      "Bash(gh run view:*)",
+      "Bash(go get:*)",
+      "Bash(node:*)",
+      "Bash(timeout:*)",
+      "Bash(npx playwright test:*)"
     ],
     "deny": []
   }

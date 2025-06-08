@@ -37,7 +37,7 @@ func RequireAuth() gin.HandlerFunc {
 		}
 
 		// Store user in context for handlers to use
-		c.Set("user", session.User)
+		c.Set("user", &session.User)
 		c.Set("session", session)
 		c.Next()
 	}
@@ -65,7 +65,7 @@ func OptionalAuth() gin.HandlerFunc {
 			return
 		}
 
-		c.Set("user", session.User)
+		c.Set("user", &session.User)
 		c.Set("session", session)
 		c.Next()
 	}

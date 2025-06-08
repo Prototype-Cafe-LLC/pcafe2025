@@ -13,6 +13,14 @@ import {
   Create,
   ArrayInput,
   SimpleFormIterator,
+  SelectInput,
+  NumberField,
+  ReferenceField,
+  ChipField,
+  FunctionField,
+  Show,
+  SimpleShowLayout,
+  RichTextField,
 } from 'react-admin'
 
 export const BlogList = () => (
@@ -21,8 +29,20 @@ export const BlogList = () => (
       <TextField source="id" />
       <TextField source="title" />
       <TextField source="slug" />
-      <BooleanField source="published" />
-      <DateField source="createdAt" />
+      <TextField source="content_type" />
+      <BooleanField source="is_published" />
+      <BooleanField source="is_featured" />
+      <FunctionField 
+        label="Tags"
+        render={(record: { tags?: string[] }) => 
+          record.tags?.map((tag: string) => (
+            <ChipField key={tag} record={{tag}} source="tag" size="small" />
+          ))
+        }
+      />
+      <NumberField source="view_count" />
+      <DateField source="published_at" />
+      <DateField source="created_at" />
       <EditButton />
       <DeleteButton />
     </Datagrid>
@@ -32,15 +52,27 @@ export const BlogList = () => (
 export const BlogEdit = () => (
   <Edit>
     <SimpleForm>
-      <TextInput source="title" required />
-      <TextInput source="slug" required />
-      <TextInput source="content" multiline rows={10} required />
+      <TextInput source="title" required fullWidth />
+      <TextInput source="slug" required fullWidth />
+      <SelectInput 
+        source="content_type" 
+        choices={[
+          { id: 'markdown', name: 'Markdown' },
+          { id: 'html', name: 'HTML' }
+        ]}
+        defaultValue="markdown"
+      />
+      <TextInput source="content" multiline rows={15} required fullWidth />
+      <TextInput source="excerpt" multiline rows={3} fullWidth helperText="Auto-generated if left empty" />
+      <TextInput source="meta_title" fullWidth helperText="SEO title (defaults to title)" />
+      <TextInput source="meta_description" multiline rows={2} fullWidth helperText="SEO description" />
       <ArrayInput source="tags">
         <SimpleFormIterator>
-          <TextInput source="" />
+          <TextInput source="" label="Tag" />
         </SimpleFormIterator>
       </ArrayInput>
-      <BooleanInput source="published" />
+      <BooleanInput source="is_published" />
+      <BooleanInput source="is_featured" />
     </SimpleForm>
   </Edit>
 )
@@ -48,15 +80,53 @@ export const BlogEdit = () => (
 export const BlogCreate = () => (
   <Create>
     <SimpleForm>
-      <TextInput source="title" required />
-      <TextInput source="slug" required />
-      <TextInput source="content" multiline rows={10} required />
+      <TextInput source="title" required fullWidth />
+      <TextInput source="slug" fullWidth helperText="Auto-generated from title if left empty" />
+      <SelectInput 
+        source="content_type" 
+        choices={[
+          { id: 'markdown', name: 'Markdown' },
+          { id: 'html', name: 'HTML' }
+        ]}
+        defaultValue="markdown"
+      />
+      <TextInput source="content" multiline rows={15} required fullWidth />
+      <TextInput source="excerpt" multiline rows={3} fullWidth helperText="Auto-generated if left empty" />
+      <TextInput source="meta_title" fullWidth helperText="SEO title (defaults to title)" />
+      <TextInput source="meta_description" multiline rows={2} fullWidth helperText="SEO description" />
       <ArrayInput source="tags">
         <SimpleFormIterator>
-          <TextInput source="" />
+          <TextInput source="" label="Tag" />
         </SimpleFormIterator>
       </ArrayInput>
-      <BooleanInput source="published" defaultValue={false} />
+      <BooleanInput source="is_published" defaultValue={false} />
+      <BooleanInput source="is_featured" defaultValue={false} />
     </SimpleForm>
   </Create>
+)
+
+export const BlogShow = () => (
+  <Show>
+    <SimpleShowLayout>
+      <TextField source="id" />
+      <TextField source="title" />
+      <TextField source="slug" />
+      <TextField source="content_type" />
+      <RichTextField source="processed_content" />
+      <TextField source="excerpt" />
+      <TextField source="meta_title" />
+      <TextField source="meta_description" />
+      <FunctionField 
+        label="Tags"
+        render={(record: { tags?: string[] }) => record.tags?.join(', ') || 'No tags'}
+      />
+      <BooleanField source="is_published" />
+      <BooleanField source="is_featured" />
+      <NumberField source="view_count" />
+      <DateField source="published_at" />
+      <DateField source="created_at" />
+      <DateField source="updated_at" />
+      <ReferenceField source="author_id" reference="users" />
+    </SimpleShowLayout>
+  </Show>
 )

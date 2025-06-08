@@ -7,9 +7,10 @@ import { EventsPage } from './pages/EventsPage'
 import { EventDetailPage } from './components/events/EventDetailPage'
 import { EventTestPage } from './pages/EventTestPage'
 import { BlogPage } from './pages/BlogPage'
+import { BlogPostDetail } from './components/blog/BlogPostDetail'
 import { GraphsPage } from './pages/GraphsPage'
 import { ContactPage } from './pages/ContactPage'
-import { AdminApp } from './admin/AdminApp'
+import { ProtectedAdminApp } from './admin/ProtectedAdminApp'
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
       <Router>
         <Routes>
           {/* Admin routes */}
-          <Route path="/admin/*" element={<AdminApp />} />
+          <Route path="/admin/*" element={<ProtectedAdminApp />} />
           
           {/* Public routes with layout */}
           <Route path="/" element={
@@ -43,6 +44,11 @@ function App() {
           <Route path="/blog" element={
             <Layout>
               <BlogPage />
+            </Layout>
+          } />
+          <Route path="/blog/:slug" element={
+            <Layout>
+              <BlogPostDetail />
             </Layout>
           } />
           <Route path="/graphs" element={

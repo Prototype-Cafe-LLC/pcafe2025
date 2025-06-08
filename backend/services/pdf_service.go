@@ -57,19 +57,19 @@ func (p *PDFService) ExtractTextFromPDF(pdfData []byte) (*PDFExtractResult, erro
 	// 2. github.com/unidoc/unipdf (commercial Go library)
 	// 3. pdftotext command-line tool (part of poppler-utils)
 	// 4. AWS Textract or Google Document AI (cloud services)
-	
+
 	// Mock implementation for development
 	if len(pdfData) > 0 {
 		result.Text = "Mock PDF extraction result - Event details would be extracted here\n\nIoT Workshop 2025\nDate: January 15, 2025\nTime: 7:00 PM - 9:00 PM\nLocation: Shibuya Tech Center\nOrganizer: Tokyo IoT Group\n\nThis workshop will cover the latest trends in IoT development..."
 		result.PageCount = 2
-		
+
 		// Mock extracted event data
 		result.ExtractedData["title"] = "IoT Workshop 2025"
 		result.ExtractedData["date"] = "January 15, 2025"
 		result.ExtractedData["time"] = "7:00 PM - 9:00 PM"
 		result.ExtractedData["location"] = "Shibuya Tech Center"
 		result.ExtractedData["organizer"] = "Tokyo IoT Group"
-		
+
 		// Mock metadata
 		result.Metadata["creator"] = "Event Management System"
 		result.Metadata["creation_date"] = "2024-12-01"
@@ -129,43 +129,43 @@ func (p *PDFService) ExtractTextFromURL(pdfURL string) (*PDFExtractResult, error
 // ExtractEventInfoFromPDFText attempts to extract event information from PDF text
 func (p *PDFService) ExtractEventInfoFromPDFText(text string) map[string]string {
 	result := make(map[string]string)
-	
+
 	// This would contain sophisticated text parsing logic
 	// For extracting event information from PDF text
-	
+
 	lines := strings.Split(text, "\n")
-	
+
 	for i, line := range lines {
 		line = strings.TrimSpace(line)
-		
+
 		// Look for common event patterns
-		if strings.Contains(strings.ToLower(line), "workshop") || 
-		   strings.Contains(strings.ToLower(line), "seminar") ||
-		   strings.Contains(strings.ToLower(line), "conference") ||
-		   strings.Contains(line, "勉強会") ||
-		   strings.Contains(line, "セミナー") {
+		if strings.Contains(strings.ToLower(line), "workshop") ||
+			strings.Contains(strings.ToLower(line), "seminar") ||
+			strings.Contains(strings.ToLower(line), "conference") ||
+			strings.Contains(line, "勉強会") ||
+			strings.Contains(line, "セミナー") {
 			result["event_type"] = "workshop"
 			// Often the title is on the same line or nearby
 			if len(line) > 10 && result["title"] == "" {
 				result["title"] = line
 			}
 		}
-		
+
 		// Look for date patterns
 		if containsDatePattern(line) {
 			result["extracted_date"] = line
 		}
-		
+
 		// Look for time patterns
 		if containsTimePattern(line) {
 			result["extracted_time"] = line
 		}
-		
+
 		// Look for location indicators
 		if strings.Contains(strings.ToLower(line), "location") ||
-		   strings.Contains(strings.ToLower(line), "venue") ||
-		   strings.Contains(line, "場所") ||
-		   strings.Contains(line, "会場") {
+			strings.Contains(strings.ToLower(line), "venue") ||
+			strings.Contains(line, "場所") ||
+			strings.Contains(line, "会場") {
 			// Location might be on the same line or the next line
 			if strings.Contains(line, ":") {
 				parts := strings.SplitN(line, ":", 2)
@@ -176,12 +176,12 @@ func (p *PDFService) ExtractEventInfoFromPDFText(text string) map[string]string 
 				result["location"] = strings.TrimSpace(lines[i+1])
 			}
 		}
-		
+
 		// Look for organizer information
 		if strings.Contains(strings.ToLower(line), "organizer") ||
-		   strings.Contains(strings.ToLower(line), "organized by") ||
-		   strings.Contains(line, "主催") ||
-		   strings.Contains(line, "運営") {
+			strings.Contains(strings.ToLower(line), "organized by") ||
+			strings.Contains(line, "主催") ||
+			strings.Contains(line, "運営") {
 			if strings.Contains(line, ":") {
 				parts := strings.SplitN(line, ":", 2)
 				if len(parts) == 2 {
@@ -192,7 +192,7 @@ func (p *PDFService) ExtractEventInfoFromPDFText(text string) map[string]string 
 			}
 		}
 	}
-	
+
 	return result
 }
 
@@ -201,7 +201,7 @@ func isPDFData(data []byte) bool {
 	if len(data) < 5 {
 		return false
 	}
-	
+
 	// Check for PDF magic bytes
 	return bytes.HasPrefix(data, []byte("%PDF-"))
 }
@@ -209,7 +209,7 @@ func isPDFData(data []byte) bool {
 // containsDatePattern checks if a line contains date-like patterns
 func containsDatePattern(line string) bool {
 	line = strings.ToLower(line)
-	
+
 	// Common date indicators
 	dateKeywords := []string{
 		"date:", "日時:", "開催日:", "when:",
@@ -217,38 +217,38 @@ func containsDatePattern(line string) bool {
 		"july", "august", "september", "october", "november", "december",
 		"月", "日", "年",
 	}
-	
+
 	for _, keyword := range dateKeywords {
 		if strings.Contains(line, keyword) {
 			return true
 		}
 	}
-	
+
 	// Check for date patterns like 2025-01-15, 01/15/2025, etc.
 	// This is a simplified check - in production you'd use regex
 	if strings.Contains(line, "2025") || strings.Contains(line, "2024") {
 		return true
 	}
-	
+
 	return false
 }
 
 // containsTimePattern checks if a line contains time-like patterns
 func containsTimePattern(line string) bool {
 	line = strings.ToLower(line)
-	
+
 	// Common time indicators
 	timeKeywords := []string{
 		"time:", "時間:", "開始:", "start:", "pm", "am",
 		":", "時", "分",
 	}
-	
+
 	for _, keyword := range timeKeywords {
 		if strings.Contains(line, keyword) {
 			return true
 		}
 	}
-	
+
 	return false
 }
 
@@ -263,12 +263,12 @@ func NewPDFToTextCommand() *PDFToTextCommand {
 func (p *PDFToTextCommand) ExtractText(pdfPath string) (*PDFExtractResult, error) {
 	// pdftotext command-line integration would go here
 	// Example: pdftotext -layout input.pdf output.txt
-	
+
 	// This would require:
 	// 1. pdftotext installed on server (part of poppler-utils)
 	// 2. Proper command execution and output reading
 	// 3. Error handling for different PDF types
-	
+
 	return &PDFExtractResult{
 		Text:          "Mock pdftotext result",
 		PageCount:     1,
@@ -288,7 +288,7 @@ func NewUnidocPDFExtractor() *UnidocPDFExtractor {
 func (u *UnidocPDFExtractor) ExtractText(pdfData []byte) (*PDFExtractResult, error) {
 	// UniDoc PDF library integration would go here
 	// This requires a commercial license for production use
-	
+
 	return &PDFExtractResult{
 		Text:          "Mock UniDoc result",
 		PageCount:     1,

@@ -3,6 +3,7 @@ package handlers
 import (
 	"crypto/rand"
 	"encoding/hex"
+	"fmt"
 	"net/http"
 	"time"
 
@@ -110,19 +111,37 @@ func (h *AuthHandler) Logout(c *gin.Context) {
 
 // GetCurrentUser handles GET /api/auth/me
 func (h *AuthHandler) GetCurrentUser(c *gin.Context) {
-	user, exists := c.Get("user")
+	// Debug: First check if user exists in context
+	userInterface, exists := c.Get("user")
 	if !exists {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "Not authenticated"})
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Not authenticated - no user in context"})
 		return
 	}
-
-	authUser := user.(*models.User)
-	c.JSON(http.StatusOK, gin.H{
-		"id":       authUser.ID,
-		"username": authUser.Username,
-		"email":    authUser.Email,
-		"is_admin": authUser.IsAdmin,
-	})
+	
+	// Debug: Check the type of user
+	switch user := userInterface.(type) {
+	case *models.User:
+		// It's a pointer to User
+		c.JSON(http.StatusOK, gin.H{
+			"id":       user.ID,
+			"username": user.Username,
+			"email":    user.Email,
+			"is_admin": user.IsAdmin,
+		})
+	case models.User:
+		// It's a User value
+		c.JSON(http.StatusOK, gin.H{
+			"id":       user.ID,
+			"username": user.Username,
+			"email":    user.Email,
+			"is_admin": user.IsAdmin,
+		})
+	default:
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "Invalid user type in context",
+			"type":  fmt.Sprintf("%T", userInterface),
+		})
+	}
 }
 
 // RefreshSession handles POST /api/auth/refresh

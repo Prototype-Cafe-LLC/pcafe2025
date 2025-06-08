@@ -255,12 +255,12 @@ func (m *MetadataExtractor) extractPlatformSpecificData(html string, metadata *E
 func (m *MetadataExtractor) extractEventbriteData(html string, metadata *ExtractedMetadata) {
 	// Eventbrite specific patterns
 	patterns := map[string]string{
-		`"organizer":\s*{\s*"name":\s*"([^"]*)"`:  "organizer_name",
-		`"organizer":\s*{\s*"url":\s*"([^"]*)"`:   "organizer_url",
-		`"start":\s*{\s*"local":\s*"([^"]*)"`:     "start_time",
-		`"end":\s*{\s*"local":\s*"([^"]*)"`:       "end_time",
-		`"venue":\s*{\s*"name":\s*"([^"]*)"`:      "venue_name",
-		`"venue":\s*{\s*"address":\s*"([^"]*)"`:   "venue_address",
+		`"organizer":\s*{\s*"name":\s*"([^"]*)"`: "organizer_name",
+		`"organizer":\s*{\s*"url":\s*"([^"]*)"`:  "organizer_url",
+		`"start":\s*{\s*"local":\s*"([^"]*)"`:    "start_time",
+		`"end":\s*{\s*"local":\s*"([^"]*)"`:      "end_time",
+		`"venue":\s*{\s*"name":\s*"([^"]*)"`:     "venue_name",
+		`"venue":\s*{\s*"address":\s*"([^"]*)"`:  "venue_address",
 	}
 
 	for pattern, key := range patterns {
@@ -291,11 +291,11 @@ func (m *MetadataExtractor) extractFacebookEventData(html string, metadata *Extr
 func (m *MetadataExtractor) extractPeatixData(html string, metadata *ExtractedMetadata) {
 	// Peatix specific patterns for Japanese events
 	patterns := map[string]string{
-		`"organizer_name":"([^"]*)"`:    "organizer_name",
-		`"event_start_at":"([^"]*)"`:    "start_time",
-		`"event_end_at":"([^"]*)"`:      "end_time",
-		`"venue_name":"([^"]*)"`:        "venue_name",
-		`"venue_address":"([^"]*)"`:     "venue_address",
+		`"organizer_name":"([^"]*)"`: "organizer_name",
+		`"event_start_at":"([^"]*)"`: "start_time",
+		`"event_end_at":"([^"]*)"`:   "end_time",
+		`"venue_name":"([^"]*)"`:     "venue_name",
+		`"venue_address":"([^"]*)"`:  "venue_address",
 	}
 
 	for pattern, key := range patterns {

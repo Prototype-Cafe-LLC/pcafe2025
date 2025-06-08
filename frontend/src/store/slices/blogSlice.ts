@@ -1,15 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-interface BlogPost {
-  id: number
-  title: string
-  slug: string
-  content: string
-  tags: string[]
-  published: boolean
-  createdAt: string
-  updatedAt: string
-}
+import { BlogPost } from '../../services/blog'
 
 interface BlogState {
   posts: BlogPost[]

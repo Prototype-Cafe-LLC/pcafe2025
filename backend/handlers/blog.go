@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"strings"
@@ -9,13 +10,18 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/pcafe/pcafe2025/db"
 	"github.com/pcafe/pcafe2025/models"
+	"github.com/pcafe/pcafe2025/services"
 )
 
 // BlogHandler handles blog operations
-type BlogHandler struct{}
+type BlogHandler struct {
+	contentService *services.ContentService
+}
 
 func NewBlogHandler() *BlogHandler {
-	return &BlogHandler{}
+	return &BlogHandler{
+		contentService: services.NewContentService(),
+	}
 }
 
 // generateSlug creates a URL-friendly slug from title
@@ -35,8 +41,8 @@ func (h *BlogHandler) GetBlogPosts(c *gin.Context) {
 	query := database.Preload("Author").Order("created_at DESC")
 
 	// Filter by published status for non-admin users
-	user, userExists := c.Get("user")
-	if !userExists || !user.(*models.User).IsAdmin {
+	user, userExists := getUserFromContext(c)
+	if !userExists || !user.IsAdmin {
 		query = query.Where("is_published = ?", true)
 	}
 
@@ -47,6 +53,15 @@ func (h *BlogHandler) GetBlogPosts(c *gin.Context) {
 
 	if tag := c.Query("tag"); tag != "" {
 		query = query.Where("tags @> ?", `["`+tag+`"]`)
+	}
+
+	// Search functionality
+	if search := c.Query("search"); search != "" {
+		searchTerm := "%" + strings.ToLower(search) + "%"
+		query = query.Where(
+			"LOWER(title) LIKE ? OR LOWER(content) LIKE ? OR LOWER(excerpt) LIKE ?",
+			searchTerm, searchTerm, searchTerm,
+		)
 	}
 
 	// Pagination
@@ -64,6 +79,36 @@ func (h *BlogHandler) GetBlogPosts(c *gin.Context) {
 		}
 	}
 
+	// Get total count for pagination
+	var total int64
+	countQuery := database.Model(&models.BlogPost{})
+	
+	// Apply same filters for count (same user permission logic)
+	if !userExists || !user.IsAdmin {
+		countQuery = countQuery.Where("is_published = ?", true)
+	}
+
+	if featured := c.Query("featured"); featured == "true" {
+		countQuery = countQuery.Where("is_featured = ?", true)
+	}
+
+	if tag := c.Query("tag"); tag != "" {
+		countQuery = countQuery.Where("tags @> ?", `["`+tag+`"]`)
+	}
+
+	if search := c.Query("search"); search != "" {
+		searchTerm := "%" + strings.ToLower(search) + "%"
+		countQuery = countQuery.Where(
+			"LOWER(title) LIKE ? OR LOWER(content) LIKE ? OR LOWER(excerpt) LIKE ?",
+			searchTerm, searchTerm, searchTerm,
+		)
+	}
+
+	if err := countQuery.Count(&total).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
 	query = query.Limit(limit).Offset(offset)
 
 	if err := query.Find(&posts).Error; err != nil {
@@ -71,7 +116,21 @@ func (h *BlogHandler) GetBlogPosts(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, posts)
+	// Convert to response format with processed content
+	responses := make([]models.BlogPostResponse, len(posts))
+	for i, post := range posts {
+		responses[i] = h.convertToResponse(post, false) // Skip heavy processing for listing
+	}
+
+	// Set Content-Range header for React Admin pagination
+	contentRange := fmt.Sprintf("posts %d-%d/%d", offset, offset+len(responses)-1, total)
+	c.Header("Content-Range", contentRange)
+
+	// Format response for React Admin simple REST provider
+	c.JSON(http.StatusOK, gin.H{
+		"data":  responses,
+		"total": total,
+	})
 }
 
 // GetBlogPost handles GET /api/blog/:id
@@ -96,8 +155,8 @@ func (h *BlogHandler) GetBlogPost(c *gin.Context) {
 	}
 
 	// Check if published for non-admin users
-	user, userExists := c.Get("user")
-	if !userExists || !user.(*models.User).IsAdmin {
+	user, userExists := getUserFromContext(c)
+	if !userExists || !user.IsAdmin {
 		if !post.IsPublished {
 			c.JSON(http.StatusNotFound, gin.H{"error": "Blog post not found"})
 			return
@@ -107,7 +166,9 @@ func (h *BlogHandler) GetBlogPost(c *gin.Context) {
 	// Increment view count
 	database.Model(&post).UpdateColumn("view_count", post.ViewCount+1)
 
-	c.JSON(http.StatusOK, post)
+	// Convert to response format with full processing
+	response := h.convertToResponse(post, true)
+	c.JSON(http.StatusOK, response)
 }
 
 // CreateBlogPost handles POST /api/blog (admin only)
@@ -118,7 +179,30 @@ func (h *BlogHandler) CreateBlogPost(c *gin.Context) {
 		return
 	}
 
-	user := c.MustGet("user").(*models.User)
+	user, exists := getUserFromContext(c)
+	if !exists {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "User not found in context"})
+		return
+	}
+
+	// Validate content type
+	if input.ContentType == "" {
+		input.ContentType = "markdown"
+	}
+	if !h.contentService.ValidateContentType(input.ContentType) {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid content type. Supported types: markdown, html"})
+		return
+	}
+
+	// Generate excerpt if not provided
+	if input.Excerpt == "" {
+		excerpt, err := h.contentService.GenerateExcerpt(input.Content, input.ContentType, 200)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate excerpt"})
+			return
+		}
+		input.Excerpt = excerpt
+	}
 
 	// Generate slug if not provided
 	slug := generateSlug(input.Title)
@@ -158,7 +242,9 @@ func (h *BlogHandler) CreateBlogPost(c *gin.Context) {
 	// Load the created post with author
 	database.Preload("Author").First(&post, post.ID)
 
-	c.JSON(http.StatusCreated, post)
+	// Convert to response format
+	response := h.convertToResponse(post, true)
+	c.JSON(http.StatusCreated, response)
 }
 
 // UpdateBlogPost handles PUT /api/blog/:id (admin only)
@@ -177,6 +263,25 @@ func (h *BlogHandler) UpdateBlogPost(c *gin.Context) {
 	if err := database.First(&post, id).Error; err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Blog post not found"})
 		return
+	}
+
+	// Validate content type
+	if input.ContentType == "" {
+		input.ContentType = "markdown"
+	}
+	if !h.contentService.ValidateContentType(input.ContentType) {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid content type. Supported types: markdown, html"})
+		return
+	}
+
+	// Generate excerpt if not provided and content changed
+	if input.Excerpt == "" || input.Content != post.Content {
+		excerpt, err := h.contentService.GenerateExcerpt(input.Content, input.ContentType, 200)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to generate excerpt"})
+			return
+		}
+		input.Excerpt = excerpt
 	}
 
 	// Update fields
@@ -206,7 +311,9 @@ func (h *BlogHandler) UpdateBlogPost(c *gin.Context) {
 	// Load the updated post with author
 	database.Preload("Author").First(&post, post.ID)
 
-	c.JSON(http.StatusOK, post)
+	// Convert to response format
+	response := h.convertToResponse(post, true)
+	c.JSON(http.StatusOK, response)
 }
 
 // DeleteBlogPost handles DELETE /api/blog/:id (admin only)
@@ -227,4 +334,73 @@ func (h *BlogHandler) DeleteBlogPost(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"message": "Blog post deleted successfully"})
+}
+
+// GetBlogTags handles GET /api/blog/tags
+func (h *BlogHandler) GetBlogTags(c *gin.Context) {
+	var tags []string
+	database := db.GetDB()
+
+	// Query to get all unique tags from published posts
+	query := `
+		SELECT DISTINCT jsonb_array_elements_text(tags) as tag 
+		FROM blog_posts 
+		WHERE is_published = true AND deleted_at IS NULL
+		ORDER BY tag
+	`
+
+	rows, err := database.Raw(query).Rows()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var tag string
+		if err := rows.Scan(&tag); err != nil {
+			continue
+		}
+		tags = append(tags, tag)
+	}
+
+	c.JSON(http.StatusOK, gin.H{"tags": tags})
+}
+
+// convertToResponse converts BlogPost to BlogPostResponse with processed content
+func (h *BlogHandler) convertToResponse(post models.BlogPost, includeProcessedContent bool) models.BlogPostResponse {
+	response := models.BlogPostResponse{
+		BlogPost: post,
+	}
+
+	if includeProcessedContent {
+		// Process content for full rendering
+		processedContent, err := h.contentService.ProcessContent(post.Content, post.ContentType)
+		if err == nil {
+			response.ProcessedContent = processedContent
+		}
+
+		// Extract plain text for search indexing
+		plainText, err := h.contentService.ExtractPlainText(post.Content, post.ContentType)
+		if err == nil {
+			response.PlainText = plainText
+			// Calculate reading time (average 200 words per minute)
+			wordCount := len(strings.Fields(plainText))
+			response.ReadingTime = max(1, wordCount/200)
+		}
+	} else {
+		// For listing, just provide a simple excerpt
+		response.ProcessedContent = post.Excerpt
+		response.ReadingTime = 1 // Default for listing
+	}
+
+	return response
+}
+
+// max helper function
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
 }
