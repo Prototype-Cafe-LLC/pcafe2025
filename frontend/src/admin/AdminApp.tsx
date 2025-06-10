@@ -3,8 +3,11 @@ import simpleRestProvider from 'ra-data-simple-rest'
 
 // Custom dashboard and components
 import { Dashboard } from './Dashboard'
+import { CustomLayout } from './components/CustomLayout'
 import { EventList, EventEdit, EventCreate, EventShow } from './resources/events'
 import { BlogList, BlogEdit, BlogCreate } from './resources/blog'
+import { IoTDataList, IoTDataShow } from './resources/iot'
+import { ContactList, ContactShow, ContactEdit } from './resources/contact'
 
 // Configure fetch to include credentials for session-based auth
 const httpClient = async (url: string, options: RequestInit = {}) => {
@@ -34,6 +37,7 @@ export function AdminApp() {
       disableTelemetry
       basename="/admin"
       dashboard={Dashboard}
+      layout={CustomLayout}
     >
       <Resource 
         name="events" 
@@ -47,6 +51,19 @@ export function AdminApp() {
         list={BlogList} 
         edit={BlogEdit} 
         create={BlogCreate} 
+      />
+      <Resource 
+        name="iot" 
+        list={IoTDataList} 
+        show={IoTDataShow}
+        options={{ label: 'IoT Data' }}
+      />
+      <Resource 
+        name="contact" 
+        list={ContactList} 
+        show={ContactShow}
+        edit={ContactEdit}
+        options={{ label: 'Contact Forms' }}
       />
     </Admin>
   )
