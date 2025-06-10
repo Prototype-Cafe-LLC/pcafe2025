@@ -4,26 +4,25 @@ import HomeIcon from '@mui/icons-material/Home'
 
 export const CustomAppBar = (props: AppBarProps) => {
   const { data: identity, isLoading } = useGetIdentity()
-  
+
   return (
     <AppBar {...props}>
       <Box flex="1" />
-      
+
       {/* User Info */}
       {!isLoading && identity && (
         <Box display="flex" alignItems="center" marginRight={2}>
           <Typography variant="body2" color="inherit" sx={{ marginRight: 1 }}>
             Welcome, {identity.fullName || identity.username || 'Admin'}
           </Typography>
-          <UserMenu />
         </Box>
       )}
-      
+
       <Button
         color="inherit"
         href="/"
         startIcon={<HomeIcon />}
-        sx={{ 
+        sx={{
           marginRight: 2,
           '&:hover': {
             backgroundColor: 'rgba(255, 255, 255, 0.1)'

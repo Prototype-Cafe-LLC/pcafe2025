@@ -1,7 +1,7 @@
 ---
 description: 
-globs: `*.md`, `*.mdc`
-globs: alwaysApply: true
+globs:
+alwaysApply: true
 ---
 # General Rules
 
