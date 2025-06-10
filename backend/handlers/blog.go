@@ -82,7 +82,7 @@ func (h *BlogHandler) GetBlogPosts(c *gin.Context) {
 	// Get total count for pagination
 	var total int64
 	countQuery := database.Model(&models.BlogPost{})
-	
+
 	// Apply same filters for count (same user permission logic)
 	if !userExists || !user.IsAdmin {
 		countQuery = countQuery.Where("is_published = ?", true)

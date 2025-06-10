@@ -80,14 +80,14 @@ func startServer(cfg *config.Config) {
 		origin := c.Request.Header.Get("Origin")
 		// Allow requests from frontend development server and production
 		allowedOrigins := []string{"http://localhost:3000", "http://localhost:5173", "https://pcafe2025.com"}
-		
+
 		for _, allowedOrigin := range allowedOrigins {
 			if origin == allowedOrigin {
 				c.Header("Access-Control-Allow-Origin", origin)
 				break
 			}
 		}
-		
+
 		c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
 		c.Header("Access-Control-Allow-Headers", "Content-Type, Authorization")
 		c.Header("Access-Control-Expose-Headers", "Content-Range")
@@ -145,7 +145,10 @@ func startServer(cfg *config.Config) {
 			iot.GET("/stats", iotHandler.GetIoTStats)
 			iot.GET("/latest", iotHandler.GetLatestIoTData)
 			iot.GET("/devices", iotHandler.GetDevices)
+			iot.GET("/chart-data", iotHandler.GetChartData)
 			iot.POST("/data", middleware.RequireAdminAuth(), iotHandler.CreateIoTData)
+			iot.POST("/sample-data", middleware.RequireAdminAuth(), iotHandler.PopulateSampleData)
+			iot.DELETE("/sample-data", middleware.RequireAdminAuth(), iotHandler.ClearSampleData)
 		}
 
 		// Office data endpoints (Django compatibility)
@@ -167,6 +170,22 @@ func startServer(cfg *config.Config) {
 	// Health check
 	router.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok", "service": "PCafe 2025 Backend"})
+	})
+	
+	// Debug route to list all registered routes
+	router.GET("/debug/routes", func(c *gin.Context) {
+		routes := router.Routes()
+		routeList := make([]gin.H, len(routes))
+		for i, route := range routes {
+			routeList[i] = gin.H{
+				"method": route.Method,
+				"path":   route.Path,
+			}
+		}
+		c.JSON(200, gin.H{
+			"total_routes": len(routes),
+			"routes":       routeList,
+		})
 	})
 
 	// Start server
