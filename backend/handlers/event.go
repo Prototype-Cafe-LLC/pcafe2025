@@ -20,6 +20,19 @@ func NewEventHandler() *EventHandler {
 }
 
 // GetEvents handles GET /api/events
+// @Summary List events
+// @Description Get a list of events with optional filters
+// @Tags Events
+// @Produce json
+// @Param featured query bool false "Filter by featured events"
+// @Param start_date query string false "Filter events starting from this date (YYYY-MM-DD)"
+// @Param end_date query string false "Filter events ending before this date (YYYY-MM-DD)"
+// @Param include_past query bool false "Include past events (public users only)"
+// @Param limit query int false "Number of events to return (max 100)"
+// @Param offset query int false "Number of events to skip"
+// @Success 200 {object} map[string]interface{} "List of events with total count"
+// @Failure 500 {object} map[string]string "Internal server error"
+// @Router /events [get]
 func (h *EventHandler) GetEvents(c *gin.Context) {
 	var events []models.Event
 	database := db.GetDB()
@@ -113,6 +126,14 @@ func (h *EventHandler) GetEvents(c *gin.Context) {
 }
 
 // GetEvent handles GET /api/events/:id
+// @Summary Get an event
+// @Description Get an event by ID
+// @Tags Events
+// @Produce json
+// @Param id path int true "Event ID"
+// @Success 200 {object} models.Event "Event details"
+// @Failure 404 {object} map[string]string "Event not found"
+// @Router /events/{id} [get]
 func (h *EventHandler) GetEvent(c *gin.Context) {
 	id := c.Param("id")
 
@@ -137,6 +158,18 @@ func (h *EventHandler) GetEvent(c *gin.Context) {
 }
 
 // CreateEvent handles POST /api/events (admin only)
+// @Summary Create an event
+// @Description Create a new event (admin only)
+// @Tags Events
+// @Accept json
+// @Produce json
+// @Security SessionAuth
+// @Param input body models.EventInput true "Event data"
+// @Success 201 {object} models.Event "Created event"
+// @Failure 400 {object} map[string]string "Bad request"
+// @Failure 401 {object} map[string]string "Unauthorized"
+// @Failure 500 {object} map[string]string "Internal server error"
+// @Router /events [post]
 func (h *EventHandler) CreateEvent(c *gin.Context) {
 	var input models.EventInput
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -180,6 +213,19 @@ func (h *EventHandler) CreateEvent(c *gin.Context) {
 }
 
 // UpdateEvent handles PUT /api/events/:id (admin only)
+// @Summary Update an event
+// @Description Update an existing event (admin only)
+// @Tags Events
+// @Accept json
+// @Produce json
+// @Security SessionAuth
+// @Param id path int true "Event ID"
+// @Param input body models.EventInput true "Event data"
+// @Success 200 {object} models.Event "Updated event"
+// @Failure 400 {object} map[string]string "Bad request"
+// @Failure 404 {object} map[string]string "Event not found"
+// @Failure 500 {object} map[string]string "Internal server error"
+// @Router /events/{id} [put]
 func (h *EventHandler) UpdateEvent(c *gin.Context) {
 	id := c.Param("id")
 

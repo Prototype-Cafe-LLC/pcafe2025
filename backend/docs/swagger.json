@@ -1,0 +1,1215 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "PCafe 2025 REST API for IoT data visualization, blog, and event management",
+        "title": "PCafe 2025 API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.pcafe2025.com/support",
+            "email": "support@pcafe2025.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/api",
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "description": "Authenticate user and create session",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "User login",
+                "parameters": [
+                    {
+                        "description": "Login credentials",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/handlers.LoginInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Login successful",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "security": [
+                    {
+                        "SessionAuth": []
+                    }
+                ],
+                "description": "Logout current user and clear session",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "User logout",
+                "responses": {
+                    "200": {
+                        "description": "Logout successful",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/me": {
+            "get": {
+                "security": [
+                    {
+                        "SessionAuth": []
+                    }
+                ],
+                "description": "Get information about the currently authenticated user",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Get current user",
+                "responses": {
+                    "200": {
+                        "description": "User information",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "401": {
+                        "description": "Not authenticated",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/refresh": {
+            "post": {
+                "security": [
+                    {
+                        "SessionAuth": []
+                    }
+                ],
+                "description": "Extend the current session expiration time",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Refresh session",
+                "responses": {
+                    "200": {
+                        "description": "Session refreshed successfully",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Not authenticated",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Failed to refresh session",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/blog": {
+            "get": {
+                "description": "Get a list of blog posts with optional filters",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Blog"
+                ],
+                "summary": "List blog posts",
+                "parameters": [
+                    {
+                        "type": "boolean",
+                        "description": "Filter by featured posts",
+                        "name": "featured",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Filter by tag",
+                        "name": "tag",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Search in title, content, and excerpt",
+                        "name": "search",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Number of posts to return (max 100)",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Number of posts to skip",
+                        "name": "offset",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of blog posts",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.BlogPost"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "SessionAuth": []
+                    }
+                ],
+                "description": "Create a new blog post (admin only)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Blog"
+                ],
+                "summary": "Create a blog post",
+                "parameters": [
+                    {
+                        "description": "Blog post data",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.BlogPostInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created blog post",
+                        "schema": {
+                            "$ref": "#/definitions/models.BlogPost"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/blog/{id}": {
+            "get": {
+                "description": "Get a blog post by ID or slug",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Blog"
+                ],
+                "summary": "Get a blog post",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Blog post ID or slug",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Blog post details",
+                        "schema": {
+                            "$ref": "#/definitions/models.BlogPost"
+                        }
+                    },
+                    "404": {
+                        "description": "Blog post not found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/contact": {
+            "post": {
+                "description": "Submit a contact form with Turnstile CAPTCHA verification",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Contact"
+                ],
+                "summary": "Submit contact form",
+                "parameters": [
+                    {
+                        "description": "Contact form data",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.ContactSubmissionInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Contact submission created",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request or invalid CAPTCHA",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/events": {
+            "get": {
+                "description": "Get a list of events with optional filters",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Events"
+                ],
+                "summary": "List events",
+                "parameters": [
+                    {
+                        "type": "boolean",
+                        "description": "Filter by featured events",
+                        "name": "featured",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Filter events starting from this date (YYYY-MM-DD)",
+                        "name": "start_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Filter events ending before this date (YYYY-MM-DD)",
+                        "name": "end_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "boolean",
+                        "description": "Include past events (public users only)",
+                        "name": "include_past",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Number of events to return (max 100)",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Number of events to skip",
+                        "name": "offset",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of events with total count",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "SessionAuth": []
+                    }
+                ],
+                "description": "Create a new event (admin only)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Create an event",
+                "parameters": [
+                    {
+                        "description": "Event data",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.EventInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created event",
+                        "schema": {
+                            "$ref": "#/definitions/models.Event"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/events/{id}": {
+            "get": {
+                "description": "Get an event by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Get an event",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Event ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event details",
+                        "schema": {
+                            "$ref": "#/definitions/models.Event"
+                        }
+                    },
+                    "404": {
+                        "description": "Event not found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "SessionAuth": []
+                    }
+                ],
+                "description": "Update an existing event (admin only)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Update an event",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Event ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Event data",
+                        "name": "input",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.EventInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated event",
+                        "schema": {
+                            "$ref": "#/definitions/models.Event"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Event not found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/iot/data": {
+            "get": {
+                "description": "Get time-series IoT sensor data with optional filters",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "IoT"
+                ],
+                "summary": "Get IoT data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filter by device ID",
+                        "name": "device_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Filter by device type",
+                        "name": "device_type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Filter by sensor type",
+                        "name": "sensor_type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Filter by location",
+                        "name": "location",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Start time (RFC3339 format)",
+                        "name": "start_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "End time (RFC3339 format)",
+                        "name": "end_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Number of records to return (max 10000)",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Number of records to skip",
+                        "name": "offset",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "IoT data with metadata",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/iot/stats": {
+            "get": {
+                "description": "Get aggregated statistics for IoT data",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "IoT"
+                ],
+                "summary": "Get IoT statistics",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filter by device ID",
+                        "name": "device_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Filter by device type",
+                        "name": "device_type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Filter by sensor type",
+                        "name": "sensor_type",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Filter by location",
+                        "name": "location",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Start time (RFC3339 format)",
+                        "name": "start_time",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "End time (RFC3339 format)",
+                        "name": "end_time",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "IoT statistics",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "gorm.DeletedAt": {
+            "type": "object",
+            "properties": {
+                "time": {
+                    "type": "string"
+                },
+                "valid": {
+                    "description": "Valid is true if Time is not NULL",
+                    "type": "boolean"
+                }
+            }
+        },
+        "handlers.LoginInput": {
+            "type": "object",
+            "required": [
+                "password",
+                "username"
+            ],
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.BlogPost": {
+            "type": "object",
+            "properties": {
+                "author": {
+                    "description": "Relationships",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    ]
+                },
+                "author_id": {
+                    "description": "Foreign keys",
+                    "type": "integer"
+                },
+                "content": {
+                    "type": "string"
+                },
+                "content_type": {
+                    "description": "Content format",
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "excerpt": {
+                    "description": "SEO and metadata",
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "is_featured": {
+                    "type": "boolean"
+                },
+                "is_published": {
+                    "description": "Publishing",
+                    "type": "boolean"
+                },
+                "meta_description": {
+                    "type": "string"
+                },
+                "meta_title": {
+                    "type": "string"
+                },
+                "published_at": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "Tags (stored as JSON array)",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "description": "Content",
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "view_count": {
+                    "description": "Statistics",
+                    "type": "integer"
+                }
+            }
+        },
+        "models.BlogPostInput": {
+            "type": "object",
+            "required": [
+                "content",
+                "title"
+            ],
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "content_type": {
+                    "type": "string"
+                },
+                "excerpt": {
+                    "type": "string"
+                },
+                "is_featured": {
+                    "type": "boolean"
+                },
+                "is_published": {
+                    "type": "boolean"
+                },
+                "meta_description": {
+                    "type": "string"
+                },
+                "meta_title": {
+                    "type": "string"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "title": {
+                    "type": "string",
+                    "maxLength": 200
+                }
+            }
+        },
+        "models.ContactSubmissionInput": {
+            "type": "object",
+            "required": [
+                "email",
+                "message",
+                "name",
+                "subject",
+                "turnstile_token"
+            ],
+            "properties": {
+                "company": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "email": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "form_type": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string",
+                    "maxLength": 2000
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 100
+                },
+                "phone": {
+                    "type": "string",
+                    "maxLength": 20
+                },
+                "subject": {
+                    "type": "string",
+                    "maxLength": 200
+                },
+                "turnstile_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Event": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "created_by": {
+                    "description": "Relationships",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    ]
+                },
+                "created_by_id": {
+                    "description": "Foreign keys",
+                    "type": "integer"
+                },
+                "deleted_at": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "event_url": {
+                    "type": "string"
+                },
+                "extracted_data": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "image_url": {
+                    "type": "string"
+                },
+                "is_all_day": {
+                    "type": "boolean"
+                },
+                "is_featured": {
+                    "type": "boolean"
+                },
+                "is_published": {
+                    "description": "Status and visibility",
+                    "type": "boolean"
+                },
+                "organizer_name": {
+                    "description": "Organizer information",
+                    "type": "string"
+                },
+                "organizer_url": {
+                    "type": "string"
+                },
+                "source_type": {
+                    "description": "\"url\", \"image\", \"pdf\"",
+                    "type": "string"
+                },
+                "source_url": {
+                    "description": "Metadata extraction info",
+                    "type": "string"
+                },
+                "start_date": {
+                    "description": "Date and time",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "Event details",
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.EventInput": {
+            "type": "object",
+            "required": [
+                "start_date",
+                "title"
+            ],
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "end_date": {
+                    "type": "string"
+                },
+                "event_url": {
+                    "type": "string"
+                },
+                "image_url": {
+                    "type": "string"
+                },
+                "is_all_day": {
+                    "type": "boolean"
+                },
+                "is_featured": {
+                    "type": "boolean"
+                },
+                "is_published": {
+                    "type": "boolean"
+                },
+                "organizer_name": {
+                    "type": "string"
+                },
+                "organizer_url": {
+                    "type": "string"
+                },
+                "source_type": {
+                    "type": "string"
+                },
+                "source_url": {
+                    "type": "string"
+                },
+                "start_date": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string",
+                    "maxLength": 200
+                }
+            }
+        },
+        "models.Session": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "expires_at": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "ip_address": {
+                    "type": "string"
+                },
+                "session_id": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "user": {
+                    "description": "Belongs to User",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/models.User"
+                        }
+                    ]
+                },
+                "user_agent": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.User": {
+            "type": "object",
+            "properties": {
+                "blog_posts": {
+                    "description": "Blog posts created by this user",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.BlogPost"
+                    }
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "events": {
+                    "description": "Events created by this user",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Event"
+                    }
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "is_admin": {
+                    "type": "boolean"
+                },
+                "sessions": {
+                    "description": "Sessions for this user",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Session"
+                    }
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "SessionAuth": {
+            "type": "apiKey",
+            "name": "session",
+            "in": "cookie"
+        }
+    }
+}

@@ -1,3 +1,22 @@
+// @title PCafe 2025 API
+// @version 1.0
+// @description PCafe 2025 REST API for IoT data visualization, blog, and event management
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name API Support
+// @contact.url http://www.pcafe2025.com/support
+// @contact.email support@pcafe2025.com
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host localhost:8080
+// @BasePath /api
+
+// @securityDefinitions.apikey SessionAuth
+// @in cookie
+// @name session
+
 package main
 
 import (
@@ -11,6 +30,10 @@ import (
 	"github.com/pcafe/pcafe2025/handlers"
 	"github.com/pcafe/pcafe2025/middleware"
 	"github.com/pcafe/pcafe2025/services"
+	
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	_ "github.com/pcafe/pcafe2025/docs"
 )
 
 func main() {
@@ -187,6 +210,9 @@ func startServer(cfg *config.Config) {
 			"routes":       routeList,
 		})
 	})
+
+	// Swagger documentation (protected by admin auth)
+	router.GET("/docs/*any", middleware.RequireAdminAuth(), ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	// Start server
 	addr := cfg.ServerHost + ":" + cfg.ServerPort
