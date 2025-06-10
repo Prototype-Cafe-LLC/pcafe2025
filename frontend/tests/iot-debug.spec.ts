@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test } from '@playwright/test'
 
 test('Debug IoT page loading', async ({ page }) => {
   // Listen for console messages
@@ -17,8 +17,7 @@ test('Debug IoT page loading', async ({ page }) => {
   // Take screenshot
   await page.screenshot({ path: 'iot-page-debug.png', fullPage: true })
   
-  // Check for any error messages
-  const pageContent = await page.content()
+  // Check page title
   console.log('Page title:', await page.title())
   
   // Check if React app is loaded

@@ -19,12 +19,6 @@ test.describe('IoT Sample Data Population Feature', () => {
     // Test the endpoint directly by checking network response
     await page.goto('/graphs')
     
-    // Intercept the populate sample data request
-    const responsePromise = page.waitForResponse(response => 
-      response.url().includes('/api/iot/sample-data') && 
-      response.request().method() === 'POST'
-    )
-    
     // Try to trigger the populate action (this should fail with 401/403 since we're not logged in)
     const response = await page.evaluate(async () => {
       try {
@@ -70,9 +64,9 @@ test.describe('IoT Sample Data Population Feature', () => {
     await expect(page.locator('text=CO₂')).toBeVisible()
     
     // Disabled sensors should be present but disabled
-    const humidityCheckbox = page.locator('input[type="checkbox"]').filter({ hasText: 'Humidity' })
-    const ambientCheckbox = page.locator('input[type="checkbox"]').filter({ hasText: 'Ambient Light' })
-    const pressureCheckbox = page.locator('input[type="checkbox"]').filter({ hasText: 'Pressure' })
+    await expect(page.locator('text=Humidity')).toBeVisible()
+    await expect(page.locator('text=Ambient Light')).toBeVisible()
+    await expect(page.locator('text=Pressure')).toBeVisible()
     
     console.log('✅ UI layout verification completed')
   })

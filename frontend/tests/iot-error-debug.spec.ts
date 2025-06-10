@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test } from '@playwright/test'
 
 test('Debug IoT page error', async ({ page }) => {
   // Collect all console errors

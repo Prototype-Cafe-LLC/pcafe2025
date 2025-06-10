@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test } from '@playwright/test'
 
 test.describe('Backend API Endpoint Testing', () => {
   const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:8080'
