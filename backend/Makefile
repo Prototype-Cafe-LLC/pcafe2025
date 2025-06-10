@@ -50,7 +50,7 @@ run-server: ## Run the API server
 
 .PHONY: dev
 dev: ## Run development server with auto-reload (requires air)
-	@which air > /dev/null || (echo "Installing air..." && go install github.com/cosmtrek/air@latest)
+	@which air > /dev/null || (echo "Installing air..." && go install github.com/air-verse/air@latest)
 	air
 
 # Database operations
