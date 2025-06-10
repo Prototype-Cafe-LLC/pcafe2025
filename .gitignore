@@ -27,5 +27,7 @@ yarn-error.log*
 frontend/tsconfig.tsbuildinfo
 tsconfig.node.tsbuildinfo
 test_cookies.txt
-playwright-report/*
+playwright-report
 cookies.txt
+test-results
+test-results/.

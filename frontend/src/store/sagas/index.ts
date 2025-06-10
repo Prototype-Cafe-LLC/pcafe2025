@@ -1,10 +1,12 @@
 import { all } from 'redux-saga/effects'
 import { blogSaga } from './blogSaga'
 import { iotSaga } from './iotSaga'
+import { eventsSaga } from './eventsSaga'
 
 export default function* rootSaga() {
   yield all([
     blogSaga(),
     iotSaga(),
+    eventsSaga(),
   ])
 }

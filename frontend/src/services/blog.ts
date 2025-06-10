@@ -67,7 +67,7 @@ class BlogService {
   /**
    * Fetch all blog posts with optional filtering and pagination
    */
-  async fetchPosts(params: BlogListParams = {}): Promise<BlogListResponse> {
+  async fetchPosts(params: BlogListParams = {}): Promise<BlogPost[]> {
     const queryParams: Record<string, string | number | boolean> = {}
     
     if (params.page !== undefined) queryParams.page = params.page
@@ -77,7 +77,12 @@ class BlogService {
     if (params.featured !== undefined) queryParams.featured = params.featured
     if (params.published !== undefined) queryParams.published = params.published
 
-    return apiClient.get<BlogListResponse>(this.basePath, queryParams)
+    // For main site, default to published posts only
+    if (params.published === undefined) {
+      queryParams.published = true
+    }
+
+    return apiClient.get<BlogPost[]>(this.basePath, queryParams)
   }
 
   /**

@@ -1,6 +1,6 @@
 import { call, put, takeLatest, takeEvery } from 'redux-saga/effects'
 import { createAction } from '@reduxjs/toolkit'
-import { blogService, BlogListParams, BlogPost, BlogListResponse } from '../../services/blog'
+import { blogService, BlogListParams, BlogPost } from '../../services/blog'
 import {
   fetchPostsStart,
   fetchPostsSuccess,
@@ -18,8 +18,8 @@ export const fetchPostRequest = createAction<string | number>('blog/fetchPostReq
 function* fetchPostsSaga(action: ReturnType<typeof fetchPostsRequest>) {
   try {
     yield put(fetchPostsStart())
-    const response: BlogListResponse = yield call(blogService.fetchPosts, action.payload || {})
-    yield put(fetchPostsSuccess(response.posts))
+    const posts: BlogPost[] = yield call(blogService.fetchPosts, action.payload || {})
+    yield put(fetchPostsSuccess(posts))
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Failed to fetch posts'
     yield put(fetchPostsFailure(errorMessage))

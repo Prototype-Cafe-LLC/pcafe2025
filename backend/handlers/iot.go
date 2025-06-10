@@ -100,14 +100,45 @@ func (h *IoTHandler) GetIoTData(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{
-		"data": iotData,
-		"meta": gin.H{
-			"count":  len(iotData),
-			"limit":  limit,
-			"offset": offset,
-		},
-	})
+	// Count total records for Content-Range header
+	var total int64
+	countQuery := database.Model(&models.IoTData{})
+
+	// Apply same filters to count query
+	if query.DeviceID != "" {
+		countQuery = countQuery.Where("device_id = ?", query.DeviceID)
+	}
+	if query.DeviceType != "" {
+		countQuery = countQuery.Where("device_type = ?", query.DeviceType)
+	}
+	if query.SensorType != "" {
+		countQuery = countQuery.Where("sensor_type = ?", query.SensorType)
+	}
+	if query.Location != "" {
+		countQuery = countQuery.Where("location = ?", query.Location)
+	}
+	if !query.StartTime.IsZero() {
+		countQuery = countQuery.Where("time >= ?", query.StartTime)
+	}
+	if !query.EndTime.IsZero() {
+		countQuery = countQuery.Where("time <= ?", query.EndTime)
+	}
+	if query.StartTime.IsZero() && query.EndTime.IsZero() {
+		defaultStart := time.Now().Add(-24 * time.Hour)
+		countQuery = countQuery.Where("time >= ?", defaultStart)
+	}
+
+	countQuery.Count(&total)
+
+	// Set Content-Range header for React Admin pagination
+	endIndex := offset + len(iotData) - 1
+	if endIndex < offset {
+		endIndex = offset
+	}
+	contentRange := fmt.Sprintf("iot_data %d-%d/%d", offset, endIndex, total)
+	c.Header("Content-Range", contentRange)
+
+	c.JSON(http.StatusOK, iotData)
 }
 
 // GetIoTStats handles GET /api/iot/stats
@@ -279,6 +310,11 @@ func (h *IoTHandler) GetDevices(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+
+	// Set Content-Range header for React Admin pagination
+	total := len(devices)
+	contentRange := fmt.Sprintf("devices 0-%d/%d", total-1, total)
+	c.Header("Content-Range", contentRange)
 
 	c.JSON(http.StatusOK, devices)
 }

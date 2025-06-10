@@ -22,6 +22,7 @@ import {
   SimpleShowLayout,
   RichTextField,
 } from 'react-admin'
+import { RichTextInput } from 'ra-input-rich-text'
 
 export const BlogList = () => (
   <List>
@@ -62,7 +63,21 @@ export const BlogEdit = () => (
         ]}
         defaultValue="markdown"
       />
-      <TextInput source="content" multiline rows={15} required fullWidth />
+      <RichTextInput 
+        source="content" 
+        label="Content"
+        toolbar={[
+          'undo', 'redo',
+          'bold', 'italic', 'underline', 
+          'link', 'unlink',
+          'bulletedList', 'numberedList',
+          'blockQuote', 'code', 'codeBlock',
+          'heading', '|',
+          'outdent', 'indent', '|',
+          'insertTable', 'tableColumn', 'tableRow', 'mergeTableCells'
+        ]}
+        helperText="Rich text editor for HTML content. For Markdown, switch content type."
+      />
       <TextInput source="excerpt" multiline rows={3} fullWidth helperText="Auto-generated if left empty" />
       <TextInput source="meta_title" fullWidth helperText="SEO title (defaults to title)" />
       <TextInput source="meta_description" multiline rows={2} fullWidth helperText="SEO description" />
@@ -90,7 +105,21 @@ export const BlogCreate = () => (
         ]}
         defaultValue="markdown"
       />
-      <TextInput source="content" multiline rows={15} required fullWidth />
+      <RichTextInput 
+        source="content" 
+        label="Content"
+        toolbar={[
+          'undo', 'redo',
+          'bold', 'italic', 'underline', 
+          'link', 'unlink',
+          'bulletedList', 'numberedList',
+          'blockQuote', 'code', 'codeBlock',
+          'heading', '|',
+          'outdent', 'indent', '|',
+          'insertTable', 'tableColumn', 'tableRow', 'mergeTableCells'
+        ]}
+        helperText="Rich text editor for HTML content. For Markdown, switch content type."
+      />
       <TextInput source="excerpt" multiline rows={3} fullWidth helperText="Auto-generated if left empty" />
       <TextInput source="meta_title" fullWidth helperText="SEO title (defaults to title)" />
       <TextInput source="meta_description" multiline rows={2} fullWidth helperText="SEO description" />

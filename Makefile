@@ -164,6 +164,29 @@ typecheck: frontend-typecheck ## Run TypeScript checks
 .PHONY: fmt
 fmt: go-fmt ## Format all code
 
+# Server Management
+.PHONY: kill-servers
+kill-servers: ## Kill backend and frontend dev servers (keeps DB running)
+	@echo "Killing backend servers (Go)..."
+	@-pkill -f "go run" || true
+	@-pkill -f "pcafe2025" || true
+	@-pkill -f "backend.*main.go" || true
+	@echo "Killing frontend servers (Vite/Bun)..."
+	@-pkill -f "vite" || true
+	@-pkill -f "bun.*dev" || true
+	@-pkill -f "node.*vite" || true
+	@echo "Killing any remaining servers on common ports..."
+	@-lsof -ti:8080 | xargs kill -9 2>/dev/null || true
+	@-lsof -ti:3000 | xargs kill -9 2>/dev/null || true
+	@-lsof -ti:5173 | xargs kill -9 2>/dev/null || true
+	@echo "Dev servers killed! (Database container still running)"
+
+.PHONY: stop
+stop: kill-servers ## Alias for kill-servers
+
+.PHONY: restart
+restart: kill-servers dev ## Kill servers and restart development
+
 # Production
 .PHONY: build-prod
 build-prod: ## Build for production

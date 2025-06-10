@@ -5,7 +5,6 @@ import { Layout } from './components/layout/Layout'
 import { HomePage } from './pages/HomePage'
 import { EventsPage } from './pages/EventsPage'
 import { EventDetailPage } from './components/events/EventDetailPage'
-import { EventTestPage } from './pages/EventTestPage'
 import { BlogPage } from './pages/BlogPage'
 import { BlogPostDetail } from './components/blog/BlogPostDetail'
 import { GraphsPage } from './pages/GraphsPage'
@@ -34,11 +33,6 @@ function App() {
           <Route path="/events/:id" element={
             <Layout>
               <EventDetailPage />
-            </Layout>
-          } />
-          <Route path="/test-events" element={
-            <Layout>
-              <EventTestPage />
             </Layout>
           } />
           <Route path="/blog" element={
