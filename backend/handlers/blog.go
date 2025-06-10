@@ -135,14 +135,14 @@ func (h *BlogHandler) GetBlogPosts(c *gin.Context) {
 	}
 
 	// Set Content-Range header for React Admin pagination
-	contentRange := fmt.Sprintf("posts %d-%d/%d", offset, offset+len(responses)-1, total)
+	endIndex := offset + len(responses) - 1
+	if endIndex < offset {
+		endIndex = offset
+	}
+	contentRange := fmt.Sprintf("posts %d-%d/%d", offset, endIndex, total)
 	c.Header("Content-Range", contentRange)
 
-	// Format response for React Admin simple REST provider
-	c.JSON(http.StatusOK, gin.H{
-		"data":  responses,
-		"total": total,
-	})
+	c.JSON(http.StatusOK, responses)
 }
 
 // GetBlogPost handles GET /api/blog/:id
