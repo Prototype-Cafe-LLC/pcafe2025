@@ -1,36 +1,30 @@
 import { AppBar, AppBarProps, useGetIdentity } from 'react-admin'
-import { Box, Button, Typography } from '@mui/material'
-import HomeIcon from '@mui/icons-material/Home'
+import { HomeIcon } from '@radix-ui/react-icons'
+import styles from './CustomAppBar.module.css'
 
 export const CustomAppBar = (props: AppBarProps) => {
   const { data: identity, isLoading } = useGetIdentity()
 
   return (
     <AppBar {...props}>
-      <Box flex="1" />
+      <div className={styles.spacer} />
 
       {/* User Info */}
       {!isLoading && identity && (
-        <Box display="flex" alignItems="center" marginRight={2}>
-          <Typography variant="body2" color="inherit" sx={{ marginRight: 1 }}>
+        <div className={styles.userInfo}>
+          <p className={styles.userText}>
             Welcome, {identity.fullName || identity.username || 'Admin'}
-          </Typography>
-        </Box>
+          </p>
+        </div>
       )}
 
-      <Button
-        color="inherit"
+      <a
         href="/"
-        startIcon={<HomeIcon />}
-        sx={{
-          marginRight: 2,
-          '&:hover': {
-            backgroundColor: 'rgba(255, 255, 255, 0.1)'
-          }
-        }}
+        className={styles.homeButton}
       >
+        <HomeIcon className={styles.homeIcon} />
         Back to Main Site
-      </Button>
+      </a>
     </AppBar>
   )
 }

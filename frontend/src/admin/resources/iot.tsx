@@ -14,7 +14,7 @@ import {
   Loading,
   Error
 } from 'react-admin'
-import { Card, CardContent, Typography, Grid } from '@mui/material'
+import styles from './iot.module.css'
 
 // Filter component for IoT data
 const IoTDataFilter = (props: Record<string, unknown>) => (
@@ -94,61 +94,57 @@ export const IoTStatsDashboard = () => {
   if (error) return <Error error={error} resetErrorBoundary={() => {}} />
 
   return (
-    <div style={{ padding: '20px' }}>
-      <Typography variant="h4" gutterBottom>
+    <div className={styles.dashboard}>
+      <h1 className={styles.title}>
         IoT Data Overview
-      </Typography>
+      </h1>
       
-      <Grid container spacing={3}>
-        <Grid item xs={12} md={6}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Active Devices
-              </Typography>
-              {devices?.map((device: { device_id: string; device_name: string; device_type: string; location: string; last_seen: string; sensor_types?: string[] }) => (
-                <div key={device.device_id} style={{ marginBottom: '10px' }}>
-                  <Typography variant="subtitle2">
-                    {device.device_name} ({device.device_id})
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    Location: {device.location} | Type: {device.device_type}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    Last seen: {new Date(device.last_seen).toLocaleString()}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    Sensors: {device.sensor_types?.join(', ')}
-                  </Typography>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-        </Grid>
+      <div className={styles.gridContainer}>
+        <div className={styles.card}>
+          <div className={styles.cardContent}>
+            <h2 className={styles.cardTitle}>
+              Active Devices
+            </h2>
+            {devices?.map((device: { device_id: string; device_name: string; device_type: string; location: string; last_seen: string; sensor_types?: string[] }) => (
+              <div key={device.device_id} className={styles.deviceItem}>
+                <h3 className={styles.deviceName}>
+                  {device.device_name} ({device.device_id})
+                </h3>
+                <p className={styles.deviceInfo}>
+                  Location: {device.location} | Type: {device.device_type}
+                </p>
+                <p className={styles.deviceInfo}>
+                  Last seen: {new Date(device.last_seen).toLocaleString()}
+                </p>
+                <p className={styles.deviceInfo}>
+                  Sensors: {device.sensor_types?.join(', ')}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
         
-        <Grid item xs={12} md={6}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Data Statistics
-              </Typography>
-              {stats?.map((stat: { device_id: string; sensor_type: string; count: number; min_value?: number; max_value?: number; avg_value?: number }) => (
-                <div key={`${stat.device_id}-${stat.sensor_type}`} style={{ marginBottom: '10px' }}>
-                  <Typography variant="subtitle2">
-                    {stat.device_id} - {stat.sensor_type}
-                  </Typography>
-                  <Typography variant="body2">
-                    Records: {stat.count} | 
-                    Min: {stat.min_value?.toFixed(2)} | 
-                    Max: {stat.max_value?.toFixed(2)} | 
-                    Avg: {stat.avg_value?.toFixed(2)}
-                  </Typography>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
+        <div className={styles.card}>
+          <div className={styles.cardContent}>
+            <h2 className={styles.cardTitle}>
+              Data Statistics
+            </h2>
+            {stats?.map((stat: { device_id: string; sensor_type: string; count: number; min_value?: number; max_value?: number; avg_value?: number }) => (
+              <div key={`${stat.device_id}-${stat.sensor_type}`} className={styles.statItem}>
+                <h3 className={styles.statName}>
+                  {stat.device_id} - {stat.sensor_type}
+                </h3>
+                <p className={styles.statValues}>
+                  Records: {stat.count} | 
+                  Min: {stat.min_value?.toFixed(2)} | 
+                  Max: {stat.max_value?.toFixed(2)} | 
+                  Avg: {stat.avg_value?.toFixed(2)}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
