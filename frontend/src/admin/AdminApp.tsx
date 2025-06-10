@@ -4,6 +4,7 @@ import simpleRestProvider from 'ra-data-simple-rest'
 // Custom dashboard and components
 import { Dashboard } from './Dashboard'
 import { CustomLayout } from './components/CustomLayout'
+import authProvider from './authProvider'
 import { EventList, EventEdit, EventCreate, EventShow } from './resources/events'
 import { BlogList, BlogEdit, BlogCreate } from './resources/blog'
 import { IoTDataList, IoTDataShow } from './resources/iot'
@@ -33,6 +34,7 @@ export function AdminApp() {
   return (
     <Admin 
       dataProvider={dataProvider}
+      authProvider={authProvider}
       title="PCafe 2025 Admin"
       disableTelemetry
       basename="/admin"
