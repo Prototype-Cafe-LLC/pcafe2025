@@ -51,7 +51,8 @@
       "Bash(timeout:*)",
       "Bash(npx playwright test:*)",
       "Bash(cat:*)",
-      "Bash(gh pr create:*)"
+      "Bash(gh pr create:*)",
+      "Bash(chmod:*)"
     ],
     "deny": []
   }

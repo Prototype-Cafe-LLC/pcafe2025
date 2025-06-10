@@ -190,6 +190,25 @@ make docker-down    # Stop all services
 make docker-logs    # View logs
 ```
 
+#### Development Utilities
+
+**IoT Sample Data Population:**
+```bash
+# Populate 60 days of sample IoT data via admin UI
+# 1. Navigate to http://localhost:3000/graphs
+# 2. Login as admin
+# 3. Click "Populate Sample Data" button
+
+# Alternative: Use test script (requires authentication setup)
+./test-populate-curl.sh
+```
+
+The sample data includes:
+- Temperature data: 18-28°C with daily variation
+- CO2 data: 400-1200 ppm with office hours pattern
+- 60 days of data with 10-minute intervals
+- Realistic patterns for testing zoom/pan functionality
+
 #### Manual Commands (if not using Makefile)
 
 **Backend (Go):**

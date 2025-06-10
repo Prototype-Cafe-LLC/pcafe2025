@@ -1,0 +1,120 @@
+.container {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 150px;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #495057;
+  margin-bottom: 0.25rem;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #dee2e6;
+  background: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  background: #e9ecef;
+  border-color: #adb5bd;
+}
+
+.button.active {
+  background: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+.button.active:hover {
+  background: #0056b3;
+  border-color: #0056b3;
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.checkboxLabel {
+  color: #495057;
+  user-select: none;
+}
+
+.checkbox.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.checkbox.disabled input[type="checkbox"] {
+  cursor: not-allowed;
+}
+
+.checkbox.disabled .checkboxLabel {
+  color: #adb5bd;
+  cursor: not-allowed;
+}
+
+.lastUpdated {
+  font-size: 0.75rem;
+  color: #6c757d;
+  margin-top: 0.25rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .buttonGroup {
+    flex-direction: row;
+  }
+  
+  .button {
+    flex: 1;
+    text-align: center;
+    min-width: 80px;
+  }
+}

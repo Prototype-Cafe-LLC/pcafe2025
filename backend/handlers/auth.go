@@ -117,7 +117,7 @@ func (h *AuthHandler) GetCurrentUser(c *gin.Context) {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Not authenticated - no user in context"})
 		return
 	}
-	
+
 	// Debug: Check the type of user
 	switch user := userInterface.(type) {
 	case *models.User:

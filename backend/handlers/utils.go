@@ -11,12 +11,12 @@ func getUserFromContext(c *gin.Context) (*models.User, bool) {
 	if !exists {
 		return nil, false
 	}
-	
+
 	if u, ok := user.(models.User); ok {
 		return &u, true
 	} else if u, ok := user.(*models.User); ok {
 		return u, true
 	}
-	
+
 	return nil, false
 }
