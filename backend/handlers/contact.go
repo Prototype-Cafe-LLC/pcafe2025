@@ -25,6 +25,16 @@ func NewContactHandler(emailService *services.EmailService, turnstileService *se
 }
 
 // SubmitContactForm handles POST /api/contact
+// @Summary Submit contact form
+// @Description Submit a contact form with Turnstile CAPTCHA verification
+// @Tags Contact
+// @Accept json
+// @Produce json
+// @Param input body models.ContactSubmissionInput true "Contact form data"
+// @Success 201 {object} map[string]interface{} "Contact submission created"
+// @Failure 400 {object} map[string]string "Bad request or invalid CAPTCHA"
+// @Failure 500 {object} map[string]string "Internal server error"
+// @Router /contact [post]
 func (h *ContactHandler) SubmitContactForm(c *gin.Context) {
 	var input models.ContactSubmissionInput
 	if err := c.ShouldBindJSON(&input); err != nil {

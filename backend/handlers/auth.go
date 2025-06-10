@@ -27,6 +27,16 @@ type LoginInput struct {
 }
 
 // Login handles POST /api/auth/login
+// @Summary User login
+// @Description Authenticate user and create session
+// @Tags Auth
+// @Accept json
+// @Produce json
+// @Param input body LoginInput true "Login credentials"
+// @Success 200 {object} map[string]interface{} "Login successful"
+// @Failure 400 {object} map[string]string "Bad request"
+// @Failure 401 {object} map[string]string "Invalid credentials"
+// @Router /auth/login [post]
 func (h *AuthHandler) Login(c *gin.Context) {
 	var input LoginInput
 	if err := c.ShouldBindJSON(&input); err != nil {
@@ -92,6 +102,13 @@ func (h *AuthHandler) Login(c *gin.Context) {
 }
 
 // Logout handles POST /api/auth/logout
+// @Summary User logout
+// @Description Logout current user and clear session
+// @Tags Auth
+// @Produce json
+// @Security SessionAuth
+// @Success 200 {object} map[string]string "Logout successful"
+// @Router /auth/logout [post]
 func (h *AuthHandler) Logout(c *gin.Context) {
 	sessionID, err := c.Cookie("session_id")
 	if err != nil {
@@ -110,6 +127,14 @@ func (h *AuthHandler) Logout(c *gin.Context) {
 }
 
 // GetCurrentUser handles GET /api/auth/me
+// @Summary Get current user
+// @Description Get information about the currently authenticated user
+// @Tags Auth
+// @Produce json
+// @Security SessionAuth
+// @Success 200 {object} map[string]interface{} "User information"
+// @Failure 401 {object} map[string]string "Not authenticated"
+// @Router /auth/me [get]
 func (h *AuthHandler) GetCurrentUser(c *gin.Context) {
 	// Debug: First check if user exists in context
 	userInterface, exists := c.Get("user")
@@ -145,6 +170,15 @@ func (h *AuthHandler) GetCurrentUser(c *gin.Context) {
 }
 
 // RefreshSession handles POST /api/auth/refresh
+// @Summary Refresh session
+// @Description Extend the current session expiration time
+// @Tags Auth
+// @Produce json
+// @Security SessionAuth
+// @Success 200 {object} map[string]string "Session refreshed successfully"
+// @Failure 401 {object} map[string]string "Not authenticated"
+// @Failure 500 {object} map[string]string "Failed to refresh session"
+// @Router /auth/refresh [post]
 func (h *AuthHandler) RefreshSession(c *gin.Context) {
 	sessionValue, exists := c.Get("session")
 	if !exists {

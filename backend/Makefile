@@ -23,6 +23,12 @@ help: ## Show this help message
 	@echo "PCafe 2025 Backend - Available commands:"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
+# Swagger documentation
+.PHONY: swagger
+swagger: ## Generate Swagger documentation
+	@which swag > /dev/null || (echo "Installing swag..." && go install github.com/swaggo/swag/cmd/swag@latest)
+	swag init --parseDependency --parseInternal
+
 # Setup and development
 .PHONY: setup
 setup: ## Install dependencies
@@ -44,7 +50,7 @@ run-server: ## Run the API server
 
 .PHONY: dev
 dev: ## Run development server with auto-reload (requires air)
-	@which air > /dev/null || (echo "Installing air..." && go install github.com/cosmtrek/air@latest)
+	@which air > /dev/null || (echo "Installing air..." && go install github.com/air-verse/air@latest)
 	air
 
 # Database operations

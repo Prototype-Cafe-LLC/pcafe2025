@@ -33,6 +33,18 @@ func generateSlug(title string) string {
 }
 
 // GetBlogPosts handles GET /api/blog
+// @Summary List blog posts
+// @Description Get a list of blog posts with optional filters
+// @Tags Blog
+// @Produce json
+// @Param featured query bool false "Filter by featured posts"
+// @Param tag query string false "Filter by tag"
+// @Param search query string false "Search in title, content, and excerpt"
+// @Param limit query int false "Number of posts to return (max 100)"
+// @Param offset query int false "Number of posts to skip"
+// @Success 200 {array} models.BlogPost "List of blog posts"
+// @Failure 500 {object} map[string]string "Internal server error"
+// @Router /blog [get]
 func (h *BlogHandler) GetBlogPosts(c *gin.Context) {
 	var posts []models.BlogPost
 	database := db.GetDB()
@@ -134,6 +146,14 @@ func (h *BlogHandler) GetBlogPosts(c *gin.Context) {
 }
 
 // GetBlogPost handles GET /api/blog/:id
+// @Summary Get a blog post
+// @Description Get a blog post by ID or slug
+// @Tags Blog
+// @Produce json
+// @Param id path string true "Blog post ID or slug"
+// @Success 200 {object} models.BlogPost "Blog post details"
+// @Failure 404 {object} map[string]string "Blog post not found"
+// @Router /blog/{id} [get]
 func (h *BlogHandler) GetBlogPost(c *gin.Context) {
 	id := c.Param("id")
 
@@ -172,6 +192,18 @@ func (h *BlogHandler) GetBlogPost(c *gin.Context) {
 }
 
 // CreateBlogPost handles POST /api/blog (admin only)
+// @Summary Create a blog post
+// @Description Create a new blog post (admin only)
+// @Tags Blog
+// @Accept json
+// @Produce json
+// @Security SessionAuth
+// @Param input body models.BlogPostInput true "Blog post data"
+// @Success 201 {object} models.BlogPost "Created blog post"
+// @Failure 400 {object} map[string]string "Bad request"
+// @Failure 401 {object} map[string]string "Unauthorized"
+// @Failure 500 {object} map[string]string "Internal server error"
+// @Router /blog [post]
 func (h *BlogHandler) CreateBlogPost(c *gin.Context) {
 	var input models.BlogPostInput
 	if err := c.ShouldBindJSON(&input); err != nil {

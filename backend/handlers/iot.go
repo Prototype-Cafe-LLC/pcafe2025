@@ -21,6 +21,22 @@ func NewIoTHandler() *IoTHandler {
 }
 
 // GetIoTData handles GET /api/iot/data
+// @Summary Get IoT data
+// @Description Get time-series IoT sensor data with optional filters
+// @Tags IoT
+// @Produce json
+// @Param device_id query string false "Filter by device ID"
+// @Param device_type query string false "Filter by device type"
+// @Param sensor_type query string false "Filter by sensor type"
+// @Param location query string false "Filter by location"
+// @Param start_time query string false "Start time (RFC3339 format)"
+// @Param end_time query string false "End time (RFC3339 format)"
+// @Param limit query int false "Number of records to return (max 10000)"
+// @Param offset query int false "Number of records to skip"
+// @Success 200 {object} map[string]interface{} "IoT data with metadata"
+// @Failure 400 {object} map[string]string "Bad request"
+// @Failure 500 {object} map[string]string "Internal server error"
+// @Router /iot/data [get]
 func (h *IoTHandler) GetIoTData(c *gin.Context) {
 	var query models.IoTDataQuery
 	if err := c.ShouldBindQuery(&query); err != nil {
@@ -95,6 +111,20 @@ func (h *IoTHandler) GetIoTData(c *gin.Context) {
 }
 
 // GetIoTStats handles GET /api/iot/stats
+// @Summary Get IoT statistics
+// @Description Get aggregated statistics for IoT data
+// @Tags IoT
+// @Produce json
+// @Param device_id query string false "Filter by device ID"
+// @Param device_type query string false "Filter by device type"
+// @Param sensor_type query string false "Filter by sensor type"
+// @Param location query string false "Filter by location"
+// @Param start_time query string false "Start time (RFC3339 format)"
+// @Param end_time query string false "End time (RFC3339 format)"
+// @Success 200 {object} map[string]interface{} "IoT statistics"
+// @Failure 400 {object} map[string]string "Bad request"
+// @Failure 500 {object} map[string]string "Internal server error"
+// @Router /iot/stats [get]
 func (h *IoTHandler) GetIoTStats(c *gin.Context) {
 	var query models.IoTDataQuery
 	if err := c.ShouldBindQuery(&query); err != nil {

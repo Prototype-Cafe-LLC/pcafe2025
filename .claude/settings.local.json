@@ -52,7 +52,14 @@
       "Bash(npx playwright test:*)",
       "Bash(cat:*)",
       "Bash(gh pr create:*)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "Bash(go install:*)",
+      "Bash(swag init:*)",
+      "Bash(~/go/bin/swag init:*)",
+      "Bash(BACKEND_URL=http://localhost:8080 bun run test swagger-ui-functionality.spec.ts)",
+      "Bash(BACKEND_URL=http://localhost:8080 bun run test:e2e tests/swagger-ui-functionality.spec.ts)",
+      "Bash(docker stop:*)",
+      "Bash(docker rm:*)"
     ],
     "deny": []
   }
