@@ -19,7 +19,7 @@ import {
   useNotify,
 } from 'react-admin'
 import { useState } from 'react'
-import { Card, CardContent, Typography, Box, TextField as MuiTextField, Alert, Button as MuiButton } from '@mui/material'
+import styles from './events.module.css'
 
 export const EventList = () => (
   <List>
@@ -176,63 +176,61 @@ export const EventCreate = () => {
 
   return (
     <Create>
-      <Box>
+      <div className={styles.container}>
         {/* Input Method Selection */}
-        <Card style={{ marginBottom: '1rem' }}>
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
+        <div className={styles.card}>
+          <div className={styles.cardContent}>
+            <h2 className={styles.title}>
               Event Creation Method
-            </Typography>
-            <Box display="flex" gap={2} flexWrap="wrap">
-              <MuiButton
-                variant={metadataMode === 'manual' ? 'contained' : 'outlined'}
+            </h2>
+            <div className={styles.buttonGroup}>
+              <button
+                className={`${styles.button} ${metadataMode === 'manual' ? styles.contained : ''}`}
                 onClick={() => setMetadataMode('manual')}
               >
                 Manual Entry
-              </MuiButton>
-              <MuiButton
-                variant={metadataMode === 'url' ? 'contained' : 'outlined'}
+              </button>
+              <button
+                className={`${styles.button} ${metadataMode === 'url' ? styles.contained : ''}`}
                 onClick={() => setMetadataMode('url')}
               >
                 Extract from URL
-              </MuiButton>
-              <MuiButton
-                variant={metadataMode === 'image' ? 'contained' : 'outlined'}
+              </button>
+              <button
+                className={`${styles.button} ${metadataMode === 'image' ? styles.contained : ''}`}
                 onClick={() => setMetadataMode('image')}
               >
                 Process Image (OCR)
-              </MuiButton>
-              <MuiButton
-                variant={metadataMode === 'pdf' ? 'contained' : 'outlined'}
+              </button>
+              <button
+                className={`${styles.button} ${metadataMode === 'pdf' ? styles.contained : ''}`}
                 onClick={() => setMetadataMode('pdf')}
               >
                 Process PDF
-              </MuiButton>
-            </Box>
-          </CardContent>
-        </Card>
+              </button>
+            </div>
+          </div>
+        </div>
 
         {/* URL Extraction */}
         {metadataMode === 'url' && (
-          <Card style={{ marginBottom: '1rem' }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
+          <div className={styles.card}>
+            <div className={styles.cardContent}>
+              <h2 className={styles.title}>
                 Extract Metadata from URL
-              </Typography>
-              <Box display="flex" gap={2} alignItems="center">
-                <MuiTextField
-                  label="Event URL"
+              </h2>
+              <div className={styles.inputContainer}>
+                <input
+                  className={styles.input}
                   placeholder="https://example.com/event"
-                  variant="outlined"
-                  style={{ flex: 1 }}
                   onKeyPress={(e) => {
                     if (e.key === 'Enter') {
                       handleUrlExtraction((e.target as HTMLInputElement).value)
                     }
                   }}
                 />
-                <MuiButton
-                  variant="contained"
+                <button
+                  className={`${styles.button} ${styles.contained}`}
                   onClick={(e) => {
                     const input = e.currentTarget.parentElement?.querySelector('input') as HTMLInputElement
                     handleUrlExtraction(input.value)
@@ -240,77 +238,79 @@ export const EventCreate = () => {
                   disabled={loading}
                 >
                   Extract
-                </MuiButton>
-              </Box>
-            </CardContent>
-          </Card>
+                </button>
+              </div>
+            </div>
+          </div>
         )}
 
         {/* Image Upload */}
         {metadataMode === 'image' && (
-          <Card style={{ marginBottom: '1rem' }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
+          <div className={styles.card}>
+            <div className={styles.cardContent}>
+              <h2 className={styles.title}>
                 Upload Image for OCR Processing
-              </Typography>
+              </h2>
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleImageUpload}
                 disabled={loading}
+                className={styles.fileInput}
               />
-              <Typography variant="body2" color="textSecondary" style={{ marginTop: '0.5rem' }}>
+              <p className={styles.helpText}>
                 Supported formats: JPEG, PNG, GIF, BMP, WebP, TIFF
-              </Typography>
-            </CardContent>
-          </Card>
+              </p>
+            </div>
+          </div>
         )}
 
         {/* PDF Upload */}
         {metadataMode === 'pdf' && (
-          <Card style={{ marginBottom: '1rem' }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
+          <div className={styles.card}>
+            <div className={styles.cardContent}>
+              <h2 className={styles.title}>
                 Upload PDF for Text Extraction
-              </Typography>
+              </h2>
               <input
                 type="file"
                 accept=".pdf"
                 onChange={handlePdfUpload}
                 disabled={loading}
+                className={styles.fileInput}
               />
-              <Typography variant="body2" color="textSecondary" style={{ marginTop: '0.5rem' }}>
+              <p className={styles.helpText}>
                 PDF files will be processed to extract event information
-              </Typography>
-            </CardContent>
-          </Card>
+              </p>
+            </div>
+          </div>
         )}
 
         {/* Loading and Error States */}
         {loading && (
-          <Alert severity="info" style={{ marginBottom: '1rem' }}>
+          <div className={`${styles.alert} ${styles.info}`}>
             Processing... Please wait.
-          </Alert>
+          </div>
         )}
 
         {error && (
-          <Alert severity="error" style={{ marginBottom: '1rem' }}>
+          <div className={`${styles.alert} ${styles.error}`}>
             {error}
-          </Alert>
+          </div>
         )}
 
         {/* Extracted Data Preview */}
         {extractedData && (
-          <Card style={{ marginBottom: '1rem' }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
+          <div className={styles.card}>
+            <div className={styles.cardContent}>
+              <h2 className={styles.title}>
                 Extracted Data Preview
-              </Typography>
-              <pre style={{ backgroundColor: '#f5f5f5', padding: '1rem', borderRadius: '4px', overflow: 'auto' }}>
+              </h2>
+              <pre className={styles.codeBlock}>
                 {JSON.stringify(extractedData, null, 2)}
               </pre>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         )}
 
         {/* Event Form */}
@@ -329,7 +329,7 @@ export const EventCreate = () => {
           <BooleanInput source="is_published" defaultValue={false} />
           <BooleanInput source="is_featured" defaultValue={false} />
         </SimpleForm>
-      </Box>
+      </div>
     </Create>
   )
 }

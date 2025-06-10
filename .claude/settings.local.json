@@ -59,7 +59,9 @@
       "Bash(BACKEND_URL=http://localhost:8080 bun run test swagger-ui-functionality.spec.ts)",
       "Bash(BACKEND_URL=http://localhost:8080 bun run test:e2e tests/swagger-ui-functionality.spec.ts)",
       "Bash(docker stop:*)",
-      "Bash(docker rm:*)"
+      "Bash(docker rm:*)",
+      "Bash(/Users/yukilab/.nvm/versions/node/v22.14.0/lib/node_modules/@anthropic-ai/claude-code/vendor/ripgrep/arm64-darwin/rg -n \"50\" --type md)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }
