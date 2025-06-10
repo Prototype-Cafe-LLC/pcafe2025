@@ -100,8 +100,6 @@ export function TimeSeriesChart({ data, meta, loading, error }: TimeSeriesChartP
       tension: number
       yAxisID: string
       borderDash?: number[]
-      type?: 'line' | 'bar'
-      barThickness?: string | number
     }
     
     const datasets: ChartDataset[] = []
