@@ -13,10 +13,10 @@ test.describe('Admin Resources Debug - Check for Errors', () => {
     
     // Store console errors on page for later access
     await page.addInitScript(() => {
-      (window as any).consoleErrors = [];
+      (window as Window & { consoleErrors: string[] }).consoleErrors = [];
       const originalConsoleError = console.error;
-      console.error = (...args) => {
-        (window as any).consoleErrors.push(args.join(' '));
+      console.error = (...args: unknown[]) => {
+        (window as Window & { consoleErrors: string[] }).consoleErrors.push(args.join(' '));
         originalConsoleError.apply(console, args);
       };
     });
@@ -61,7 +61,7 @@ test.describe('Admin Resources Debug - Check for Errors', () => {
     }
     
     // Check for console errors
-    const errors = await page.evaluate(() => (window as any).consoleErrors || []);
+    const errors = await page.evaluate(() => (window as Window & { consoleErrors: string[] }).consoleErrors || []);
     console.log('Console errors found:', errors);
     
     // The page should not have critical errors
@@ -94,7 +94,7 @@ test.describe('Admin Resources Debug - Check for Errors', () => {
     console.log('Page contains "react-admin":', pageContent.toLowerCase().includes('react-admin'));
     
     // Check console errors
-    const errors = await page.evaluate(() => (window as any).consoleErrors || []);
+    const errors = await page.evaluate(() => (window as Window & { consoleErrors: string[] }).consoleErrors || []);
     console.log('Blog page console errors:', errors);
     
     if (hasError) {
@@ -125,7 +125,7 @@ test.describe('Admin Resources Debug - Check for Errors', () => {
     console.log('IoT page - Has login prompt:', hasLoginPrompt);
     
     // Check console errors
-    const errors = await page.evaluate(() => (window as any).consoleErrors || []);
+    const errors = await page.evaluate(() => (window as Window & { consoleErrors: string[] }).consoleErrors || []);
     console.log('IoT page console errors:', errors);
   });
 
@@ -150,7 +150,7 @@ test.describe('Admin Resources Debug - Check for Errors', () => {
     console.log('Contact page - Has login prompt:', hasLoginPrompt);
     
     // Check console errors
-    const errors = await page.evaluate(() => (window as any).consoleErrors || []);
+    const errors = await page.evaluate(() => (window as Window & { consoleErrors: string[] }).consoleErrors || []);
     console.log('Contact page console errors:', errors);
   });
 

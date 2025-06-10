@@ -59,6 +59,32 @@ export interface UpdateEventData extends Partial<CreateEventData> {
   id: number
 }
 
+export interface ExtractedMetadata {
+  title?: string
+  description?: string
+  image_url?: string
+  organizer_name?: string
+  organizer_url?: string
+  start_date?: string
+  end_date?: string
+  error?: string
+  success: boolean
+}
+
+export interface OCRResult {
+  extracted_text?: string
+  confidence?: number
+  error?: string
+  success: boolean
+}
+
+export interface PDFResult {
+  extracted_text?: string
+  page_count?: number
+  error?: string
+  success: boolean
+}
+
 class EventService {
   private readonly basePath = '/api/events'
 
@@ -115,14 +141,14 @@ class EventService {
   /**
    * Extract metadata from URL (admin only)
    */
-  async extractMetadata(url: string): Promise<any> {
-    return apiClient.post<any>(`${this.basePath}/extract-metadata`, { url })
+  async extractMetadata(url: string): Promise<ExtractedMetadata> {
+    return apiClient.post<ExtractedMetadata>(`${this.basePath}/extract-metadata`, { url })
   }
 
   /**
    * Process image OCR (admin only)
    */
-  async processImage(imageFile: File): Promise<any> {
+  async processImage(imageFile: File): Promise<OCRResult> {
     const formData = new FormData()
     formData.append('image', imageFile)
     
@@ -136,7 +162,7 @@ class EventService {
   /**
    * Process PDF text extraction (admin only)
    */
-  async processPDF(pdfFile: File): Promise<any> {
+  async processPDF(pdfFile: File): Promise<PDFResult> {
     const formData = new FormData()
     formData.append('pdf', pdfFile)
     

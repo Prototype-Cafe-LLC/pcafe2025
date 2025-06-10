@@ -91,12 +91,10 @@ test.describe('React Admin UI Components - Issue #37', () => {
     await page.waitForLoadState('networkidle');
     
     // Check network requests for React Admin related assets
-    let hasReactAdminAssets = false;
-    
     page.on('response', response => {
       const url = response.url();
       if (url.includes('react-admin') || url.includes('ra-')) {
-        hasReactAdminAssets = true;
+        console.log('Found React Admin asset:', url);
       }
     });
     

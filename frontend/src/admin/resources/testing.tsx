@@ -1,10 +1,3 @@
-import { 
-  List, 
-  Datagrid, 
-  TextField, 
-  DateField, 
-  BooleanField
-} from 'react-admin'
 import { useState } from 'react'
 import { EventCalendar } from '../../components/calendar/EventCalendar'
 import { EventInputForm, EventFormData } from '../../components/forms/EventInputForm'

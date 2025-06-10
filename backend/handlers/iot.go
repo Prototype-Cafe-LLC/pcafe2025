@@ -103,7 +103,7 @@ func (h *IoTHandler) GetIoTData(c *gin.Context) {
 	// Count total records for Content-Range header
 	var total int64
 	countQuery := database.Model(&models.IoTData{})
-	
+
 	// Apply same filters to count query
 	if query.DeviceID != "" {
 		countQuery = countQuery.Where("device_id = ?", query.DeviceID)
@@ -127,7 +127,7 @@ func (h *IoTHandler) GetIoTData(c *gin.Context) {
 		defaultStart := time.Now().Add(-24 * time.Hour)
 		countQuery = countQuery.Where("time >= ?", defaultStart)
 	}
-	
+
 	countQuery.Count(&total)
 
 	// Set Content-Range header for React Admin pagination

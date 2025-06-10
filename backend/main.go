@@ -30,10 +30,10 @@ import (
 	"github.com/pcafe/pcafe2025/handlers"
 	"github.com/pcafe/pcafe2025/middleware"
 	"github.com/pcafe/pcafe2025/services"
-	
+
+	_ "github.com/pcafe/pcafe2025/docs"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	_ "github.com/pcafe/pcafe2025/docs"
 )
 
 func main() {
@@ -194,7 +194,7 @@ func startServer(cfg *config.Config) {
 	router.GET("/health", func(c *gin.Context) {
 		c.JSON(200, gin.H{"status": "ok", "service": "PCafe 2025 Backend"})
 	})
-	
+
 	// Debug route to list all registered routes
 	router.GET("/debug/routes", func(c *gin.Context) {
 		routes := router.Routes()
