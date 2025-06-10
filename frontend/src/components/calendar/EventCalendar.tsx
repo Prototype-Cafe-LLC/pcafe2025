@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { RootState } from '../../store'
-import { fetchEventsStart } from '../../store/slices/eventsSlice'
+import { fetchEventsRequest } from '../../store/sagas/eventsSaga'
 import styles from './EventCalendar.module.css'
 
 interface Event {
@@ -41,7 +41,8 @@ export function EventCalendar({ view = 'grid', showPastEvents = false, limit }: 
   const [viewMode, setViewMode] = useState<'month' | 'list' | 'grid'>(view)
 
   useEffect(() => {
-    dispatch(fetchEventsStart())
+    // Fetch published events for main site
+    dispatch(fetchEventsRequest({ published: true }))
   }, [dispatch])
 
   const processedEvents = useMemo((): CalendarEvent[] => {

@@ -1,4 +1,4 @@
-import { AppBar, AppBarProps, UserMenu, useGetIdentity } from 'react-admin'
+import { AppBar, AppBarProps, useGetIdentity } from 'react-admin'
 import { Box, Button, Typography } from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home'
 

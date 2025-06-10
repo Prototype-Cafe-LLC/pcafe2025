@@ -47,6 +47,10 @@ export function Dashboard() {
     navigate('/admin/iot')
   }
   
+  const handleTestingClick = () => {
+    navigate('/admin/testing')
+  }
+  
   return (
     <div style={{ padding: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
@@ -183,6 +187,37 @@ export function Dashboard() {
             }}
           >
             View IoT Data
+          </button>
+        </div>
+        
+        <div style={{ 
+          padding: '1.5rem', 
+          border: '1px solid #e2e8f0', 
+          borderRadius: '8px',
+          backgroundColor: '#f8fafc'
+        }}>
+          <h3>🧪 Testing Features</h3>
+          <p>Test event forms, OCR, and calendar components</p>
+          <div style={{ marginTop: '1rem', color: '#64748b' }}>
+            <div>🔗 URL Extraction: ✅ Working</div>
+            <div>🖼️ OCR Processing: ✅ Mock Ready</div>
+            <div>📄 PDF Parsing: ✅ Mock Ready</div>
+          </div>
+          <button 
+            onClick={handleTestingClick}
+            style={{ 
+              display: 'inline-block',
+              padding: '0.5rem 1rem',
+              backgroundColor: '#3498db',
+              color: 'white',
+              textDecoration: 'none',
+              borderRadius: '4px',
+              marginTop: '1rem',
+              border: 'none',
+              cursor: 'pointer'
+            }}
+          >
+            🧪 Open Testing
           </button>
         </div>
         

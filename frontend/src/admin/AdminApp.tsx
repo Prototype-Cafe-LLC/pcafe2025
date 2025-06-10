@@ -9,6 +9,7 @@ import { EventList, EventEdit, EventCreate, EventShow } from './resources/events
 import { BlogList, BlogEdit, BlogCreate } from './resources/blog'
 import { IoTDataList, IoTDataShow } from './resources/iot'
 import { ContactList, ContactShow, ContactEdit } from './resources/contact'
+import { TestList, TestingDashboard } from './resources/testing'
 
 // Configure fetch to include credentials for session-based auth
 const httpClient = async (url: string, options: RequestInit = {}) => {
@@ -66,6 +67,11 @@ export function AdminApp() {
         show={ContactShow}
         edit={ContactEdit}
         options={{ label: 'Contact Forms' }}
+      />
+      <Resource 
+        name="testing" 
+        list={TestList}
+        options={{ label: '🧪 Testing' }}
       />
     </Admin>
   )

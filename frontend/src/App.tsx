@@ -36,11 +36,6 @@ function App() {
               <EventDetailPage />
             </Layout>
           } />
-          <Route path="/test-events" element={
-            <Layout>
-              <EventTestPage />
-            </Layout>
-          } />
           <Route path="/blog" element={
             <Layout>
               <BlogPage />
