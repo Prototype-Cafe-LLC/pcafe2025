@@ -11,7 +11,7 @@ COPY . .
 
 # Development stage
 FROM base AS development
-EXPOSE 3000
+EXPOSE 4000
 CMD ["bun", "run", "dev", "--host", "0.0.0.0"]
 
 # Production build stage
