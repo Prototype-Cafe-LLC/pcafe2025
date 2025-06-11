@@ -1,8 +1,6 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Blog Functionality', () => {
-  const BASE_URL = ''; // Playwright expects port 3000
-
   test.beforeEach(async ({ page }) => {
     // Start from the homepage
     await page.goto('/');
@@ -175,8 +173,6 @@ test.describe('Blog Functionality', () => {
 });
 
 test.describe('Blog SEO and Social Features', () => {
-  const BASE_URL = '';
-
   test('should have proper meta tags on blog listing page', async ({ page }) => {
     await page.goto('/blog');
     await page.waitForLoadState('networkidle');

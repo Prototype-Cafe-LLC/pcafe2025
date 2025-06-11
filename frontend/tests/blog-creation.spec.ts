@@ -1,7 +1,5 @@
 import { test, expect } from '@playwright/test'
 
-const BASE_URL = ''
-
 test('should complete full blog creation flow', async ({ page }) => {
   // 1. Navigate to admin panel
   await page.goto('/admin')
