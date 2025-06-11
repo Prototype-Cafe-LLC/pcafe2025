@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Admin Fixes Test', () => {
   test('should test admin login and resources after fixes', async ({ page }) => {
     // Navigate to admin
-    await page.goto('http://localhost:3000/admin');
+    await page.goto('/admin');
     await page.waitForLoadState('networkidle');
     
     // Should see login form

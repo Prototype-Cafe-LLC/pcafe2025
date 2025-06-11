@@ -1,11 +1,9 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Blog Functionality', () => {
-  const BASE_URL = 'http://localhost:3000'; // Playwright expects port 3000
-
   test.beforeEach(async ({ page }) => {
     // Start from the homepage
-    await page.goto(BASE_URL);
+    await page.goto('/');
     await page.waitForLoadState('networkidle');
   });
 
@@ -26,7 +24,7 @@ test.describe('Blog Functionality', () => {
 
   test('should display blog search and filter interface', async ({ page }) => {
     // Navigate to blog page
-    await page.goto(`${BASE_URL}/blog`);
+    await page.goto('/blog');
     await page.waitForLoadState('networkidle');
     
     // Check search input exists
@@ -40,7 +38,7 @@ test.describe('Blog Functionality', () => {
 
   test('should update URL when using search filters', async ({ page }) => {
     // Navigate to blog page
-    await page.goto(`${BASE_URL}/blog`);
+    await page.goto('/blog');
     await page.waitForLoadState('networkidle');
     
     // Test search functionality
@@ -63,7 +61,7 @@ test.describe('Blog Functionality', () => {
 
   test('should handle empty blog state gracefully', async ({ page }) => {
     // Navigate to blog page
-    await page.goto(`${BASE_URL}/blog`);
+    await page.goto('/blog');
     await page.waitForLoadState('networkidle');
     
     // Since we likely don't have blog posts in the test environment,
@@ -79,7 +77,7 @@ test.describe('Blog Functionality', () => {
 
   test('should clear filters when clear button is clicked', async ({ page }) => {
     // Navigate to blog page
-    await page.goto(`${BASE_URL}/blog`);
+    await page.goto('/blog');
     await page.waitForLoadState('networkidle');
     
     // Apply some filters
@@ -101,7 +99,7 @@ test.describe('Blog Functionality', () => {
 
   test('should display proper page title and meta tags', async ({ page }) => {
     // Navigate to blog page
-    await page.goto(`${BASE_URL}/blog`);
+    await page.goto('/blog');
     await page.waitForLoadState('networkidle');
     
     // Check page title
@@ -114,7 +112,7 @@ test.describe('Blog Functionality', () => {
 
   test('should handle direct navigation to blog with query parameters', async ({ page }) => {
     // Navigate directly to blog with search parameter
-    await page.goto(`${BASE_URL}/blog?search=test&featured=true`);
+    await page.goto('/blog?search=test&featured=true');
     await page.waitForLoadState('networkidle');
     
     // Check that filters are applied from URL
@@ -125,7 +123,7 @@ test.describe('Blog Functionality', () => {
 
   test('should validate blog post link structure', async ({ page }) => {
     // Navigate to blog page
-    await page.goto(`${BASE_URL}/blog`);
+    await page.goto('/blog');
     await page.waitForLoadState('networkidle');
     
     // If there are any blog posts, check their link structure
@@ -142,7 +140,7 @@ test.describe('Blog Functionality', () => {
 
   test('should handle blog post detail page (if posts exist)', async ({ page }) => {
     // Navigate to blog page
-    await page.goto(`${BASE_URL}/blog`);
+    await page.goto('/blog');
     await page.waitForLoadState('networkidle');
     
     // Check if any blog posts exist
@@ -165,20 +163,18 @@ test.describe('Blog Functionality', () => {
 
   test('should validate API endpoints are working', async ({ page }) => {
     // Test that the blog API endpoints are accessible
-    const response = await page.request.get(`${BASE_URL.replace('5173', '8080')}/api/blog`);
+    const response = await page.request.get('/api/blog');
     await expect(response).toBeOK();
     
     // Test tags endpoint
-    const tagsResponse = await page.request.get(`${BASE_URL.replace('5173', '8080')}/api/blog/tags`);
+    const tagsResponse = await page.request.get('/api/blog/tags');
     await expect(tagsResponse).toBeOK();
   });
 });
 
 test.describe('Blog SEO and Social Features', () => {
-  const BASE_URL = 'http://localhost:3000';
-
   test('should have proper meta tags on blog listing page', async ({ page }) => {
-    await page.goto(`${BASE_URL}/blog`);
+    await page.goto('/blog');
     await page.waitForLoadState('networkidle');
     
     // Check Open Graph meta tags
@@ -189,14 +185,14 @@ test.describe('Blog SEO and Social Features', () => {
 
   test('should reset meta tags when navigating away from blog', async ({ page }) => {
     // Navigate to blog first
-    await page.goto(`${BASE_URL}/blog`);
+    await page.goto('/blog');
     await page.waitForLoadState('networkidle');
     
     // Verify blog meta tags exist
     await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', /Blog/);
     
     // Navigate away to home page
-    await page.goto(BASE_URL);
+    await page.goto('/');
     await page.waitForLoadState('networkidle');
     
     // Check that blog-specific meta tags are reset

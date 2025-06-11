@@ -22,7 +22,7 @@ test.describe('Admin Resources Debug - Check for Errors', () => {
     });
     
     // Navigate to homepage
-    await page.goto('http://localhost:3000');
+    await page.goto('/');
     await page.waitForLoadState('networkidle');
   });
 
@@ -70,7 +70,7 @@ test.describe('Admin Resources Debug - Check for Errors', () => {
 
   test('should test blog resource directly', async ({ page }) => {
     // Navigate directly to blog admin
-    await page.goto('http://localhost:3000/admin#/blog');
+    await page.goto('/admin#/blog');
     await page.waitForLoadState('networkidle');
     
     // Wait a bit for React Admin to load
@@ -106,7 +106,7 @@ test.describe('Admin Resources Debug - Check for Errors', () => {
 
   test('should test IoT resource directly', async ({ page }) => {
     // Navigate directly to IoT admin
-    await page.goto('http://localhost:3000/admin#/iot');
+    await page.goto('/admin#/iot');
     await page.waitForLoadState('networkidle');
     
     // Wait for React Admin to load
@@ -131,7 +131,7 @@ test.describe('Admin Resources Debug - Check for Errors', () => {
 
   test('should test contact resource directly', async ({ page }) => {
     // Navigate directly to contact admin
-    await page.goto('http://localhost:3000/admin#/contact');
+    await page.goto('/admin#/contact');
     await page.waitForLoadState('networkidle');
     
     // Wait for React Admin to load
@@ -156,7 +156,7 @@ test.describe('Admin Resources Debug - Check for Errors', () => {
 
   test('should check React Admin configuration', async ({ page }) => {
     // Navigate to admin and check the React Admin setup
-    await page.goto('http://localhost:3000/admin');
+    await page.goto('/admin');
     await page.waitForLoadState('networkidle');
     await page.waitForTimeout(2000);
     

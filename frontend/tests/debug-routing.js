@@ -19,7 +19,7 @@ async function debugRouting() {
   
   try {
     // Login first
-    await page.goto('http://localhost:3000/admin');
+    await page.goto('/admin');
     await page.waitForLoadState('networkidle');
     
     await page.fill('input[type="text"]', 'admin');
@@ -41,7 +41,7 @@ async function debugRouting() {
     }
     
     console.log('\n=== Testing Direct Navigation ===');
-    await page.goto('http://localhost:3000/admin/blog');
+    await page.goto('/admin/blog');
     await page.waitForTimeout(3000);
     console.log('After direct navigation URL:', page.url());
     

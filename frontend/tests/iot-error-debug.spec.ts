@@ -14,7 +14,7 @@ test('Debug IoT page error', async ({ page }) => {
   })
   
   // Navigate to graphs page
-  await page.goto('http://localhost:3000/graphs')
+  await page.goto('/graphs')
   
   // Wait a bit for errors to appear
   await page.waitForTimeout(2000)
@@ -28,7 +28,7 @@ test('Debug IoT page error', async ({ page }) => {
   // Check network responses
   const chartDataResponse = await page.evaluate(async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/iot/chart-data?timeRange=24h')
+      const response = await fetch('/api/iot/chart-data?timeRange=24h')
       const data = await response.json()
       return { status: response.status, data }
     } catch (error) {

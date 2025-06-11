@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Admin Navigation', () => {
   test.beforeEach(async ({ page }) => {
     // Start from the homepage
-    await page.goto('http://localhost:3000');
+    await page.goto('/');
     
     // Wait for the page to load
     await page.waitForLoadState('networkidle');
@@ -59,7 +59,7 @@ test.describe('Admin Navigation', () => {
   test('should verify all navigation links work correctly', async ({ page }) => {
     // Test Home link
     await page.click('nav a[href="/"]');
-    await expect(page).toHaveURL('http://localhost:3000/');
+    await expect(page).toHaveURL(/\/$/);
     
     // Test Events link
     await page.click('nav a[href="/events"]');
@@ -67,7 +67,7 @@ test.describe('Admin Navigation', () => {
     await expect(page).toHaveURL(/.*\/events/);
     
     // Go back to home
-    await page.goto('http://localhost:3000');
+    await page.goto('/');
     
     // Test Blog link
     await page.click('nav a[href="/blog"]');
@@ -75,7 +75,7 @@ test.describe('Admin Navigation', () => {
     await expect(page).toHaveURL(/.*\/blog/);
     
     // Go back to home
-    await page.goto('http://localhost:3000');
+    await page.goto('/');
     
     // Test IoT Data link
     await page.click('nav a[href="/graphs"]');
@@ -83,7 +83,7 @@ test.describe('Admin Navigation', () => {
     await expect(page).toHaveURL(/.*\/graphs/);
     
     // Go back to home
-    await page.goto('http://localhost:3000');
+    await page.goto('/');
     
     // Test Contact link
     await page.click('nav a[href="/contact"]');
@@ -91,7 +91,7 @@ test.describe('Admin Navigation', () => {
     await expect(page).toHaveURL(/.*\/contact/);
     
     // Go back to home and test Admin link
-    await page.goto('http://localhost:3000');
+    await page.goto('/');
     await page.click('nav a[href="/admin"]');
     await page.waitForLoadState('networkidle');
     await expect(page).toHaveURL(/.*\/admin/);
@@ -128,7 +128,7 @@ test.describe('Admin Navigation', () => {
     console.log('Current URL after header click:', page.url());
     
     // Go back and try homepage button
-    await page.goto('http://localhost:3000');
+    await page.goto('/');
     await adminHomepageButton.scrollIntoViewIfNeeded();
     
     console.log('Clicking admin homepage button...');

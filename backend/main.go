@@ -21,7 +21,9 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"os"
+	"path/filepath"
 
 	"github.com/gin-gonic/gin"
 	"github.com/pcafe/pcafe2025/config"
@@ -223,6 +225,29 @@ func startServer(cfg *config.Config) {
 
 	// Swagger documentation (protected by admin auth)
 	router.GET("/docs/*any", middleware.RequireAdminAuth(), ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	// Serve static files from frontend build
+	// Check if frontend/dist exists and serve static assets
+	distPath := "../frontend/dist"
+	if _, err := os.Stat(distPath); err == nil {
+		// Serve static assets (JS, CSS, images, etc.)
+		router.Static("/assets", filepath.Join(distPath, "assets"))
+		router.StaticFile("/favicon.ico", filepath.Join(distPath, "favicon.ico"))
+		
+		// Serve index.html for all non-API routes (SPA routing)
+		router.NoRoute(func(c *gin.Context) {
+			// Don't serve index.html for API routes
+			if c.Request.URL.Path[:4] == "/api" || c.Request.URL.Path[:5] == "/docs" || c.Request.URL.Path[:7] == "/health" || c.Request.URL.Path[:6] == "/debug" {
+				c.JSON(http.StatusNotFound, gin.H{"error": "Not found"})
+				return
+			}
+			c.File(filepath.Join(distPath, "index.html"))
+		})
+		
+		log.Printf("Serving static files from: %s", distPath)
+	} else {
+		log.Printf("Frontend dist folder not found at %s, skipping static file serving", distPath)
+	}
 
 	// Start server
 	addr := cfg.ServerHost + ":" + cfg.ServerPort

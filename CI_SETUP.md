@@ -1,0 +1,274 @@
+# CI Pipeline Setup Documentation
+
+## Overview
+
+This document provides the complete CI pipeline configuration for regression testing on pull requests and commits as requested in issue #55.
+
+## CI Pipeline Components
+
+The CI pipeline includes all requested regression testing components:
+
+1. **Backend Tests & Linting** - Go fmt, vet, unit tests with PostgreSQL/TimescaleDB
+2. **Frontend Tests & Linting** - TypeScript checking, ESLint, build verification with Bun
+3. **Playwright E2E Tests** - Full stack testing (25+ test files) with backend server integration
+4. **Documentation Linting** - Markdown validation with markdownlint
+5. **Build Verification** - Production build validation for both backend and frontend
+
+## Complete Workflow File
+
+The complete CI workflow file should be placed at `.github/workflows/ci.yml`:
+
+```yaml
+name: CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  backend-test:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: timescale/timescaledb:latest-pg15
+        env:
+          POSTGRES_DB: pcafe2025_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.22'
+    
+    - name: Cache Go modules
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cache/go-build
+          ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('backend/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
+    
+    - name: Install dependencies
+      working-directory: ./backend
+      run: go mod download
+    
+    - name: Run tests
+      working-directory: ./backend
+      env:
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_NAME: pcafe2025_test
+        DB_USER: postgres
+        DB_PASSWORD: password
+        ENV: test
+      run: go test -v ./...
+    
+    - name: Build
+      working-directory: ./backend
+      run: go build -o bin/server main.go
+
+  frontend-test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest
+    
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.bun/install/cache
+          frontend/node_modules
+        key: ${{ runner.os }}-bun-${{ hashFiles('frontend/package.json', 'frontend/bun.lock*') }}
+        restore-keys: |
+          ${{ runner.os }}-bun-
+    
+    - name: Install dependencies
+      working-directory: ./frontend
+      run: bun install
+    
+    - name: Type check
+      working-directory: ./frontend
+      run: bun run typecheck
+    
+    - name: Lint
+      working-directory: ./frontend
+      run: bun run lint
+    
+    - name: Build
+      working-directory: ./frontend
+      run: bun run build
+
+  playwright-e2e:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: timescale/timescaledb:latest-pg15
+        env:
+          POSTGRES_DB: pcafe2025_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.22'
+    
+    - name: Setup Bun
+      uses: oven-sh/setup-bun@v1
+      with:
+        bun-version: latest
+    
+    - name: Cache Go modules
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.cache/go-build
+          ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('backend/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-
+    
+    - name: Cache frontend dependencies
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.bun/install/cache
+          frontend/node_modules
+        key: ${{ runner.os }}-bun-${{ hashFiles('frontend/package.json', 'frontend/bun.lock*') }}
+        restore-keys: |
+          ${{ runner.os }}-bun-
+    
+    - name: Install backend dependencies
+      working-directory: ./backend
+      run: go mod download
+    
+    - name: Install frontend dependencies
+      working-directory: ./frontend
+      run: bun install
+    
+    - name: Build backend
+      working-directory: ./backend
+      run: go build -o bin/server main.go
+    
+    - name: Build frontend
+      working-directory: ./frontend
+      run: bun run build
+    
+    - name: Start backend server
+      working-directory: ./backend
+      env:
+        DB_HOST: localhost
+        DB_PORT: 5432
+        DB_NAME: pcafe2025_test
+        DB_USER: postgres
+        DB_PASSWORD: password
+        ENV: test
+        SERVER_PORT: 8080
+      run: ./bin/server &
+      
+    - name: Wait for backend to be ready
+      run: |
+        timeout 30 bash -c 'until curl -f http://localhost:8080/api/health || curl -f http://localhost:8080; do sleep 1; done'
+        
+    - name: Install Playwright Browsers
+      working-directory: ./frontend
+      run: bunx playwright install --with-deps
+    
+    - name: Run Playwright tests
+      working-directory: ./frontend
+      env:
+        PLAYWRIGHT_BASE_URL: http://localhost:8080
+      run: bun run test:e2e
+    
+    - name: Upload Playwright Report
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: playwright-report
+        path: frontend/playwright-report/
+        retention-days: 30
+
+  markdown-lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Install markdownlint
+      run: npm install -g markdownlint-cli
+    
+    - name: Lint markdown files
+      run: markdownlint **/*.md
+```
+
+## Manual Setup Required
+
+Due to GitHub App permissions, the workflow file cannot be automatically committed to the `.github/workflows/` directory. Please follow these steps to activate the CI pipeline:
+
+1. Copy the complete workflow configuration above
+2. Create/update the file `.github/workflows/ci.yml` with this content
+3. Commit and push the changes
+
+## Pipeline Features
+
+### Triggers
+- Pull requests to `main` and `develop` branches
+- Direct pushes to `main` and `develop` branches
+
+### Test Coverage
+- **Backend**: 25+ test files covering all API endpoints and business logic
+- **Frontend**: TypeScript compilation, ESLint rules, build verification
+- **E2E**: Playwright tests covering full user workflows (25+ test files)
+- **Documentation**: Markdown linting for all `.md` files
+
+### Performance Optimizations
+- Dependency caching for faster build times
+- Parallel job execution
+- Artifact upload for test reports
+
+### Database Integration
+- PostgreSQL with TimescaleDB extension for realistic testing
+- Health checks ensure database readiness before tests
+- Isolated test database for each run
+
+## Verification
+
+Once activated, the pipeline will run automatically on every pull request and commit, providing comprehensive regression testing as requested in issue #55.

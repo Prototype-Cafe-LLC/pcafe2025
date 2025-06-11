@@ -1,10 +1,8 @@
 import { test, expect } from '@playwright/test'
 
-const BASE_URL = 'http://localhost:3000'
-
 test('should complete full blog creation flow', async ({ page }) => {
   // 1. Navigate to admin panel
-  await page.goto(`${BASE_URL}/admin`)
+  await page.goto('/admin')
   
   // 2. Should see login form
   await expect(page.locator('h3:has-text("Admin Login Required")')).toBeVisible()
@@ -44,7 +42,7 @@ test('should complete full blog creation flow', async ({ page }) => {
   await expect(page.locator('text=created', { exact: false })).toBeVisible({ timeout: 10000 })
   
   // 11. Verify the blog post appears in the public blog page
-  await page.goto(`${BASE_URL}/blog`)
+  await page.goto('/blog')
   await expect(page.locator(`text=${testTitle}`)).toBeVisible()
   
   console.log('✅ Blog creation flow completed successfully!')

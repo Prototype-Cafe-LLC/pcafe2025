@@ -8,7 +8,7 @@ async function testDashboard() {
   const page = await browser.newPage();
   
   try {
-    await page.goto('http://localhost:3000/admin');
+    await page.goto('/admin');
     await page.waitForLoadState('networkidle');
     
     await page.fill('input[type="text"]', 'admin');

@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Issue #37 Verification - React Admin Integration', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:3000');
+    await page.goto('/');
     await page.waitForLoadState('networkidle');
   });
 
@@ -60,7 +60,7 @@ test.describe('Issue #37 Verification - React Admin Integration', () => {
     await expect(page).toHaveURL(/.*\/admin/);
     
     // Go back and test homepage button
-    await page.goto('http://localhost:3000');
+    await page.goto('/');
     await page.click('a:has-text("Access Admin Panel")');
     await expect(page).toHaveURL(/.*\/admin/);
   });
@@ -69,7 +69,7 @@ test.describe('Issue #37 Verification - React Admin Integration', () => {
     // From issue #37: "Install and configure React Admin dependencies"
     
     // Check that React Admin related packages are loaded
-    await page.goto('http://localhost:3000/admin');
+    await page.goto('/admin');
     await page.waitForLoadState('networkidle');
     
     // Check for React Admin in page content or network requests
@@ -139,7 +139,7 @@ test.describe('Issue #37 Verification - React Admin Integration', () => {
     // From issue #37: "Seamless navigation between public site and admin"
     
     // Start on main site
-    await expect(page).toHaveURL('http://localhost:3000/');
+    await expect(page).toHaveURL(/\/$/);
     
     // Navigate to admin
     await page.click('a:has-text("Access Admin Panel")');
@@ -155,7 +155,7 @@ test.describe('Issue #37 Verification - React Admin Integration', () => {
     // Verify that our React Admin components are properly integrated
     
     // Navigate to admin
-    await page.goto('http://localhost:3000/admin');
+    await page.goto('/admin');
     await page.waitForLoadState('networkidle');
     
     // Check that page loads without critical errors
@@ -174,7 +174,7 @@ test.describe('Issue #37 Verification - React Admin Integration', () => {
     // Verify that our TypeScript implementation builds correctly
     
     // If the page loads, it means our TypeScript compiled successfully
-    await page.goto('http://localhost:3000/admin');
+    await page.goto('/admin');
     await page.waitForLoadState('networkidle');
     
     // Check for any console errors that might indicate TypeScript issues

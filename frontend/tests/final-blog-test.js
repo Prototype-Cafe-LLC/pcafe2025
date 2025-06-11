@@ -10,7 +10,7 @@ async function testBlogCreation() {
   try {
     // Login
     console.log('1. Logging in...');
-    await page.goto('http://localhost:3000/admin');
+    await page.goto('/admin');
     await page.waitForLoadState('networkidle');
     
     await page.fill('input[type="text"]', 'admin');
