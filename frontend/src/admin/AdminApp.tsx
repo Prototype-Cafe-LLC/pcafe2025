@@ -10,7 +10,7 @@ import { BlogList, BlogEdit, BlogCreate } from './resources/blog'
 import { IoTDataList, IoTDataShow } from './resources/iot'
 import { ContactList, ContactShow, ContactEdit } from './resources/contact'
 import { TestList } from './resources/testing'
-import { sanjoTsubameCalendarResource } from './resources/sanjoTsubameCalendar'
+import { sanjoTsubameCalendarResource } from './resources/sanjoTsubameCalendarResource'
 
 // Configure fetch to include credentials for session-based auth
 const httpClient = async (url: string, options: RequestInit = {}) => {

@@ -2,7 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { 
   SanjoTsubameStatusResponse, 
   SanjoTsubameMonthResponse,
-  SanjoTsubameCalendarEntry 
+  SanjoTsubameCalendarEntry,
+  SanjoTsubameBulkImportRequest,
+  SanjoTsubameBulkImportResponse
 } from '../../services/sanjoTsubameCalendar';
 
 export interface SanjoTsubameCalendarState {
@@ -63,6 +65,7 @@ const sanjoTsubameCalendarSlice = createSlice({
   initialState,
   reducers: {
     // Month data actions
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     fetchMonthDataStart: (state, _action: PayloadAction<{ year: number; month: number }>) => {
       state.loading.monthData = true;
       state.error.monthData = null;
@@ -120,7 +123,8 @@ const sanjoTsubameCalendarSlice = createSlice({
       state.loading.bulkImporting = true;
       state.error.bulkImporting = null;
     },
-    bulkImportSuccess: (state, _action: PayloadAction<{ importData: any; result: any }>) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    bulkImportSuccess: (state, _action: PayloadAction<{ importData: SanjoTsubameBulkImportRequest; result: SanjoTsubameBulkImportResponse }>) => {
       state.loading.bulkImporting = false;
       state.error.bulkImporting = null;
       

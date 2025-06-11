@@ -3,8 +3,7 @@ import {
   useNotify,
 } from 'react-admin';
 import { Box, Chip, Card, CardContent, Typography, Grid, Button as MuiButton } from '@mui/material';
-import { CalendarMonth } from '@mui/icons-material';
-import { sanjoTsubameCalendarApi } from '../../services/sanjoTsubameCalendar';
+import { sanjoTsubameCalendarApi, SanjoTsubameMonthResponse } from '../../services/sanjoTsubameCalendar';
 
 // This component provides calendar management for admin users
 
@@ -12,7 +11,7 @@ import { sanjoTsubameCalendarApi } from '../../services/sanjoTsubameCalendar';
 export const SanjoTsubameCalendarList = () => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth() + 1);
-  const [monthData, setMonthData] = useState<any>(null);
+  const [monthData, setMonthData] = useState<SanjoTsubameMonthResponse | null>(null);
   const [localChanges, setLocalChanges] = useState<Record<string, 'on' | 'off'>>({});
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -333,12 +332,3 @@ export const SanjoTsubameCalendarList = () => {
 // Simple placeholder components for React Admin
 export const SanjoTsubameCalendarCreate = () => <SanjoTsubameCalendarList />;
 export const SanjoTsubameCalendarEdit = () => <SanjoTsubameCalendarList />;
-
-// Export the resource configuration
-export const sanjoTsubameCalendarResource = {
-  list: SanjoTsubameCalendarList,
-  create: SanjoTsubameCalendarCreate,
-  edit: SanjoTsubameCalendarEdit,
-  icon: CalendarMonth,
-  recordRepresentation: (record: any) => `${record.year}/${record.month}/${record.day} (${record.status})`,
-};

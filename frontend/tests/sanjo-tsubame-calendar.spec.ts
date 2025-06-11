@@ -41,7 +41,7 @@ test.describe('Sanjo-Tsubame Calendar', () => {
     await expect(page.locator('.calendarContainer')).toBeVisible();
     
     // Get the current displayed month/year
-    const currentMonthYear = await page.locator('.calendarHeader span').textContent();
+    // const currentMonthYear = await page.locator('.calendarHeader span').textContent();
     
     // Click next month button
     await page.locator('.navButton[aria-label="次の月"]').click();
@@ -99,7 +99,7 @@ test.describe('Sanjo-Tsubame Calendar', () => {
 });
 
 test.describe('Admin Calendar Management', () => {
-  test('should show admin calendar interface', async ({ page, context }) => {
+  test('should show admin calendar interface', async ({ page }) => {
     // Note: This test assumes admin authentication is set up
     // In a real test environment, you'd handle authentication properly
     

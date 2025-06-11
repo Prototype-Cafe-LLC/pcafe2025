@@ -1,6 +1,14 @@
 import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { sanjoTsubameCalendarApi, SanjoTsubameCalendarInput, SanjoTsubameBulkImportRequest } from '../../services/sanjoTsubameCalendar';
+import { 
+  sanjoTsubameCalendarApi, 
+  SanjoTsubameCalendarInput, 
+  SanjoTsubameBulkImportRequest,
+  SanjoTsubameMonthResponse,
+  SanjoTsubameStatusResponse,
+  SanjoTsubameCalendarEntry,
+  SanjoTsubameBulkImportResponse
+} from '../../services/sanjoTsubameCalendar';
 import {
   fetchMonthDataStart,
   fetchMonthDataSuccess,
@@ -17,10 +25,10 @@ import {
 } from '../slices/sanjoTsubameCalendarSlice';
 
 // Fetch month data saga
-function* fetchMonthDataSaga(action: PayloadAction<{ year: number; month: number }>): Generator<any, void, any> {
+function* fetchMonthDataSaga(action: PayloadAction<{ year: number; month: number }>) {
   try {
     const { year, month } = action.payload;
-    const monthData: any = yield call(sanjoTsubameCalendarApi.getMonthStatus, year, month);
+    const monthData: SanjoTsubameMonthResponse = yield call(sanjoTsubameCalendarApi.getMonthStatus, year, month);
     yield put(fetchMonthDataSuccess(monthData));
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Failed to fetch month data';
@@ -29,9 +37,9 @@ function* fetchMonthDataSaga(action: PayloadAction<{ year: number; month: number
 }
 
 // Fetch today status saga
-function* fetchTodayStatusSaga(): Generator<any, void, any> {
+function* fetchTodayStatusSaga() {
   try {
-    const todayStatus: any = yield call(sanjoTsubameCalendarApi.getTodayStatus);
+    const todayStatus: SanjoTsubameStatusResponse = yield call(sanjoTsubameCalendarApi.getTodayStatus);
     yield put(fetchTodayStatusSuccess(todayStatus));
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Failed to fetch today status';
@@ -40,9 +48,9 @@ function* fetchTodayStatusSaga(): Generator<any, void, any> {
 }
 
 // Create entry saga
-function* createEntrySaga(action: PayloadAction<SanjoTsubameCalendarInput>): Generator<any, void, any> {
+function* createEntrySaga(action: PayloadAction<SanjoTsubameCalendarInput>) {
   try {
-    const entry: any = yield call(sanjoTsubameCalendarApi.createCalendarEntry, action.payload);
+    const entry: SanjoTsubameCalendarEntry = yield call(sanjoTsubameCalendarApi.createCalendarEntry, action.payload);
     yield put(createEntrySuccess(entry));
     
     // Refresh month data after creating entry
@@ -54,9 +62,9 @@ function* createEntrySaga(action: PayloadAction<SanjoTsubameCalendarInput>): Gen
 }
 
 // Bulk import saga
-function* bulkImportSaga(action: PayloadAction<SanjoTsubameBulkImportRequest>): Generator<any, void, any> {
+function* bulkImportSaga(action: PayloadAction<SanjoTsubameBulkImportRequest>) {
   try {
-    const result: any = yield call(sanjoTsubameCalendarApi.bulkImportEntries, action.payload);
+    const result: SanjoTsubameBulkImportResponse = yield call(sanjoTsubameCalendarApi.bulkImportEntries, action.payload);
     yield put(bulkImportSuccess({ importData: action.payload, result }));
     
     // Refresh month data after bulk import
