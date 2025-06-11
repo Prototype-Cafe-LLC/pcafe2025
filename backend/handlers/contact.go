@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -116,6 +117,24 @@ func (h *ContactHandler) GetContactSubmissions(c *gin.Context) {
 		query = query.Where("is_spam = ?", isSpam == "true")
 	}
 
+	// Count total records for pagination
+	var total int64
+	countQuery := db.Model(&models.ContactSubmission{})
+
+	// Apply same filters to count query
+	if status := c.Query("status"); status != "" {
+		countQuery = countQuery.Where("status = ?", status)
+	}
+
+	if isSpam := c.Query("is_spam"); isSpam != "" {
+		countQuery = countQuery.Where("is_spam = ?", isSpam == "true")
+	}
+
+	if err := countQuery.Count(&total).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
 	// Pagination
 	limit := 50
 	if l := c.Query("limit"); l != "" {
@@ -137,6 +156,14 @@ func (h *ContactHandler) GetContactSubmissions(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+
+	// Set Content-Range header for React Admin pagination
+	endIndex := offset + len(submissions) - 1
+	if endIndex < offset {
+		endIndex = offset
+	}
+	contentRange := fmt.Sprintf("contact %d-%d/%d", offset, endIndex, total)
+	c.Header("Content-Range", contentRange)
 
 	c.JSON(http.StatusOK, submissions)
 }
