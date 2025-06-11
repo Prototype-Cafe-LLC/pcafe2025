@@ -166,6 +166,17 @@ jobs:
         working-directory: ./frontend
         run: bun run build
 
+      - name: Run database migrations
+        working-directory: ./backend
+        env:
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: pcafe2025_test
+          DB_USER: postgres
+          DB_PASSWORD: password
+          ENV: test
+        run: ./bin/server migrate
+
       - name: Start backend server
         working-directory: ./backend
         env:
@@ -176,11 +187,36 @@ jobs:
           DB_PASSWORD: password
           ENV: test
           SERVER_PORT: 8080
-        run: ./bin/server &
+          SERVER_HOST: 0.0.0.0
+        run: |
+          echo "Starting backend server..."
+          ./bin/server > server.log 2>&1 &
+          SERVER_PID=$!
+          echo "Backend server started with PID: $SERVER_PID"
+          echo $SERVER_PID > server.pid
 
       - name: Wait for backend to be ready
         run: |
-          timeout 30 bash -c 'until curl -f http://localhost:8080/api/health || curl -f http://localhost:8080; do sleep 1; done'
+          echo "Waiting for backend to be ready..."
+          timeout 60 bash -c 'until curl -f http://localhost:8080/health; do 
+            echo "Backend not ready yet, waiting..."
+            sleep 2
+          done'
+          echo "Backend is ready!"
+          
+      - name: Show server logs if startup failed
+        if: failure()
+        working-directory: ./backend
+        run: |
+          echo "=== Backend Server Logs ==="
+          cat server.log || echo "No server logs found"
+          echo "=== End Server Logs ==="
+          
+      - name: Verify backend endpoints
+        run: |
+          echo "Testing backend endpoints..."
+          curl -f http://localhost:8080/health
+          curl -f http://localhost:8080/debug/routes
 
       - name: Install Playwright Browsers
         working-directory: ./frontend
@@ -191,6 +227,29 @@ jobs:
         env:
           PLAYWRIGHT_BASE_URL: http://localhost:8080
         run: bun run test:e2e
+
+      - name: Show server logs if Playwright tests failed
+        if: failure()
+        working-directory: ./backend
+        run: |
+          echo "=== Backend Server Logs During Tests ==="
+          cat server.log || echo "No server logs found"
+          echo "=== End Server Logs ==="
+          echo "=== Server Process Status ==="
+          if [ -f server.pid ]; then
+            SERVER_PID=$(cat server.pid)
+            ps aux | grep $SERVER_PID || echo "Server process not found"
+          fi
+
+      - name: Cleanup backend server
+        if: always()
+        working-directory: ./backend
+        run: |
+          if [ -f server.pid ]; then
+            SERVER_PID=$(cat server.pid)
+            kill $SERVER_PID || echo "Server already stopped"
+            rm server.pid
+          fi
 
       - name: Upload Playwright Report
         uses: actions/upload-artifact@v4
