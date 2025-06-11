@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -105,16 +106,26 @@ func (h *ContactHandler) GetContactSubmissions(c *gin.Context) {
 	var submissions []models.ContactSubmission
 	db := db.GetDB()
 
-	// Apply filters
-	query := db.Order("created_at DESC")
+	// Build base query for filtering
+	baseQuery := db.Model(&models.ContactSubmission{})
 
 	if status := c.Query("status"); status != "" {
-		query = query.Where("status = ?", status)
+		baseQuery = baseQuery.Where("status = ?", status)
 	}
 
 	if isSpam := c.Query("is_spam"); isSpam != "" {
-		query = query.Where("is_spam = ?", isSpam == "true")
+		baseQuery = baseQuery.Where("is_spam = ?", isSpam == "true")
 	}
+
+	// Get total count with same filters
+	var total int64
+	if err := baseQuery.Count(&total).Error; err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	// Apply filters and ordering for data query
+	query := baseQuery.Order("created_at DESC")
 
 	// Pagination
 	limit := 50
@@ -137,6 +148,13 @@ func (h *ContactHandler) GetContactSubmissions(c *gin.Context) {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+
+	// Set Content-Range header for React Admin pagination
+	endIndex := offset + len(submissions) - 1
+	if endIndex < offset {
+		endIndex = offset
+	}
+	c.Header("Content-Range", fmt.Sprintf("contact %d-%d/%d", offset, endIndex, total))
 
 	c.JSON(http.StatusOK, submissions)
 }
