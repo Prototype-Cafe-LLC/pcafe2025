@@ -90,6 +90,7 @@ func startServer(cfg *config.Config) {
 	blogHandler := handlers.NewBlogHandler()
 	eventHandler := handlers.NewEventHandler()
 	iotHandler := handlers.NewIoTHandler()
+	sanjoTsubameCalendarHandler := handlers.NewSanjoTsubameCalendarHandler()
 
 	// Setup router
 	if cfg.Env == "production" {
@@ -184,6 +185,15 @@ func startServer(cfg *config.Config) {
 		api.POST("/contact", contactHandler.SubmitContactForm)
 		api.GET("/contact", middleware.RequireAdminAuth(), contactHandler.GetContactSubmissions)
 		api.PUT("/contact/:id", middleware.RequireAdminAuth(), contactHandler.UpdateContactSubmission)
+
+		// Sanjo-Tsubame calendar endpoints
+		sanjoCalendar := api.Group("/sanjo-tsubame-calendar")
+		{
+			sanjoCalendar.GET("/:year/:month/:day", sanjoTsubameCalendarHandler.GetDateStatus)
+			sanjoCalendar.GET("/:year/:month", sanjoTsubameCalendarHandler.GetMonthStatus)
+			sanjoCalendar.POST("", middleware.RequireAdminAuth(), sanjoTsubameCalendarHandler.CreateCalendarEntry)
+			sanjoCalendar.POST("/bulk-import", middleware.RequireAdminAuth(), sanjoTsubameCalendarHandler.BulkImportCalendarEntries)
+		}
 	}
 
 	// Django compatibility endpoints
