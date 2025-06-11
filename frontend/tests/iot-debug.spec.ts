@@ -9,7 +9,7 @@ test('Debug IoT page loading', async ({ page }) => {
   })
   
   // Navigate to graphs page
-  await page.goto('http://localhost:3000/graphs')
+  await page.goto('/graphs')
   
   // Wait for page to load
   await page.waitForLoadState('networkidle')

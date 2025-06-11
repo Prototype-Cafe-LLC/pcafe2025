@@ -7,13 +7,13 @@ test.describe('All Pages Test', () => {
   });
 
   test('Homepage loads successfully', async ({ page }) => {
-    await page.goto('http://localhost:4000/');
+    await page.goto('/');
     await expect(page).toHaveTitle(/PCafe 2025/);
     await expect(page.locator('h1')).toContainText(/Welcome to PCafe 2025/);
   });
 
   test('Events page loads and displays events', async ({ page }) => {
-    await page.goto('http://localhost:4000/events');
+    await page.goto('/events');
     await expect(page.locator('h1')).toContainText(/Events/);
     
     // Wait for events to load
@@ -24,7 +24,7 @@ test.describe('All Pages Test', () => {
   });
 
   test('Blog page loads and displays posts', async ({ page }) => {
-    await page.goto('http://localhost:4000/blog');
+    await page.goto('/blog');
     await expect(page.locator('h1')).toContainText(/Blog/);
     
     // Wait for blog posts to load
@@ -35,12 +35,12 @@ test.describe('All Pages Test', () => {
   });
 
   test('Graphs page loads successfully', async ({ page }) => {
-    await page.goto('http://localhost:4000/graphs');
+    await page.goto('/graphs');
     await expect(page.locator('h1')).toContainText(/IoT Data/);
   });
 
   test('Contact page loads successfully', async ({ page }) => {
-    await page.goto('http://localhost:4000/contact');
+    await page.goto('/contact');
     await expect(page.locator('h1')).toContainText(/Contact/);
     
     // Check for form elements
@@ -50,7 +50,7 @@ test.describe('All Pages Test', () => {
   });
 
   test('Admin page redirects to login', async ({ page }) => {
-    await page.goto('http://localhost:4000/admin');
+    await page.goto('/admin');
     
     // Should either show login form or redirect to login
     await expect(page.locator('input[type="password"], input[name="password"]')).toBeVisible();

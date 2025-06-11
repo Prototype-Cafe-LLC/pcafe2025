@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 test.describe('Issue #33 - IoT Data Visualization Requirements', () => {
   test('Complete verification of all requirements', async ({ page }) => {
     // Navigate to graphs page
-    await page.goto('http://localhost:3000/graphs')
+    await page.goto('/graphs')
     await page.waitForLoadState('networkidle')
     
     // Take initial screenshot

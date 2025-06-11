@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('React Admin Integration - Issue #37', () => {
   test.beforeEach(async ({ page }) => {
     // Start from the homepage and navigate to admin
-    await page.goto('http://localhost:3000');
+    await page.goto('/');
     await page.waitForLoadState('networkidle');
     
     // Navigate to admin panel
@@ -299,7 +299,7 @@ test.describe('React Admin Integration - Issue #37', () => {
     await page.waitForLoadState('networkidle');
     
     // Should be back to homepage
-    await expect(page).toHaveURL('http://localhost:3000/');
+    await expect(page).toHaveURL(/\/$/);
     await expect(page.locator('h1, text=PCafe, text=IoT')).toBeVisible();
   });
 

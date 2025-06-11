@@ -10,7 +10,7 @@ async function testBlogCreation() {
   try {
     // Step 1: Navigate to admin
     console.log('1. Navigating to admin panel...');
-    await page.goto('http://localhost:3000/admin');
+    await page.goto('/admin');
     await page.waitForLoadState('networkidle');
     
     // Step 2: Check if login form appears
@@ -33,14 +33,14 @@ async function testBlogCreation() {
         
         // Step 5: Test both admin routes to see which one works
         console.log('5. Testing admin/events route...');
-        await page.goto('http://localhost:3000/admin/events');
+        await page.goto('/admin/events');
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(2000);
         
         console.log('5.1. Current URL after admin/events:', page.url());
         
         console.log('5.2. Testing admin/blog route...');
-        await page.goto('http://localhost:3000/admin/blog');
+        await page.goto('/admin/blog');
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(2000);
         
@@ -48,7 +48,7 @@ async function testBlogCreation() {
         
         // Try the link click approach too
         console.log('5.4. Going back to admin dashboard...');
-        await page.goto('http://localhost:3000/admin');
+        await page.goto('/admin');
         await page.waitForLoadState('networkidle');
         
         console.log('5.5. Clicking Manage Events...');
@@ -60,7 +60,7 @@ async function testBlogCreation() {
         }
         
         console.log('5.7. Going back to admin dashboard...');
-        await page.goto('http://localhost:3000/admin');
+        await page.goto('/admin');
         await page.waitForLoadState('networkidle');
         
         console.log('5.8. Clicking Manage Blog...');

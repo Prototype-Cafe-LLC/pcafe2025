@@ -10,7 +10,7 @@ async function testAdminRouting() {
   try {
     // Login first
     console.log('1. Logging in...');
-    await page.goto('http://localhost:3000/admin');
+    await page.goto('/admin');
     await page.waitForLoadState('networkidle');
     
     await page.fill('input[type="text"]', 'admin');
@@ -45,7 +45,7 @@ async function testAdminRouting() {
         
         // Try direct navigation as backup
         console.log('3. Trying direct navigation to /admin/blog...');
-        await page.goto('http://localhost:3000/admin/blog');
+        await page.goto('/admin/blog');
         await page.waitForLoadState('networkidle');
         await page.waitForTimeout(3000);
         

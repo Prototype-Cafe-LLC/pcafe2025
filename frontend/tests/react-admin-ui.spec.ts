@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 test.describe('React Admin UI Components - Issue #37', () => {
   test.beforeEach(async ({ page }) => {
     // Start from the homepage
-    await page.goto('http://localhost:3000');
+    await page.goto('/');
     await page.waitForLoadState('networkidle');
   });
 
@@ -51,7 +51,7 @@ test.describe('React Admin UI Components - Issue #37', () => {
 
   test('should test React Admin dependencies are loaded', async ({ page }) => {
     // Navigate to admin
-    await page.goto('http://localhost:3000/admin');
+    await page.goto('/admin');
     await page.waitForLoadState('networkidle');
     
     // Check for React Admin specific elements or classes
@@ -87,7 +87,7 @@ test.describe('React Admin UI Components - Issue #37', () => {
 
   test('should check for required npm packages in page assets', async ({ page }) => {
     // Navigate to admin to trigger asset loading
-    await page.goto('http://localhost:3000/admin');
+    await page.goto('/admin');
     await page.waitForLoadState('networkidle');
     
     // Check network requests for React Admin related assets
