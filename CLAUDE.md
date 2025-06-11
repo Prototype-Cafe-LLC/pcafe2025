@@ -89,7 +89,7 @@ PCafe 2025 - A fresh project starting from scratch. The project name suggests it
 - UI：Radix UI
 - CSS: CSS Modules
 - 管理画面：React Admin（カスタムフォームあり）
-- local開発 port 3000q
+- local開発 port 4000
 
 #### バックエンド（API）
 
@@ -195,7 +195,7 @@ make docker-logs    # View logs
 **IoT Sample Data Population:**
 ```bash
 # Populate 60 days of sample IoT data via admin UI
-# 1. Navigate to http://localhost:3000/graphs
+# 1. Navigate to http://localhost:4000/graphs
 # 2. Login as admin
 # 3. Click "Populate Sample Data" button
 

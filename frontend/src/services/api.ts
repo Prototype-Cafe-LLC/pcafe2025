@@ -1,4 +1,4 @@
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080'
+const API_BASE = import.meta.env.VITE_API_BASE_URL || ''
 
 interface FetchOptions extends RequestInit {
   params?: Record<string, string | number | boolean>
@@ -12,6 +12,16 @@ class ApiClient {
   }
 
   private buildURL(endpoint: string, params?: Record<string, string | number | boolean>): string {
+    // Handle relative URLs when baseURL is empty (using Vite proxy)
+    if (!this.baseURL) {
+      const queryString = params ? 
+        '?' + Object.entries(params)
+          .filter(([_, value]) => value !== undefined && value !== null && value !== '')
+          .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`)
+          .join('&') : ''
+      return `${endpoint}${queryString}`
+    }
+    
     const url = new URL(`${this.baseURL}${endpoint}`)
     
     if (params) {
