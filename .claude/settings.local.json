@@ -62,7 +62,12 @@
       "Bash(docker rm:*)",
       "Bash(/Users/yukilab/.nvm/versions/node/v22.14.0/lib/node_modules/@anthropic-ai/claude-code/vendor/ripgrep/arm64-darwin/rg -n \"50\" --type md)",
       "Bash(rm:*)",
-      "Bash(PGPASSWORD=password psql:*)"
+      "Bash(PGPASSWORD=password psql:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh issue close:*)",
+      "Bash(npm run typecheck:*)",
+      "Bash(/Users/yukilab/temp/pcafe/pcafe2025/test-auth.sh)",
+      "Bash(docker exec:*)"
     ],
     "deny": []
   }

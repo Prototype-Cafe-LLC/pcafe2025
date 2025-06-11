@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -164,7 +165,17 @@ func (h *SanjoTsubameCalendarHandler) CreateCalendarEntry(c *gin.Context) {
 	}
 
 	database := db.GetDB()
-	userID, _ := c.Get("user_id")
+	userInterface, exists := c.Get("user")
+	if !exists {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "User context not found"})
+		return
+	}
+	user, ok := userInterface.(*models.User)
+	if !ok {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Invalid user context"})
+		return
+	}
+	userID := user.ID
 
 	var entry models.SanjoTsubameCalendar
 	result := database.Where("year = ? AND month = ? AND day = ?", input.Year, input.Month, input.Day).First(&entry)
@@ -177,7 +188,7 @@ func (h *SanjoTsubameCalendarHandler) CreateCalendarEntry(c *gin.Context) {
 			Day:         input.Day,
 			Status:      input.Status,
 			Notes:       input.Notes,
-			CreatedByID: userID.(uint),
+			CreatedByID: userID,
 		}
 		database.Create(&entry)
 	} else {
@@ -210,13 +221,26 @@ func (h *SanjoTsubameCalendarHandler) BulkImportCalendarEntries(c *gin.Context) 
 	}
 
 	database := db.GetDB()
-	userID, _ := c.Get("user_id")
+	userInterface, exists := c.Get("user")
+	if !exists {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "User context not found"})
+		return
+	}
+	user, ok := userInterface.(*models.User)
+	if !ok {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Invalid user context"})
+		return
+	}
+	userID := user.ID
 
 	created := 0
 	updated := 0
 
+	fmt.Printf("BulkImport: Processing %d days for %d/%d with status %s\n", len(input.Days), input.Year, input.Month, input.Status)
+
 	for _, day := range input.Days {
 		if !isValidDate(input.Year, input.Month, day) {
+			fmt.Printf("BulkImport: Invalid date %d/%d/%d\n", input.Year, input.Month, day)
 			continue
 		}
 
@@ -230,15 +254,25 @@ func (h *SanjoTsubameCalendarHandler) BulkImportCalendarEntries(c *gin.Context) 
 				Month:       input.Month,
 				Day:         day,
 				Status:      input.Status,
-				CreatedByID: userID.(uint),
+				CreatedByID: userID,
 			}
-			database.Create(&entry)
+			if err := database.Create(&entry).Error; err != nil {
+				fmt.Printf("BulkImport: Error creating entry: %v\n", err)
+				c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Failed to create entry: %v", err)})
+				return
+			}
 			created++
+			fmt.Printf("BulkImport: Created entry for %d/%d/%d\n", input.Year, input.Month, day)
 		} else {
 			// Update existing entry
 			entry.Status = input.Status
-			database.Save(&entry)
+			if err := database.Save(&entry).Error; err != nil {
+				fmt.Printf("BulkImport: Error updating entry: %v\n", err)
+				c.JSON(http.StatusInternalServerError, gin.H{"error": fmt.Sprintf("Failed to update entry: %v", err)})
+				return
+			}
 			updated++
+			fmt.Printf("BulkImport: Updated entry for %d/%d/%d\n", input.Year, input.Month, day)
 		}
 	}
 

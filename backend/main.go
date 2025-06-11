@@ -103,7 +103,7 @@ func startServer(cfg *config.Config) {
 	router.Use(func(c *gin.Context) {
 		origin := c.Request.Header.Get("Origin")
 		// Allow requests from frontend development server and production
-		allowedOrigins := []string{"http://localhost:3000", "http://localhost:5173", "https://pcafe2025.com"}
+		allowedOrigins := []string{"http://localhost:3000", "http://localhost:4000", "http://localhost:4001", "http://localhost:5173", "https://pcafe2025.com"}
 
 		for _, allowedOrigin := range allowedOrigins {
 			if origin == allowedOrigin {

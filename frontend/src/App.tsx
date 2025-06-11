@@ -9,6 +9,7 @@ import { BlogPage } from './pages/BlogPage'
 import { BlogPostDetail } from './components/blog/BlogPostDetail'
 import { GraphsPage } from './pages/GraphsPage'
 import { ContactPage } from './pages/ContactPage'
+import { SanjoTsubameCalendarPage } from './pages/SanjoTsubameCalendarPage'
 import { ProtectedAdminApp } from './admin/ProtectedAdminApp'
 
 function App() {
@@ -53,6 +54,11 @@ function App() {
           <Route path="/contact" element={
             <Layout>
               <ContactPage />
+            </Layout>
+          } />
+          <Route path="/sanjo-tsubame-calendar" element={
+            <Layout>
+              <SanjoTsubameCalendarPage />
             </Layout>
           } />
         </Routes>

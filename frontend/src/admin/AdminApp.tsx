@@ -10,6 +10,7 @@ import { BlogList, BlogEdit, BlogCreate } from './resources/blog'
 import { IoTDataList, IoTDataShow } from './resources/iot'
 import { ContactList, ContactShow, ContactEdit } from './resources/contact'
 import { TestList } from './resources/testing'
+import { sanjoTsubameCalendarResource } from './resources/sanjoTsubameCalendar'
 
 // Configure fetch to include credentials for session-based auth
 const httpClient = async (url: string, options: RequestInit = {}) => {
@@ -72,6 +73,11 @@ export function AdminApp() {
         name="testing" 
         list={TestList}
         options={{ label: '🧪 Testing' }}
+      />
+      <Resource 
+        name="sanjo-tsubame-calendar" 
+        {...sanjoTsubameCalendarResource}
+        options={{ label: '📅 三条・燕カレンダー' }}
       />
     </Admin>
   )

@@ -21,11 +21,16 @@ type SanjoTsubameCalendar struct {
 	Status string `gorm:"type:varchar(20);not null" json:"status"` // "on", "off", "undefined"
 
 	// Admin metadata
-	CreatedByID uint `json:"created_by_id"`
-	Notes       string `gorm:"type:text" json:"notes"`
+	CreatedByID uint   `json:"created_by_id"`
+	Notes       string `gorm:"type:text" json:"notes,omitempty"`
 
 	// Relationships
 	CreatedBy User `gorm:"foreignKey:CreatedByID" json:"created_by,omitempty"`
+}
+
+// TableName specifies the table name for GORM
+func (SanjoTsubameCalendar) TableName() string {
+	return "sanjo_tsubame_calendars"
 }
 
 // SanjoTsubameCalendarInput represents input for creating/updating calendar status
