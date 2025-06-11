@@ -16,7 +16,7 @@ class ApiClient {
     if (!this.baseURL) {
       const queryString = params ? 
         '?' + Object.entries(params)
-          .filter(([_, value]) => value !== undefined && value !== null && value !== '')
+          .filter(([, value]) => value !== undefined && value !== null && value !== '')
           .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`)
           .join('&') : ''
       return `${endpoint}${queryString}`
