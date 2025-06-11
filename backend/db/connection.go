@@ -99,8 +99,9 @@ func runMigrations() error {
 		&models.Event{},
 		&models.BlogPost{},
 		&models.ContactSubmission{},
-		&models.OfficeData{}, // Django OfficeData compatibility table
-		&models.IoTData{},    // Extended IoT data table
+		&models.OfficeData{},           // Django OfficeData compatibility table
+		&models.IoTData{},              // Extended IoT data table
+		&models.SanjoTsubameCalendar{}, // Sanjo-Tsubame calendar business day data
 	)
 	if err != nil {
 		return fmt.Errorf("failed to auto-migrate models: %w", err)

@@ -90,6 +90,7 @@ func startServer(cfg *config.Config) {
 	blogHandler := handlers.NewBlogHandler()
 	eventHandler := handlers.NewEventHandler()
 	iotHandler := handlers.NewIoTHandler()
+	sanjoTsubameCalendarHandler := handlers.NewSanjoTsubameCalendarHandler()
 
 	// Setup router
 	if cfg.Env == "production" {
@@ -102,7 +103,7 @@ func startServer(cfg *config.Config) {
 	router.Use(func(c *gin.Context) {
 		origin := c.Request.Header.Get("Origin")
 		// Allow requests from frontend development server and production
-		allowedOrigins := []string{"http://localhost:3000", "http://localhost:5173", "https://pcafe2025.com"}
+		allowedOrigins := []string{"http://localhost:3000", "http://localhost:4000", "http://localhost:4001", "http://localhost:5173", "https://pcafe2025.com"}
 
 		for _, allowedOrigin := range allowedOrigins {
 			if origin == allowedOrigin {
@@ -184,6 +185,15 @@ func startServer(cfg *config.Config) {
 		api.POST("/contact", contactHandler.SubmitContactForm)
 		api.GET("/contact", middleware.RequireAdminAuth(), contactHandler.GetContactSubmissions)
 		api.PUT("/contact/:id", middleware.RequireAdminAuth(), contactHandler.UpdateContactSubmission)
+
+		// Sanjo-Tsubame calendar endpoints
+		sanjoCalendar := api.Group("/sanjo-tsubame-calendar")
+		{
+			sanjoCalendar.GET("/:year/:month/:day", sanjoTsubameCalendarHandler.GetDateStatus)
+			sanjoCalendar.GET("/:year/:month", sanjoTsubameCalendarHandler.GetMonthStatus)
+			sanjoCalendar.POST("", middleware.RequireAdminAuth(), sanjoTsubameCalendarHandler.CreateCalendarEntry)
+			sanjoCalendar.POST("/bulk-import", middleware.RequireAdminAuth(), sanjoTsubameCalendarHandler.BulkImportCalendarEntries)
+		}
 	}
 
 	// Django compatibility endpoints

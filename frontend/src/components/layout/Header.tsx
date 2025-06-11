@@ -32,6 +32,11 @@ export function Header() {
               </Link>
             </li>
             <li>
+              <Link to="/sanjo-tsubame-calendar" className={styles.navLink}>
+                営業日カレンダー
+              </Link>
+            </li>
+            <li>
               <Link to="/contact" className={styles.navLink}>
                 Contact
               </Link>

@@ -5,6 +5,7 @@ import authReducer from './slices/authSlice'
 import eventsReducer from './slices/eventsSlice'
 import blogReducer from './slices/blogSlice'
 import iotReducer from './slices/iotSlice'
+import sanjoTsubameCalendarReducer from './slices/sanjoTsubameCalendarSlice'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -14,6 +15,7 @@ export const store = configureStore({
     events: eventsReducer,
     blog: blogReducer,
     iot: iotReducer,
+    sanjoTsubameCalendar: sanjoTsubameCalendarReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
