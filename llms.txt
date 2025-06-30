@@ -1,0 +1,159 @@
+# PCafe 2025 - IoT Website Replacement Project
+
+PCafe 2025 is a comprehensive website replacement project that migrates from Django to a modern Go + React architecture. The project serves IoT engineers and visitors with event management, blog functionality, and sophisticated IoT data visualization capabilities.
+
+## Project Overview
+
+**Purpose**: Replace existing Django-based website with Go backend + React frontend to improve maintainability, scalability, and performance.
+
+**Target Users**:
+- General visitors (IoT engineers, facility tour candidates)
+- Single administrator for content management
+
+**Core Features**:
+- Event calendar with automated data extraction from URLs/images/PDFs
+- IoT time-series data visualization (50M+ records)
+- Blog system with Markdown/HTML support
+- Contact form with Cloudflare Turnstile protection
+- Admin dashboard using React Admin
+
+## Technology Stack
+
+### Backend (Go)
+- **Framework**: Gin (github.com/gin-gonic/gin)
+- **Database**: PostgreSQL 15+ with TimescaleDB extension for time-series data
+- **ORM**: GORM (gorm.io/gorm)
+- **Authentication**: Session-based with secure cookies (no JWT)
+- **Documentation**: Swagger UI at `/docs` (admin-only)
+- **Security**: bcrypt password hashing, Cloudflare Turnstile CAPTCHA
+
+### Frontend (React/TypeScript)
+- **Build Tool**: Vite
+- **UI Framework**: React 18 with TypeScript
+- **Routing**: React Router v7
+- **State Management**: Redux Toolkit + Redux Saga
+- **UI Components**: Radix UI primitives
+- **Styling**: CSS Modules
+- **Charts**: Chart.js + D3.js for IoT data visualization
+- **Admin Interface**: React Admin with custom components
+- **Development Port**: 4000
+
+### Database Architecture
+- **Primary DB**: PostgreSQL with GORM models
+- **Time-Series**: TimescaleDB hypertables for IoT data
+- **Partitioning**: Time-based partitioning with 1-day intervals
+- **Optimization**: Continuous aggregates, compression, retention policies
+- **Performance**: Indexes optimized for time-range queries
+
+## Project Structure
+
+```
+/
+├── backend/           # Go REST API server
+│   ├── main.go       # Application entry point
+│   ├── handlers/     # HTTP request handlers (auth, blog, events, iot, contact)
+│   ├── models/       # GORM database models
+│   ├── services/     # Business logic (OCR, metadata extraction, email)
+│   ├── middleware/   # Authentication and CORS middleware
+│   ├── db/          # Database connections, migrations, seeds
+│   └── docs/        # Swagger documentation
+├── frontend/         # React TypeScript application
+│   ├── src/
+│   │   ├── components/  # Reusable UI components
+│   │   ├── pages/      # Page components (Home, Events, Blog, Graphs, Contact)
+│   │   ├── admin/      # React Admin configuration
+│   │   ├── store/      # Redux store with slices and sagas
+│   │   ├── services/   # API client functions
+│   │   └── types/      # TypeScript definitions
+│   └── public/        # Static assets
+├── CLAUDE.md         # Development guidelines and project documentation  
+├── Makefile          # Development commands
+└── docker-compose.yml # Local development setup
+```
+
+## Key Components
+
+### Backend Models (GORM)
+- **User**: Admin authentication with session management
+- **Session**: Cookie-based session storage
+- **Event**: Event management with metadata extraction capabilities
+- **BlogPost**: Blog articles with Markdown/HTML support
+- **ContactSubmission**: Contact form with Turnstile verification
+- **IoTData**: TimescaleDB hypertable for sensor data (temperature, CO2, power, etc.)
+- **SanjoTsubameCalendar**: External calendar integration
+
+### Frontend Features
+- **HomePage**: Landing page with latest news and events
+- **EventsPage**: Calendar view with event management
+- **BlogPage**: Article listing and detail views
+- **GraphsPage**: IoT data visualization with zoom/pan capabilities
+- **ContactPage**: Contact form with spam protection
+- **Admin Dashboard**: React Admin interface for content management
+
+### API Architecture
+All endpoints follow `/api/{resource}` pattern:
+- `GET/POST /api/auth/*` - Authentication endpoints
+- `GET/POST/PUT/DELETE /api/events/*` - Event management
+- `GET/POST/PUT/DELETE /api/blog/*` - Blog management  
+- `GET /api/iot/*` - IoT data queries with time-range filtering
+- `POST /api/contact` - Contact form submission
+- `GET /api/sanjo-tsubame-calendar/*` - External calendar integration
+
+### IoT Data Structure
+**Device Types**: Temperature sensors (1F lobby, 2F office), power meters, environmental sensors
+**Sensor Types**: temperature (°C), humidity (%), power_consumption (kWh), voltage (V), current (A)
+**Data Quality**: good (95%), warning (5%), error (rare)
+**Storage**: TimescaleDB hypertables with automatic partitioning and compression
+
+## Development Workflow
+
+### Setup Commands
+```bash
+make setup          # Install all dependencies
+make dev            # Start both backend and frontend servers
+make build          # Build both components
+make test           # Run all tests
+make lint           # Lint all code
+```
+
+### Database Operations
+```bash
+make db-up          # Start PostgreSQL with TimescaleDB
+make db-migrate     # Run database migrations
+make db-seed        # Populate with development data
+```
+
+### Quality Assurance
+Pre-commit requirements:
+- Go: `go fmt`, `go vet`, `go test`
+- Frontend: `bun run typecheck`, `bun run lint`, `bun run build`
+- Documentation: `markdownlint **/*.md`
+
+## Security Considerations
+- Session-based authentication with secure HTTP-only cookies
+- CORS configuration for frontend-backend communication
+- SQL injection protection via GORM parameterized queries
+- Input validation on all endpoints
+- Cloudflare Turnstile for contact form spam protection
+- Admin-only endpoints protected by authentication middleware
+
+## Performance Optimizations
+- TimescaleDB continuous aggregates for statistical queries
+- Database indexes optimized for time-range and device filtering
+- Frontend code splitting with Vite
+- Chart.js for efficient data visualization
+- Redux Saga for async state management
+
+## Environment Configuration
+Required environment variables:
+- Database: `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD`
+- Server: `SERVER_PORT`, `ENV`
+- Security: `TURNSTILE_SECRET_KEY`, `TURNSTILE_SITE_KEY`
+
+## Deployment
+- **Local Development**: Docker Compose setup
+- **Production**: Direct Go binary execution on Ubuntu 24.04 LTS (Sakura Internet VPS)
+- **Static Assets**: React build served by Go server
+- **HTTPS**: Let's Encrypt integration
+
+This project demonstrates modern full-stack development practices with emphasis on IoT data handling, responsive design, and maintainable architecture.
