@@ -1,0 +1,77 @@
+# PCafe 2025 - Modern Web Platform
+
+PCafe 2025 is a contemporary web platform showcasing advanced technology integration and data visualization capabilities.
+
+## Company & Project Overview
+
+**Company**: Prototype Cafe LLC  
+**Project**: Modern web platform development using cutting-edge technologies  
+**Focus**: IoT data visualization, event management, and content publishing  
+
+## Technology Stack & Capabilities
+
+### Frontend Technologies
+- **React + TypeScript**: Modern, type-safe user interface development
+- **Vite**: High-performance build tooling and development server
+- **Redux Toolkit + Saga**: Professional state management for complex applications
+- **Radix UI**: Accessible, customizable component library
+- **D3.js & Chart.js**: Advanced data visualization and interactive charts
+- **React Admin**: Professional admin interface with CRUD operations
+
+### Backend Technologies  
+- **Go (Golang)**: High-performance, concurrent backend services
+- **PostgreSQL**: Enterprise-grade relational database
+- **TimescaleDB**: Specialized time-series database for IoT data at scale
+- **REST API**: Clean, well-documented API architecture
+- **Swagger/OpenAPI**: Comprehensive API documentation
+
+### Data & Performance
+- **Large-scale Data Processing**: Capable of handling 50M+ time-series records
+- **IoT Data Management**: Real-time temperature, CO2, and environmental monitoring
+- **Time-series Optimization**: Efficient querying and visualization of temporal data
+- **Responsive Design**: Mobile-first, multi-device compatibility
+
+### Security & Quality
+- **Session-based Authentication**: Secure user management
+- **Cloudflare Turnstile**: Advanced spam protection
+- **Input Validation**: Comprehensive data sanitization
+- **TypeScript**: Type safety across the entire application stack
+
+## Business Applications
+
+### Event Management Platform
+- **Automated Event Discovery**: OCR and metadata extraction from images/PDFs
+- **Calendar Integration**: Comprehensive event scheduling and management
+- **Multi-format Content**: Support for various media types and formats
+
+### Content Management System
+- **Blog Platform**: Modern publishing with Markdown/HTML support
+- **SEO Optimization**: Search engine friendly architecture
+- **Admin Interface**: User-friendly content management tools
+
+### IoT Data Visualization
+- **Real-time Monitoring**: Live environmental data tracking
+- **Interactive Charts**: Zoom, pan, and detailed data exploration
+- **Historical Analysis**: Long-term trend analysis and reporting
+
+### Contact & Communication
+- **Professional Contact Forms**: Spam-protected inquiry management
+- **Responsive Customer Interface**: Optimized for all device types
+
+## Technical Strengths
+
+- **Scalability**: Architecture designed for growth and high traffic
+- **Performance**: Optimized for fast loading and smooth user experience  
+- **Maintainability**: Clean code structure with comprehensive documentation
+- **Modern Standards**: Following current industry best practices
+- **Cross-platform**: Compatible across different devices and browsers
+
+## Development Approach
+
+- **Quality Assurance**: Comprehensive testing and validation processes
+- **Documentation**: Well-documented codebase and API specifications
+- **Responsive Design**: Mobile-first, accessible user interfaces
+- **Containerization**: Docker-based development and deployment
+- **CI/CD**: Automated testing and deployment pipelines
+
+This project demonstrates expertise in modern web development, data management, and user experience design, suitable for enterprise-level applications requiring scalability, performance, and professional presentation.
